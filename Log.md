@@ -64,5 +64,13 @@ The purpose of this log is:
 - Blueprint child class derived from `ADebugActor`
 - Used for level placement and iteration
 - Demonstrates proper C++ → Blueprint inheritance workflow
+- Implemented functionality to print debug messages using UE_LOG.
+- Used GEngine->AddOnScreenDebugMessage to display messages on the game screen.
 
+ > Blueprint Editor Terminology:
+* `Viewport` = `This is where we can see our Actor in 3D Space`
+* `Event Graph` = `This is Execute After Game Starts`
+* `Construction_Script` = `This is Execute Before Game Starts`
 
+**Showing Debugging**
+![Showing Debugging](GamePlayScreenshots/ShowingDebugging.png)
