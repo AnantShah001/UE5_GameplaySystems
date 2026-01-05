@@ -1,5 +1,6 @@
 ﻿# UE5_GameplaySystems
 
+## 📅 5\1\26
 ## 📘 Unreal Engine 5 C++ – Development Log
 
 This file tracks my daily work, experiments, and observations
@@ -55,3 +56,13 @@ The purpose of this log is:
 ![Gameplay](GamePlayScreenshots/GamePlay.png)
 
 ---
+
+🔗 [GitHub Previous Commit](https://github.com/AnantShah001/UE5_GameplaySystems/commit/b9555e0559055a49e76a37f8694d85c73b611429)
+
+## 📅 Day 1 – Project Setup & Create DebugActor Class
+- Created a new class called DebugActor derived from AActor.
+- Blueprint child class derived from `ADebugActor`
+- Used for level placement and iteration
+- Demonstrates proper C++ → Blueprint inheritance workflow
+
+
