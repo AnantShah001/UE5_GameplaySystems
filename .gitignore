@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Allow all folders under Source & Screenshots
+!Source/
+!Source/**/
+!GamePlayScreenshots/
+!GamePlayScreenshots/**
+!Screenshots/
+!Screenshots/**
+
+
+# Except these:
+!.gitignore
+!README.md
+!Log.md
+!Source/
+!Source/**/*.h
+!Source/**/*.cpp
