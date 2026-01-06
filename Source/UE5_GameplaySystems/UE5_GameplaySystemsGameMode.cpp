@@ -1,4 +1,5 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
+// GameMode responsible for defining default gameplay classes and rules
 
 #include "UE5_GameplaySystemsGameMode.h"
 #include "UE5_GameplaySystemsCharacter.h"

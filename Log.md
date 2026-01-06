@@ -74,3 +74,29 @@ The purpose of this log is:
 
 **Showing Debugging**
 ![Showing Debugging](GamePlayScreenshots/ShowingDebugging.png)
+
+---
+
+🔗 [GitHub Previous Commit](https://github.com/AnantShah001/UE5_GameplaySystems/commit/16a8a9c80c88720d81a8ce84de6a9478d2b71a2b)
+
+
+## Day 2 – Unreal Engine C++ Project Structure & Gameplay Framework
+
+### Objective
+Understand Unreal Engine’s C++ project structure and the responsibility of core gameplay framework classes.
+
+---
+
+### Project Structure Observations
+
+- The `Source/` folder contains the main game module.
+- `.Build.cs` defines module dependencies and build rules.
+- `Target.cs` separates Editor and Game build configurations.
+- The main module files (`UE5_GameplaySystems.cpp/.h`) handle module startup and shutdown.
+
+This helped me understand how Unreal loads and manages C++ code at runtime.
+
+---
+
+### Gameplay Framework Understanding
+

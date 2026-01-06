@@ -1,4 +1,5 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
+// Player character using UE's third-person movement template
 
 #include "UE5_GameplaySystemsCharacter.h"
 #include "Engine/LocalPlayer.h"
