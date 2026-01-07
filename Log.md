@@ -154,3 +154,9 @@ This clarified when initialization, gameplay logic, and cleanup should occur.
 
 Not all gameplay logic belongs in Actors.
 Understanding ownership and responsibility is critical for scalable gameplay systems.
+
+---
+
+## Day 3 – Actor vs Component Design
+
+Focus: Understanding when to use Actors versus Actor Components in Unreal Engine.
