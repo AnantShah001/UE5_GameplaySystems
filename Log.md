@@ -100,3 +100,57 @@ This helped me understand how Unreal loads and manages C++ code at runtime.
 
 ### Gameplay Framework Understanding
 
+I studied the responsibility of Unreal Engine gameplay classes:
+
+- **GameMode**  
+  Controls game rules and default classes. Exists only on the server.
+
+- **Character**  
+  Represents a controllable pawn with movement and collision.
+  Handles physical representation in the world.
+
+- **PlayerController**  
+  Handles player input and high-level control logic.
+  It is NOT the player character itself.
+
+- **Actor**  
+  Base class for all gameplay objects.
+  Should be used only when world presence is required.
+
+- **Component**  
+  Used to add reusable behavior to Actors.
+  Preferred over Actors when possible for performance and design clarity.
+
+---
+
+### Actor Lifecycle Review
+
+I reviewed the Actor lifecycle execution order:
+
+* Constructor  
+	* Runs when the Actor is created
+	* Used to set **default values** and create components
+	* Runs **even in the editor**
+* OnConstruction  
+    * Called after spawning or when a property changes in the editor
+	* Great for **editor-time logic**
+	* Runs multiple times
+* BeginPlay  
+	* Called once when the game starts or actor is spawned at runtime
+	* Best place for **gameplay logic initialization**
+* Tick  
+	* Runs every frame (if enabled)
+	* Used for continuous updates
+* EndPlay  
+	* Called when the actor is removed from the level or game ends
+	* Used for **cleanup**
+* Destroyed  
+
+This clarified when initialization, gameplay logic, and cleanup should occur.
+
+---
+
+### Key Learning
+
+Not all gameplay logic belongs in Actors.
+Understanding ownership and responsibility is critical for scalable gameplay systems.
