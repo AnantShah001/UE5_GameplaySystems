@@ -160,3 +160,7 @@ Understanding ownership and responsibility is critical for scalable gameplay sys
 ## Day 3 – Actor vs Component Design
 
 Focus: Understanding when to use Actors versus Actor Components in Unreal Engine.
+
+What I did:
+- Created a reusable C++ Actor Component (DebugInfoComponent)
+- 
