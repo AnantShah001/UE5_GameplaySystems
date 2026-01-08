@@ -2,6 +2,8 @@
 // Used for learning Actor lifecycle and runtime debugging
 
 #include "DebugActor.h"
+#include "DebugInfoComponent.h"
+
 
 // Sets default values
 ADebugActor::ADebugActor()
@@ -10,6 +12,7 @@ ADebugActor::ADebugActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	DebugInfoComponent = CreateDefaultSubobject<UDebugInfoComponent>(TEXT("DebugInfoComponent"));
 }
 
 // Called when the game starts or when spawned

@@ -163,4 +163,17 @@ Focus: Understanding when to use Actors versus Actor Components in Unreal Engine
 
 What I did:
 - Created a reusable C++ Actor Component (DebugInfoComponent)
-- 
+- Attached the component to an existing DebugActor
+- Used the component to access and log its owning Actor
+- Observed execution order between Actor and Component lifecycle
+
+Key Learnings:
+- Actors represent entities in the world
+- Components represent reusable behavior
+- Components help reduce duplication and improve scalability
+- Not all logic should live inside Actors
+
+This approach will be used for future systems such as health, interaction, and abilities.
+
+---
+

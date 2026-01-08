@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "DebugActor.generated.h"
 
+class UDebugInfoComponent;
+
 UCLASS()
 class UE5_GAMEPLAYSYSTEMS_API ADebugActor : public AActor
 {
@@ -15,12 +17,14 @@ public:
 	// Sets default values for this actor's properties
 	ADebugActor();
 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+	UPROPERTY(VisibleAnywhere)
+	class UDebugInfoComponent* DebugInfoComponent;
 };

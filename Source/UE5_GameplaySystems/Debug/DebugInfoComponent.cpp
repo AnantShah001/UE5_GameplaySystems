@@ -18,7 +18,7 @@ UDebugInfoComponent::UDebugInfoComponent()
 void UDebugInfoComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+	PrintOwnerInfo(); // call the function to print owner info.
 	// ...
 	
 }
@@ -30,5 +30,17 @@ void UDebugInfoComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+void UDebugInfoComponent::PrintOwnerInfo() const
+{
+	AActor* Owner = GetOwner();
+	UE_LOG(LogTemp, Warning, TEXT("DebugInfoComponent attached to : % s"), *Owner->GetName());
+
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(2, 10.f, FColor::Blue, (TEXT("Owner Actor : %s"),*Owner->GetName()));
+	}
+	
 }
 
