@@ -177,3 +177,28 @@ This approach will be used for future systems such as health, interaction, and a
 
 ---
 
+## Day 4 – Enhanced Input (UE5)
+
+Focus:
+Learning and implementing Unreal Engine 5’s Enhanced Input system using C++.
+
+What I did:
+- Created Input Actions and Mapping Context
+- Added Enhanced Input Mapping Context at runtime
+- Bound input actions using UEnhancedInputComponent
+- Implemented movement and camera input using FInputActionValue
+
+Key Learnings:
+- Input belongs in Character / PlayerController, not Actors
+- Enhanced Input is context-based and scalable
+- Clean input architecture is critical for future multiplayer support
+
+| Code                                               | Purpose                                                                |
+| -------------------------------------------------- | ---------------------------------------------------------------------- |
+| `Super::BeginPlay()`                               | Calls the parent class’s BeginPlay to ensure proper initialization     |
+| `Cast<APlayerController>(Controller)`              | Ensures the character has a PlayerController controlling it            |
+| `GetSubsystem<UEnhancedInputLocalPlayerSubsystem>` | Accesses the Enhanced Input system for this player                     |
+| `AddMappingContext(DefaultMappingContext, 0)`      | Activates this character’s input mapping so Jump, Move, Look will work |
+
+---
+
