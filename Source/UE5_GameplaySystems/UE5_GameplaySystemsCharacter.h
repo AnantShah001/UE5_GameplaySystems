@@ -18,16 +18,16 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
-UCLASS(config=Game)
+UCLASS(config=Game)// Allows reading config values from DefaultGame.ini
 class AUE5_GameplaySystemsCharacter : public ACharacter
 {
-	GENERATED_BODY()
+	GENERATED_BODY()// Required for UE's reflection system
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
 
-	/** Follow camera */
+	/** Follow camera that follows the character at the end of the boom */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
 	
@@ -69,7 +69,7 @@ protected:
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
-	/// Handles look input (X = yaw, Y = pitch).
+	// Handles look input (X = yaw, Y = pitch).
 	void Look(const FInputActionValue& Value);
 			
 
@@ -77,13 +77,13 @@ protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
-	// To add mapping context
+	// called when the game starts or when spawned; used to add input mapping context
 	virtual void BeginPlay();
 
 public:
-	/** Returns CameraBoom subobject **/
+	/** Returns CameraBoom (spring arm) component **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
+	/** Returns the follow camera component **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 };
 

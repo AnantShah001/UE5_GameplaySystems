@@ -21,7 +21,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 AUE5_GameplaySystemsCharacter::AUE5_GameplaySystemsCharacter()
 {
-	// Set size for collision capsule
+	// Set size for the collision capsule (width = 42, height = 96)
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 		
 	// Don't rotate when the controller rotates. Let that just affect the camera.
@@ -42,7 +42,7 @@ AUE5_GameplaySystemsCharacter::AUE5_GameplaySystemsCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 
-	// Create a camera boom (pulls in towards the player if there is a collision)
+	// Create camera boom (spring arm) to position camera behind the character
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
