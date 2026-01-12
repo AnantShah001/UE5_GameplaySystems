@@ -100,6 +100,8 @@ void AUE5_GameplaySystemsCharacter::SetupPlayerInputComponent(UInputComponent* P
 		// Looking
 		// Bind look input (mouse / right joystick) to the Look() function
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::Look);
+
+		EnhancedInputComponent->BindAction(DebugAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::DebugActionPressed);
 	}
 	else
 	{
@@ -152,4 +154,13 @@ void AUE5_GameplaySystemsCharacter::Look(const FInputActionValue& Value)
 		// Rotate the controller pitch (up/down)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AUE5_GameplaySystemsCharacter::DebugActionPressed()
+{
+
+	UE_LOG(LogTemp, Display, TEXT("Debug Input Pressed"));
+
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Debug Input Triggered"));
+
 }

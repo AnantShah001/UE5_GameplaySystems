@@ -227,3 +227,25 @@ Use this understanding to safely extend gameplay systems
 starting Day 6 with input-driven behavior.
 
 ---
+## Day 6 – Input Handling & Gameplay Flow
+
+Focus:
+Understanding how player input flows through Unreal Engine
+from input mapping to C++ execution.
+
+What I worked on:
+- Reviewed PlayerController vs Character input responsibilities
+- Created a custom Enhanced Input Action for testing
+- Bound the input action in the Character C++ class
+- Verified runtime execution using UE_LOG and on-screen debug messages
+
+Key Learnings:
+- Input is owned by the PlayerController but executed by the possessed Pawn
+- Input actions should trigger intent, not direct gameplay complexity
+- Clean input flow is critical for scalable systems (abilities, interaction, UI)
+
+Outcome:
+We now clearly understand where and how gameplay input should be handled
+before implementing real systems like interactions or abilities.
+
+---

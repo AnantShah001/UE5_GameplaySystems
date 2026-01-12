@@ -44,6 +44,9 @@ class AUE5_GameplaySystemsCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* DebugAction;
+
 	/** Move Input Action */
 	// Represents the movement input for this character.
 	// Typically returns a Vector2D where X = right / left, Y = forward / back.
@@ -71,6 +74,8 @@ protected:
 	/** Called for looking input */
 	// Handles look input (X = yaw, Y = pitch).
 	void Look(const FInputActionValue& Value);
+
+	void DebugActionPressed();
 			
 
 protected:
