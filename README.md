@@ -21,16 +21,25 @@ This is not a finished commercial game, but a structured and evolving systems pr
 ## 🚀 Current Scope
 - Third Person C++ project as a foundation
 - Custom debugging and logging tools
+- Gameplay framework analysis (GameMode, Character, Actors)
+- Input-driven gameplay behavior (planned)
 - Clean version control with focused commits
 - Blueprint ↔ C++ inheritance workflow
 
 ---
 
-## 🧩 Implemented Systems (So Far)
-
 ### 🔹 Third Person Character (Template)
 - Movement, jumping, and camera logic provided by Unreal Engine
 - Used as a stable base for future gameplay systems
+
+---
+## 🧩 Gameplay Framework Focus
+This project emphasizes understanding **responsibilities**, not just features:
+
+- **GameMode** – Game rules and default class definitions
+- **Character** – Player representation and movement systems
+- **Actors** – Lifecycle, ticking, and runtime behavior
+- **Components** – Modular gameplay logic (ongoing)
 
 ---
 
