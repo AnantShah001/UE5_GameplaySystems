@@ -201,3 +201,29 @@ Key Learnings:
 | `AddMappingContext(DefaultMappingContext, 0)`      | Activates this character’s input mapping so Jump, Move, Look will work |
 
 ---
+
+## Day 5 – Gameplay Framework Deep Dive
+
+### Objective
+Understand Unreal Engine’s Gameplay Framework by analyzing
+and documenting existing template code without adding new features.
+
+#### GameMode
+- GameMode defines game rules and default gameplay classes.
+- Exists only on the server.
+- Not responsible for player input or per-frame gameplay logic.
+
+#### Character
+- Character is a specialized Pawn with built-in movement logic.
+- Movement is handled by CharacterMovementComponent.
+- Camera behavior is managed using SpringArm + Camera components.
+
+### Why This Matters
+Understanding framework responsibilities prevents bad architecture,
+such as placing input logic in GameMode or game rules in Actors.
+
+### Next Step
+Use this understanding to safely extend gameplay systems
+starting Day 6 with input-driven behavior.
+
+---
