@@ -161,6 +161,6 @@ void AUE5_GameplaySystemsCharacter::DebugActionPressed()
 
 	UE_LOG(LogTemp, Display, TEXT("Debug Input Pressed"));
 
-	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Debug Input Triggered"));
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Cyan, TEXT("Debug Input Triggered"));
 
 }

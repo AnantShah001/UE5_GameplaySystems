@@ -248,4 +248,7 @@ Outcome:
 We now clearly understand where and how gameplay input should be handled
 before implementing real systems like interactions or abilities.
 
+**Debug Input**
+![Showing Debugging](GamePlayScreenshots/DebugInput.png)
+
 ---
