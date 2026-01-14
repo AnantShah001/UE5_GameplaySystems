@@ -252,3 +252,5 @@ before implementing real systems like interactions or abilities.
 ![Showing Debugging](GamePlayScreenshots/DebugInput.png)
 
 ---
+## Day 7 – Moving Platform (Actor System)
+* Create Moving Platform C++ Actor Class
