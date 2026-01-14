@@ -253,4 +253,21 @@ before implementing real systems like interactions or abilities.
 
 ---
 ## Day 7 – Moving Platform (Actor System)
-* Create Moving Platform C++ Actor Class
+### What I built
+- Created a reusable Moving Platform Actor in C++
+- Platform moves between two locations using Tick and DeltaTime
+- Exposed movement values to the editor using UPROPERTY
+
+### Key Concepts Learned
+- Tick-based movement and frame-rate independence
+- FVector position math
+- Actor lifecycle in a real gameplay use-case
+- How to design simple but reusable gameplay systems
+
+### Why this matters
+Moving platforms are a core level-design mechanic.
+This system can be reused, extended, or networked later.
+
+### Notes
+- Logic kept in C++, values exposed to designers
+- Avoided hardcoding positions

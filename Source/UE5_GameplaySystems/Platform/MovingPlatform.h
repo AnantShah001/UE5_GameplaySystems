@@ -23,4 +23,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	// Create Variable
+	FVector StartLocation;
+
+	UPROPERTY(EditAnywhere, Category = "Moving"); // Variable Show in UE_Editer
+	FVector PlatformVelocity = FVector(100, 0, 0);
+
+	UPROPERTY(EditAnywhere, Category = "Moving")
+	float MoveDistance = 1000;
+
+	// Create Function No Value Return Type
+	void MovePlatform(float DeltaTime);
 };
