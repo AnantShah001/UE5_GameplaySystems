@@ -271,3 +271,21 @@ This system can be reused, extended, or networked later.
 ### Notes
 - Logic kept in C++, values exposed to designers
 - Avoided hardcoding positions
+
+---
+## Day 8 – Visual Debugging (Moving Platform)
+
+### What I did
+* Added visual debug helpers to the Moving Platform system
+* Used `DrawDebugLine` to visualize movement path
+* Used `DrawDebugSphere` to mark start and end locations
+* Used `DrawDebugPoint` to mark Current Actor Location
+
+### Why this matters
+Visual debugging helps understand gameplay behavior without modifying logic
+or spamming logs. This is useful for both programmers and designers.
+
+### Takeaway
+Debugging visually leads to faster iteration and clearer system behavior.
+
+---
