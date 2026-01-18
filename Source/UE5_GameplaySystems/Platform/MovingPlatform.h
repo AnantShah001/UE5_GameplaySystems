@@ -27,12 +27,20 @@ private:
 	// Create Variable
 	FVector StartLocation;
 
-	UPROPERTY(EditAnywhere, Category = "Moving"); // Variable Show in UE_Editer
+	UPROPERTY(EditAnywhere, Category = "Moving") // Variable Show in UE_Editer
 	FVector PlatformVelocity = FVector(100, 0, 0);
 
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	float MoveDistance = 1000;
 
+	UPROPERTY(EditAnywhere, Category = "Rotation")
+	FRotator RotationVelocity;
+
+	UPROPERTY(EditAnyWhere, Category = "Rotation")
+	bool ShouldRotate = false;
+
 	// Create Function No Value Return Type
 	void MovePlatform(float DeltaTime);
+
+	void RotatePlatform(float DeltaTime);
 };

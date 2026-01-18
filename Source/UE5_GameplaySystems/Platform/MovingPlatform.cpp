@@ -32,6 +32,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 
 	MovePlatform(DeltaTime);
 	DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f,0);
+	if(ShouldRotate) RotatePlatform(DeltaTime);
 
 }
 
@@ -54,4 +55,11 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 		PlatformVelocity = -PlatformVelocity;//Direction Reverse(Velocity Reverse) 
 		UE_LOG(LogTemp, Display, TEXT("Move, Distance : %f | Location : %s"), DistanceMoved, *CurrentLocation.ToString());
 	}
+}
+
+void AMovingPlatform::RotatePlatform(float DeltaTime)
+{
+	AddActorLocalRotation(RotationVelocity);
+	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
+	DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
 }
