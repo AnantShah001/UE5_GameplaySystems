@@ -289,3 +289,12 @@ or spamming logs. This is useful for both programmers and designers.
 Debugging visually leads to faster iteration and clearer system behavior.
 
 ---
+## Day 9 – Rotating Platform System
+
+### What I did
+* Extended the Moving Platform system with optional rotation
+* Used FRotator for frame-rate–independent rotation
+* Exposed rotation settings to the editor for designer control
+
+### Takeaway
+Gameplay systems should be modular and configurable rather than hard-coded.
