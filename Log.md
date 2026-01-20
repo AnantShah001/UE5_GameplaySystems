@@ -298,3 +298,27 @@ Debugging visually leads to faster iteration and clearer system behavior.
 
 ### Takeaway
 Gameplay systems should be modular and configurable rather than hard-coded.
+
+---
+## Day 10 – Level Integration & Gameplay Prototype & Playtest Build (Milestone)
+
+### What I did
+* Designed a small test level using moving and rotating platforms
+![Game Level](GamePlayScreenshots/Day_10_GamePlay.png)
+* Focused on player flow and timing
+* Packaged the project into a playable Windows build
+* Shared the build for external playtesting
+
+### Takeaway
+Shipping small playable builds early helps validate gameplay systems
+and exposes real-world issues faster than theory alone.
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1p1YuqYr70H9uFD3_ahaFcNEgR23CierQ/view?usp=sharing)**
+
+![Day-10 Level TopView](Screenshots/Day_10_Level_TopView.png)
+
+![Game View](Screenshots/GameView1.png)
+
+---
