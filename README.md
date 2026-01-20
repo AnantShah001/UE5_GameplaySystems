@@ -1,8 +1,7 @@
 ﻿# UE5_GameplaySystems
 
 ## 🎮 Project Overview
-**UE5_GameplaySystems** is a gameplay systems–focused project built using  
-**Unreal Engine 5** and **C++**.
+**UE5_GameplaySystems** is a gameplay systems–focused project built using **Unreal Engine 5** and **C++**.
 
 The goal of this repository is to explore **gameplay architecture, engine behavior,
 and system-level experimentation** using Unreal Engine’s C++ framework.
@@ -12,9 +11,10 @@ This is not a finished commercial game, but a structured and evolving systems pr
 
 ## 🎯 Project Goals
 - Build gameplay systems using C++ as the foundation
-- Understand Unreal Engine’s gameplay lifecycle and architecture
+- Deeply Understand Unreal Engine’s gameplay lifecycle and architecture
 - Use Blueprint as an extension layer over C++ logic
 - Maintain clean version control and documentation
+- Ship small playable prototypes for validation
 
 ---
 
@@ -25,6 +25,9 @@ This is not a finished commercial game, but a structured and evolving systems pr
 - Input-driven gameplay behavior (planned)
 - Clean version control with focused commits
 - Blueprint ↔ C++ inheritance workflow
+- Moving and rotating gameplay platforms
+- Early level design for system validation
+- Playable prototype builds for testing
 
 ---
 
@@ -52,11 +55,23 @@ This project emphasizes understanding **responsibilities**, not just features:
 ---
 
 ## 📂 Repository Structure
-- `Source/` – C++ gameplay and system code
-- `Screenshots/` – Editor and development screenshots
-- `GamePlayScreenshots/` – In-game runtime visuals
-- `README.md` – Project overview
-- `Log.md` – Development and system observations
+
+```
+Source/
+ ├─ UE5_GameplaySystems/
+ │   ├─ GameMode
+ │   ├─ Character
+ │   ├─ Debug
+ │   │   ├─ DebugActor
+ │   ├─ Platform
+ │   │   ├─ MovingPlatform
+
+Source/                   # C++ gameplay and system code
+Screenshots/              # Editor & development screenshots
+GamePlayScreenshots/      # In-game runtime visuals
+README.md                 # Project overview
+Log.md                    # Daily development log
+```
 
 ---
 
@@ -73,6 +88,32 @@ This project emphasizes understanding **responsibilities**, not just features:
 
 ---
 
+## 🎮 Playable Builds (Prototype)
+
+Early gameplay prototypes are packaged and shared for testing.
+
+> These builds are **system validation prototypes**, not final games.
+
+**Game Level**
+![Game Level](GamePlayScreenshots/Day_10_GamePlay.png)
+
+**Level Top View**
+![Day-10 Level TopView](Screenshots/Day_10_Level_TopView.png)
+
+**Game View**
+![Game View](Screenshots/GameView1.png)
+
+---
+
+## 🎮 Download Playable Builds (Prototype)
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1p1YuqYr70H9uFD3_ahaFcNEgR23CierQ/view?usp=sharing)**
+
+
+---
+
 ## 📖 Development Log
 Detailed progress, experiments, and technical observations are documented in :
 📘 **[Log.md](Log.md)**
@@ -82,3 +123,7 @@ Detailed progress, experiments, and technical observations are documented in :
 ## 🤝 Connect
 - **LinkedIn**: https://www.linkedin.com/in/anantshah001/
 - **GitHub**: https://github.com/AnantShah001
+
+---
+
+> Learning in public. Building systems. Shipping small, improving daily.
