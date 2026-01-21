@@ -19,10 +19,10 @@ void AMovingPlatform::BeginPlay()
 
 	StartLocation = GetActorLocation();
 	// Debug
-	//DrawDebugSphere(GetWorld(), StartLocation, 20.f, 12, FColor::Cyan, true, -1.f);
+	DrawDebugSphere(GetWorld(), StartLocation, 20.f, 12, FColor::Cyan, true, -1.f);
 	FVector EndLocation = StartLocation + PlatformVelocity.GetSafeNormal() * MoveDistance;
-	//DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, true, -1.f);
-	//DrawDebugSphere(GetWorld(), EndLocation, 20.f, 12, FColor::Red, true, -1.f);
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, true, -1.f);
+	DrawDebugSphere(GetWorld(), EndLocation, 20.f, 12, FColor::Red, true, -1.f);
 }
 
 // Called every frame
@@ -31,7 +31,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	MovePlatform(DeltaTime);
-	//DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f,0);
+	DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f,0);
 	if(ShouldRotate) RotatePlatform(DeltaTime);// if ShouldRotate variable true. Then function cal every frame
 
 }
@@ -53,13 +53,13 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 		StartLocation = StartLocation + MoveDirection * MoveDistance;
 		SetActorLocation(StartLocation);
 		PlatformVelocity = -PlatformVelocity;//Direction Reverse(Velocity Reverse) 
-		UE_LOG(LogTemp, Display, TEXT("Move, Distance : %f | Location : %s"), DistanceMoved, *CurrentLocation.ToString());
+		//UE_LOG(LogTemp, Display, TEXT("Move, Distance : %f | Location : %s"), DistanceMoved, *CurrentLocation.ToString());
 	}
 }
 
 void AMovingPlatform::RotatePlatform(float DeltaTime)
 {
 	AddActorLocalRotation(RotationVelocity);
-	//DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
-	//DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
+	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
+	DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
 }

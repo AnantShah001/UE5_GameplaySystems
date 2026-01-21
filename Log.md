@@ -322,3 +322,21 @@ and exposes real-world issues faster than theory alone.
 ![Game View](Screenshots/GameView1.png)
 
 ---
+## Day 11 – Trigger Box Zone System (C++)
+
+Implemented a trigger box system using BoxComponent in C++.
+
+What I did:
+* Created a Class TriggerBoxZone Component
+* Implemented a reusable TriggerBoxZone 
+* Used overlap events (Begin / End)
+* Displayed runtime “Level Complete”
+
+What I learned:
+* Components are ideal for reusable gameplay behavior
+* Trigger boxes are core to interaction, checkpoints, and level logic
+* UFUNCTION is required for dynamic delegates
+* This design scales better for complex systems
+
+---
+

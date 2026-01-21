@@ -23,10 +23,10 @@ void ADebugActor::BeginPlay()
 	UE_LOG(LogTemp, Display, TEXT("DebugActor : BeginPlay"));
 
 	// Use this to print a debug message on the game screen for 10 seconds only.
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(1, 10.f, FColor::Red, TEXT("DebugActor : Hello Unreal Engine"));
-	}
+	}*/
 	
 }
 
