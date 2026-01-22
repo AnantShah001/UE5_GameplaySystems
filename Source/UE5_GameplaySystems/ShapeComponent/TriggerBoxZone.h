@@ -22,6 +22,10 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 protected:
+
+	UPROPERTY(EditAnyWhere)
+	FText Message;
+
 	virtual void BeginPlay() override ;
     // Functions are protected so they can be overridden by child classes if needed
     UFUNCTION()

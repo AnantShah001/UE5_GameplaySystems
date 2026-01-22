@@ -18,11 +18,26 @@ void AMovingPlatform::BeginPlay()
 	Super::BeginPlay();
 
 	StartLocation = GetActorLocation();
+	
+	// If we are returning, our "Target" is the TransferLocation
+	if (!ShouldReturn)
+	{
+		// Calculate velocity toward TransferLocation using TransferSpeed
+		FVector Direction = (TransferLocation - StartLocation).GetSafeNormal();
+		PlatformVelocity = Direction * TransferSpeed;
+		UE_LOG(LogTemp, Error, TEXT("Platform Velocity : %s"), *PlatformVelocity.ToString());
+
+		// Update MoveDistance to be exactly the distance to the Transfer point
+		MoveDistance = FVector::Dist(StartLocation, TransferLocation);
+
+	}
+
 	// Debug
 	DrawDebugSphere(GetWorld(), StartLocation, 20.f, 12, FColor::Cyan, true, -1.f);
 	FVector EndLocation = StartLocation + PlatformVelocity.GetSafeNormal() * MoveDistance;
 	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, true, -1.f);
 	DrawDebugSphere(GetWorld(), EndLocation, 20.f, 12, FColor::Red, true, -1.f);
+
 }
 
 // Called every frame
@@ -30,9 +45,9 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	MovePlatform(DeltaTime);
+	if (ShouldMove) MovePlatform(DeltaTime); // Should Move Check
 	DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f,0);
-	if(ShouldRotate) RotatePlatform(DeltaTime);// if ShouldRotate variable true. Then function cal every frame
+	if (ShouldRotate) RotatePlatform(DeltaTime);// if ShouldRotate variable true. Then function cal every frame
 
 }
 
@@ -49,12 +64,24 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 	// Reverse Direction of motion if gone too far
 	if (DistanceMoved > MoveDistance)
 	{
-		FVector MoveDirection = PlatformVelocity.GetSafeNormal();// Get Safe Normalized Direction Vector
-		StartLocation = StartLocation + MoveDirection * MoveDistance;
-		SetActorLocation(StartLocation);
-		PlatformVelocity = -PlatformVelocity;//Direction Reverse(Velocity Reverse) 
-		//UE_LOG(LogTemp, Display, TEXT("Move, Distance : %f | Location : %s"), DistanceMoved, *CurrentLocation.ToString());
+		if (ShouldReturn)
+		{
+			// Normal Return Logic
+			FVector MoveDirection = PlatformVelocity.GetSafeNormal();// Get Safe Normalized Direction Vector
+			StartLocation = StartLocation + MoveDirection * MoveDistance;
+			SetActorLocation(StartLocation);
+			PlatformVelocity = -PlatformVelocity;//Direction Reverse(Velocity Reverse) 
+			//UE_LOG(LogTemp, Display, TEXT("Move, Distance : %f | Location : %s"), DistanceMoved, *CurrentLocation.ToString());
+		}
+		else
+		{
+			// ShouldReturn is False Logic
+			// Move to final position and stop moving forever
+			SetActorLocation(StartLocation + PlatformVelocity.GetSafeNormal() * MoveDistance);
+			ShouldMove = false;
+		}
 	}
+
 }
 
 void AMovingPlatform::RotatePlatform(float DeltaTime)

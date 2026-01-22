@@ -37,7 +37,7 @@ void UTriggerBoxZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor
 	if (!OtherActor) return;
 	UE_LOG(LogTemp, Display, TEXT("Trigger Enter : %s"), *OtherActor->GetName());
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green,TEXT("Enter in TriggerBoxZone "));
-	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, TEXT("Level Complete"));
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, (TEXT("Message : %s "),*Message.ToString()));
 
 
 }

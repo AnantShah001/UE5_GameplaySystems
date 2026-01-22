@@ -27,17 +27,29 @@ private:
 	// Create Variable
 	FVector StartLocation;
 
+	UPROPERTY(EditAnywhere, Category = "Moving")
+	bool ShouldMove = true; // If false, never moves
+
+	UPROPERTY(EditAnywhere, Category = "Moving")
+	bool ShouldReturn = true; // If false, stops at destination
+
 	UPROPERTY(EditAnywhere, Category = "Moving") // Variable Show in UE_Editer
 	FVector PlatformVelocity = FVector(100, 0, 0);
 
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	float MoveDistance = 1000;
 
-	UPROPERTY(EditAnywhere, Category = "Rotation")
-	FRotator RotationVelocity;
+	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "!ShouldReturn"))
+	FVector TransferLocation; // Location to stop at if ShouldReturn is false
+
+	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "!ShouldReturn"))
+	float TransferSpeed = 300.0f; // Speed specifically for the Transfer path
 
 	UPROPERTY(EditAnyWhere, Category = "Rotation")
 	bool ShouldRotate = false;
+
+	UPROPERTY(EditAnywhere, Category = "Rotation" , meta = (EditCondition = "ShouldRotate"))
+	FRotator RotationVelocity;
 
 	// Create Function No Value Return Type
 	void MovePlatform(float DeltaTime);
