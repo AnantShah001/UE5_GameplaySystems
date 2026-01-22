@@ -339,4 +339,17 @@ What I learned:
 * This design scales better for complex systems
 
 ---
+## Day 12 – Extended an Existing gameplay system (MovingPlatform)
 
+Today I extended an existing gameplay system instead of creating a new one.
+
+* Focused on extending/upgrading my C++ Moving Platform system.
+* Add New Features and Implement.
+* ShouldMove false Then Platform can't Move
+* If ShouldMove True then only set or select PlatformVelocity, MoveDistance.
+* ShouldReturn false then Platform stays at the destination instead of returning
+* ShouldReturn false then only set or select TransferLocation , TransferSpeed
+* ShouldReturn true then Moving Platform stay in Infinity Loop.
+
+**ShouldMove ShouldReturn**
+![ShouldMove ShouldReturn](GamePlayScreenshots/ShouldMove_ShouldReturn.png)

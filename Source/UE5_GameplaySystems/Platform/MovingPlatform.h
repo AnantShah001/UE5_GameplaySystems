@@ -33,10 +33,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	bool ShouldReturn = true; // If false, stops at destination
 
-	UPROPERTY(EditAnywhere, Category = "Moving") // Variable Show in UE_Editer
+	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove")) // Variable Show in UE_Editer
 	FVector PlatformVelocity = FVector(100, 0, 0);
 
-	UPROPERTY(EditAnywhere, Category = "Moving")
+	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove"))
 	float MoveDistance = 1000;
 
 	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "!ShouldReturn"))
