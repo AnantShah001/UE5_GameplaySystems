@@ -90,3 +90,14 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
 	DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
 }
+
+void AMovingPlatform::ActivatePlatform(bool bActivate)
+{
+	ShouldMove = bActivate;
+
+	if (!bActivate)
+	{
+		// Snap start location to current position
+		//StartLocation = GetActorLocation();
+	}
+}

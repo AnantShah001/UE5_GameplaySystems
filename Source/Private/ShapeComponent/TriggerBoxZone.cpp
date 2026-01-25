@@ -2,6 +2,8 @@
 
 
 #include "TriggerBoxZone.h"
+#include "../Platform/MovingPlatform.h"
+#include "Kismet/GameplayStatics.h"
 
 //Construction
 UTriggerBoxZone::UTriggerBoxZone()
@@ -14,6 +16,8 @@ UTriggerBoxZone::UTriggerBoxZone()
 	SetCollisionProfileName(TEXT("Trigger"));
 	// Essential: Ensures the component is capable of firing "Overlap" events	
 	SetGenerateOverlapEvents(true);
+
+
 }
 
 void UTriggerBoxZone::BeginPlay()
@@ -38,8 +42,17 @@ void UTriggerBoxZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor
 	UE_LOG(LogTemp, Display, TEXT("Trigger Enter : %s"), *OtherActor->GetName());
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green,TEXT("Enter in TriggerBoxZone "));
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, (TEXT("Message : %s "),*Message.ToString()));
-
-
+	
+	if (bOnlyPlayerCanTrigger && !OtherActor->IsA(APawn::StaticClass()))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Begin_Overlape"));
+		return;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Begin_Overlape_True"));
+		SetPlatformActive(true);
+	}
 }
 
 void UTriggerBoxZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
@@ -47,6 +60,32 @@ void UTriggerBoxZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* 
 	if (!OtherActor) return;
 	UE_LOG(LogTemp, Display, TEXT("Trigger Exit : %s"), *OtherActor->GetName());
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Exit TriggerBoxZone "));
+	
+	if (bOnlyPlayerCanTrigger && !OtherActor->IsA(APawn::StaticClass()))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Begin_End_Overlape"));
+		return;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Begin_Overlape_False"));
+		SetPlatformActive(false);
+	}
+}
 
+void UTriggerBoxZone::SetPlatformActive(bool bActive)
+{
+	UE_LOG(LogTemp, Warning, TEXT("SetPlatformActive"));
+
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), PlatformTag, FoundActors);
+	
+	for (AActor* Actor : FoundActors)
+	{
+		if (AMovingPlatform* Platform = Cast<AMovingPlatform>(Actor))
+		{
+			Platform->ActivatePlatform(bActive);
+		}
+	}
 }
 

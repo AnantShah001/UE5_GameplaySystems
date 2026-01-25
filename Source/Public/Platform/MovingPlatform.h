@@ -23,15 +23,17 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-private:
-	// Create Variable
-	FVector StartLocation;
-
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	bool ShouldMove = true; // If false, never moves
 
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	bool ShouldReturn = true; // If false, stops at destination
+
+	void ActivatePlatform(bool bActivate);
+
+private:
+	// Create Variable
+	FVector StartLocation;
 
 	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove")) // Variable Show in UE_Editer
 	FVector PlatformVelocity = FVector(100, 0, 0);
