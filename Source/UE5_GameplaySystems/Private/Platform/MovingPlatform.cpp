@@ -95,9 +95,4 @@ void AMovingPlatform::ActivatePlatform(bool bActivate)
 {
 	ShouldMove = bActivate;
 
-	if (!bActivate)
-	{
-		// Snap start location to current position
-		//StartLocation = GetActorLocation();
-	}
 }

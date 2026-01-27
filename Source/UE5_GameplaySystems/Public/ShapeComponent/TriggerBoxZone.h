@@ -19,10 +19,11 @@ public:
 	// Construction
 	UTriggerBoxZone();
 
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	//virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
 protected:
+	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnyWhere)
 	FName Named;
@@ -35,9 +36,8 @@ protected:
 	FName PlatformTag;
 
 	UPROPERTY(EditAnywhere)
-	bool bOnlyPlayerCanTrigger = true;
+	bool OnlyPlayerCanTrigger = true;
 
-	virtual void BeginPlay() override;
 	// Functions are protected so they can be overridden by child classes if needed
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -45,16 +45,5 @@ protected:
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UPROPERTY(EditAnywhere)
-	bool bOnlyPlayerCanTrigger = true;
-
-	virtual void BeginPlay() override ;
-    // Functions are protected so they can be overridden by child classes if needed
-    UFUNCTION()
-    void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-    UFUNCTION()
-    void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-	
 	void SetPlatformActive(bool bActive);
 };
