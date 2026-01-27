@@ -34,5 +34,6 @@ void ADebugActor::BeginPlay()
 void ADebugActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 }
 
