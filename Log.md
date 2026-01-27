@@ -355,3 +355,20 @@ Today I extended an existing gameplay system instead of creating a new one.
 ![ShouldMove ShouldReturn](GamePlayScreenshots/ShouldMove_ShouldReturn.png)
 
 ---
+## Day 13 - I bridged the gap between trigger detection and world interaction
+
+Implemented a trigger box with Moving platform in C++.
+
+What I did:
+* **Integrated Platform Logic** : Added the SetPlatformActive function to bridge the gap between the trigger zone and world mechanics.
+* **Implemented Actor Tagging** : Used UGameplayStatics::GetAllActorsWithTag to allow the trigger to find and control specific platforms dynamically via the PlatformTag.
+* **Added Filtering** : Finalized the OnlyPlayerCanTrigger logic to ensure only the player (or specific pawns) can activate the sequence.
+* **Safety Casting** : Implemented a Cast<AMovingPlatform> check to prevent the code from crashing if a non-platform actor shares the same tag.
+
+ What I learned:
+* **Cross-Actor Communication** : I learned how to use Tags as a decoupled way to let components talk to Actors without needing a direct pointer reference in the editor.
+* **Component Versatility** : By inheriting from UBoxComponent, I realized I can turn any Actor into a trigger-able object just by adding this component.
+* **Safe Pointer Handling** : Reconfirmed the importance of checking if (!OtherActor) and using Cast before calling functions on external classes to maintain engine stability.
+* **API Usage** : Gained experience using Kismet/GameplayStatics.h for world-level actor searching within a component class.
+
+---
