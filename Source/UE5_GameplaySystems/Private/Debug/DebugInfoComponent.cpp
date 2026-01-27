@@ -1,7 +1,7 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Anant Shah All Rights Reserved
 
 
-#include "DebugInfoComponent.h"
+#include "Debug/DebugInfoComponent.h"
 
 // Sets default values for this component's properties
 UDebugInfoComponent::UDebugInfoComponent()
@@ -20,7 +20,7 @@ void UDebugInfoComponent::BeginPlay()
 	Super::BeginPlay();
 	PrintOwnerInfo(); // call the function to print owner info.
 	// ...
-	
+
 }
 
 
@@ -41,6 +41,6 @@ void UDebugInfoComponent::PrintOwnerInfo() const
 	{
 		GEngine->AddOnScreenDebugMessage(2, 10.f, FColor::Blue, (TEXT("Owner Actor : %s"),*Owner->GetName()));
 	}*/
-	
+
 }
 

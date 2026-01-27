@@ -1,15 +1,15 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Anant Shah All Rights Reserved
 // Used for learning Actor lifecycle and runtime debugging
 
-#include "DebugActor.h"
-#include "DebugInfoComponent.h"
+#include "Debug/DebugActor.h"
+#include "Debug/DebugInfoComponent.h"
 
 
 // Sets default values
 ADebugActor::ADebugActor()
 {
 	UE_LOG(LogTemp, Log, TEXT("DebugActor Constructor"));
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	DebugInfoComponent = CreateDefaultSubobject<UDebugInfoComponent>(TEXT("DebugInfoComponent"));
@@ -27,7 +27,7 @@ void ADebugActor::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(1, 10.f, FColor::Red, TEXT("DebugActor : Hello Unreal Engine"));
 	}*/
-	
+
 }
 
 // Called every frame

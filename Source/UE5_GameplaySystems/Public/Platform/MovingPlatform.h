@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Anant Shah All Rights Reserved
 
 #pragma once
 
@@ -10,8 +10,8 @@ UCLASS()
 class UE5_GAMEPLAYSYSTEMS_API AMovingPlatform : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AMovingPlatform();
 
@@ -19,13 +19,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-private:
-	// Create Variable
-	FVector StartLocation;
 
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	bool ShouldMove = true; // If false, never moves
@@ -33,8 +29,14 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	bool ShouldReturn = true; // If false, stops at destination
 
+	void ActivatePlatform(bool bActivate);
+
+private:
+	// Create Variable
+	FVector StartLocation;
+
 	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove")) // Variable Show in UE_Editer
-	FVector PlatformVelocity = FVector(100, 0, 0);
+		FVector PlatformVelocity = FVector(100, 0, 0);
 
 	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove"))
 	float MoveDistance = 1000;
@@ -48,7 +50,7 @@ private:
 	UPROPERTY(EditAnyWhere, Category = "Rotation")
 	bool ShouldRotate = false;
 
-	UPROPERTY(EditAnywhere, Category = "Rotation" , meta = (EditCondition = "ShouldRotate"))
+	UPROPERTY(EditAnywhere, Category = "Rotation", meta = (EditCondition = "ShouldRotate"))
 	FRotator RotationVelocity;
 
 	// Create Function No Value Return Type

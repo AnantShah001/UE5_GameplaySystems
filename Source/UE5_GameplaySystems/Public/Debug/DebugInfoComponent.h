@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Anant Shah All Rights Reserved
 
 #pragma once
 
@@ -7,12 +7,12 @@
 #include "DebugInfoComponent.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class UE5_GAMEPLAYSYSTEMS_API UDebugInfoComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UDebugInfoComponent();
 
@@ -23,7 +23,7 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Function to print information about the owner actor
-	void PrintOwnerInfo() const; 
+	void PrintOwnerInfo() const;
 };

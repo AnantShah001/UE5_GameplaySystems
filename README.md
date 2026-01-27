@@ -61,10 +61,16 @@ Source/
  ├─ UE5_GameplaySystems/
  │   ├─ GameMode
  │   ├─ Character
- │   ├─ Debug
- │   │   ├─ DebugActor
- │   ├─ Platform
- │   │   ├─ MovingPlatform
+ │   ├─ Public || Private
+ │   │   ├─ Debug
+ │   │   │   ├─ DebugActor
+ │   │   │   ├─ DebugInfoComponent
+ │   │   │
+ │   │   ├─ Platform
+ │   │   │   ├─ MovingPlatform
+ │   │   │
+ │   │   ├─ ShapeComponent
+ │   │   │   ├─ TriggerBoxZone
 
 Source/                   # C++ gameplay and system code
 Screenshots/              # Editor & development screenshots

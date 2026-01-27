@@ -1,10 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Anant Shah All Rights Reserved
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
-#include "TriggerBoxZone.generated.h"
+#include "TriggerBoxZone.generated.h" 
 
 /** UCLASS macro makes this visible to the Unreal Engine.
  *  ClassGroup = (Custom): Categories it in the "Add Component" menu.
@@ -21,17 +21,29 @@ public:
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+
 protected:
+
+	UPROPERTY(EditAnyWhere)
+	FName Named;
 
 	UPROPERTY(EditAnyWhere)
 	FText Message;
 
-	virtual void BeginPlay() override ;
-    // Functions are protected so they can be overridden by child classes if needed
-    UFUNCTION()
-    void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	// Type the tag name here in the Editor (e.g., "Elevator01")
+	UPROPERTY(EditAnywhere)
+	FName PlatformTag;
 
-    UFUNCTION()
-    void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	UPROPERTY(EditAnywhere)
+	bool bOnlyPlayerCanTrigger = true;
 
+	virtual void BeginPlay() override;
+	// Functions are protected so they can be overridden by child classes if needed
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	void SetPlatformActive(bool bActive);
 };
