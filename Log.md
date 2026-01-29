@@ -393,3 +393,23 @@ Implemented limited and controlled platform rotation instead of infinite rotatio
 * Editor-exposed values make systems designer-friendly
 
 ---
+## Day 15 – Reversible Target Rotation (State-Based Rotation)
+
+* Implemented **target-based rotation** using Alpha (0 → 1) with Slerp
+
+* Rotation now **automatically reverses** after completion (Start → Target → Start)
+
+* Added rotation direction control without duplicating logic
+
+* Rotation can be reused for:
+	* Doors
+	* Rotating platforms
+	* Hidden passages
+	* Puzzle mechanics
+
+* Trigger system cleanly activates rotation, platform logic stays independent
+
+### Key learning:
+State + Alpha + Direction flag = powerful, reusable mechanic.
+
+---
