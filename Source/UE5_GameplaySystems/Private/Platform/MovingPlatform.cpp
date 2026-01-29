@@ -20,6 +20,9 @@ void AMovingPlatform::BeginPlay()
 	StartLocation = GetActorLocation();
 	StartRotation = GetActorRotation();
 
+	StartRotationQuat = StartRotation.Quaternion();
+	TargetRotationQuat = TargetRotation.Quaternion();
+
 	// If we are returning, our "Target" is the TransferLocation
 	if (!ShouldReturn)
 	{
@@ -90,12 +93,22 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 	if (ShouldTargetRotation)
 	{
 		Alpha = FMath::Clamp(Alpha + (TargetRotationSpeed * DeltaTime), 0.0f, 1.0f);// clamp use for to between min & max value
-		FQuat RotatorOffset = FQuat::SlerpFullPath(StartRotation.Quaternion(), TargetRotation.Quaternion(), Alpha);//for smooth interpolation
+		
+		FQuat RotatorOffset = FQuat::SlerpFullPath(StartRotationQuat, TargetRotationQuat, Alpha);//for smooth interpolation
 
 		SetActorRotation(RotatorOffset);
 		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
 		DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
 		
+		if (Alpha >= 1.0f)
+		{
+			ShouldRotate = false;
+			FQuat S_Rotate = TargetRotationQuat;
+			FQuat T_Rotate = StartRotationQuat;
+			StartRotationQuat = S_Rotate;
+			TargetRotationQuat = T_Rotate;
+			Alpha = 0.0f;
+		}
 	}
 	else
 	{

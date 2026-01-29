@@ -68,8 +68,15 @@ private:
 
 	float Alpha;
 
+	FQuat StartRotationQuat;
+	FQuat TargetRotationQuat;
+
+
 	// Create Function No Value Return Type
 	void MovePlatform(float DeltaTime);
 
 	void RotatePlatform(float DeltaTime);
+
+	UPROPERTY(EditAnyWhere)
+	FQuat TRading;
 };
