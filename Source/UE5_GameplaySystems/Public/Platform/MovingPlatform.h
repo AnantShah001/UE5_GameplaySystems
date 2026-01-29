@@ -66,6 +66,8 @@ private:
 	UPROPERTY(EditAnyWhere, Category = "Rotation", meta = (EditCondition = "ShouldTargetRotation"))
 	float TargetRotationSpeed = 2.f;
 
+	float Alpha;
+
 	// Create Function No Value Return Type
 	void MovePlatform(float DeltaTime);
 

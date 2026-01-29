@@ -372,3 +372,24 @@ What I did:
 * **API Usage** : Gained experience using Kismet/GameplayStatics.h for world-level actor searching within a component class.
 
 ---
+## Day 14 – Controlled Platform Rotation
+
+### Focus
+Implemented limited and controlled platform rotation instead of infinite rotation.
+
+### What I Added
+* Initial rotation tracking
+* Editor-defined maximum rotation angle
+* Conditional rotation stopping
+* Clean separation between movement and rotation logic
+
+### Outcome
+* Platforms rotate only up to a defined angle
+* Rotation behavior is predictable and reusable
+* System can be extended with triggers or reverse logic
+
+### Learning
+* Always control gameplay behavior with clear limits
+* Editor-exposed values make systems designer-friendly
+
+---

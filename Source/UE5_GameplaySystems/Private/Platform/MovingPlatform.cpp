@@ -50,8 +50,6 @@ void AMovingPlatform::Tick(float DeltaTime)
 	DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f, 0);
 	if (ShouldRotate) RotatePlatform(DeltaTime);// if ShouldRotate variable true. Then function cal every frame
 
-	//RotateToTarget(DeltaTime);
-
 }
 
 void AMovingPlatform::MovePlatform(float DeltaTime)
@@ -91,13 +89,13 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 {
 	if (ShouldTargetRotation)
 	{
-		FRotator RotatorOffset = FMath::RInterpConstantTo(GetActorRotation(), TargetRotation, DeltaTime, TargetRotationSpeed);
+		Alpha = FMath::Clamp(Alpha + (TargetRotationSpeed * DeltaTime), 0.0f, 1.0f);// clamp use for to between min & max value
+		FQuat RotatorOffset = FQuat::SlerpFullPath(StartRotation.Quaternion(), TargetRotation.Quaternion(), Alpha);//for smooth interpolation
 
 		SetActorRotation(RotatorOffset);
-
 		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
 		DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
-
+		
 	}
 	else
 	{
