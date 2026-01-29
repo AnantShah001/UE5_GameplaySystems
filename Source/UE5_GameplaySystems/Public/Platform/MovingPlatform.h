@@ -29,11 +29,15 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Moving")
 	bool ShouldReturn = true; // If false, stops at destination
 
-	void ActivatePlatform(bool bActivate);
+	void SetMovePlatform(bool bMove);
+
+	void SetRotatePlatform(bool bRotate);
 
 private:
 	// Create Variable
 	FVector StartLocation;
+
+	FRotator StartRotation;
 
 	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove")) // Variable Show in UE_Editer
 		FVector PlatformVelocity = FVector(100, 0, 0);
@@ -52,6 +56,15 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Rotation", meta = (EditCondition = "ShouldRotate"))
 	FRotator RotationVelocity;
+
+	UPROPERTY(EditAnyWhere, Category = "Rotation", meta = (EditCondition = "ShouldRotate"))
+	bool ShouldTargetRotation = false;
+
+	UPROPERTY(EditAnyWhere, Category = "Rotation" , meta = (EditCondition = "ShouldTargetRotation"))
+	FRotator TargetRotation;
+
+	UPROPERTY(EditAnyWhere, Category = "Rotation", meta = (EditCondition = "ShouldTargetRotation"))
+	float TargetRotationSpeed = 2.f;
 
 	// Create Function No Value Return Type
 	void MovePlatform(float DeltaTime);

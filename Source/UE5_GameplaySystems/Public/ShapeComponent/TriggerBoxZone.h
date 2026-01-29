@@ -31,6 +31,9 @@ protected:
 	UPROPERTY(EditAnyWhere)
 	FText Message;
 
+	UPROPERTY(EditAnyWhere)
+	bool ShouldMove = true;
+
 	// Type the tag name here in the Editor (e.g., "Elevator01")
 	UPROPERTY(EditAnywhere)
 	FName PlatformTag;

@@ -74,7 +74,16 @@ void UTriggerBoxZone::SetPlatformActive(bool bActive)
 	{
 		if(AMovingPlatform* Platform = Cast<AMovingPlatform>(Actor)) 
 		{
-			Platform->ActivatePlatform(bActive);
+			if (ShouldMove)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Should Move"));
+				Platform->SetMovePlatform(bActive);
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Should Move"));
+				Platform->SetRotatePlatform(bActive);
+			}
 		}
 	}
 }

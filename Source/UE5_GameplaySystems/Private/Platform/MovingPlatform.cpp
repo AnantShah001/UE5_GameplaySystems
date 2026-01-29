@@ -18,6 +18,7 @@ void AMovingPlatform::BeginPlay()
 	Super::BeginPlay();
 
 	StartLocation = GetActorLocation();
+	StartRotation = GetActorRotation();
 
 	// If we are returning, our "Target" is the TransferLocation
 	if (!ShouldReturn)
@@ -48,6 +49,8 @@ void AMovingPlatform::Tick(float DeltaTime)
 	if (ShouldMove) MovePlatform(DeltaTime); // Should Move Check
 	DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f, 0);
 	if (ShouldRotate) RotatePlatform(DeltaTime);// if ShouldRotate variable true. Then function cal every frame
+
+	//RotateToTarget(DeltaTime);
 
 }
 
@@ -86,13 +89,33 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 
 void AMovingPlatform::RotatePlatform(float DeltaTime)
 {
-	AddActorLocalRotation(RotationVelocity);
-	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
-	DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
+	if (ShouldTargetRotation)
+	{
+		FRotator RotatorOffset = FMath::RInterpConstantTo(GetActorRotation(), TargetRotation, DeltaTime, TargetRotationSpeed);
+
+		SetActorRotation(RotatorOffset);
+
+		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
+		DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
+
+	}
+	else
+	{
+		AddActorLocalRotation(RotationVelocity);
+		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
+		DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
+	}
+
 }
 
-void AMovingPlatform::ActivatePlatform(bool bActivate)
-{
-	ShouldMove = bActivate;
 
+void AMovingPlatform::SetMovePlatform(bool bMove)
+{
+	ShouldMove = bMove;
+
+}
+
+void AMovingPlatform::SetRotatePlatform(bool bRotate)
+{
+	ShouldRotate = bRotate;
 }
