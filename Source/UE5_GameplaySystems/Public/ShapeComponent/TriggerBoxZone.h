@@ -25,6 +25,9 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere)
+	bool ShowMessageOnly = false;
+
 	UPROPERTY(EditAnyWhere)
 	FName Named;
 
@@ -52,5 +55,4 @@ protected:
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	void SetPlatformActive(bool bActive);
-
 };

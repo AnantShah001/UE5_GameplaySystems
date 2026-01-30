@@ -35,7 +35,15 @@ void UTriggerBoxZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor
 	} 
 	else
 	{ 
-		SetPlatformActive(true);
+		if (ShowMessageOnly)
+		{
+			if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Green, (TEXT("Message %s"), *Message.ToString()));
+			DestroyComponent();
+		}
+		else
+		{
+			SetPlatformActive(true);
+		}
 	}
 } 
 
