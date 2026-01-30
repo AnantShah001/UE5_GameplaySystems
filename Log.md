@@ -446,4 +446,47 @@ This change was handled entirely inside the TriggerBoxZone, without modifying pl
 without duplicating code.
 
 ---
-Day 17 - 
+## Day 17 – One-Time Trigger Box (Message Only)
+
+###  Goal
+Create a TriggerBox system that:
+* Displays a message only once
+* Triggers only when the player enters
+* Destroys itself after execution
+* Does NOT affect gameplay systems like moving platforms
+
+This system is intended for:
+* Level intro messages
+* Tutorial hints
+* One-time notifications
+
+### What Was Implemented
+* TriggerBox activates on `BeginOverlap`
+* Validates player pawn (optional restriction)
+* Displays a screen message using `GEngine->AddOnScreenDebugMessage`
+* Executes only once
+* Destroys itself after use to prevent retriggering
+
+### Key Design Decisions
+
+* **Component-based Trigger (`UBoxComponent`)**
+	* Keeps logic reusable and lightweight
+* **No Tick usage**
+	* Event-driven → better performance
+* **Self-destruction after execution**
+	* Prevents repeated messages
+    * Keeps level logic clean
+	
+### Why This Matters
+
+* Matches real game behavior (tutorial popups, level start hints)
+* Prevents duplicated logic and unnecessary bool flags
+* Improves maintainability and readability
+* Separates messaging systems from gameplay systems
+
+Next step:
+➡️ Extend the same concept to **one-time gameplay triggers** (MovingPlatforms)
+
+---
+
+
