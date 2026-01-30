@@ -413,3 +413,37 @@ Implemented limited and controlled platform rotation instead of infinite rotatio
 State + Alpha + Direction flag = powerful, reusable mechanic.
 
 ---
+## Day 16 - Trigger-Driven Platform State Control (Hold vs Toggle Behavior)
+
+### What I worked on
+Today I refined the interaction between TriggerBoxZone and MovingPlatform by introducing a clear behavioral rule instead of hard-coded logic.
+
+I added a control variable inside the trigger component:
+
+### OnlyWhenTrigger
+* If `true:` Platform remains active only while the player is inside the trigger
+* If `false:` Platform continues its movement or rotation even after the player exits
+This change was handled entirely inside the TriggerBoxZone, without modifying platform movement or rotation logic.
+
+### Why this matters
+* Separates event control (TriggerBox) from motion execution (MovingPlatform)
+* Prevents Tick logic from being broken by overlap events
+* Makes the same platform reusable for:
+	* Elevators
+	* Doors (open/close)
+	* Rotating platforms
+	* Puzzle mechanics	
+	* Technical Takeaways
+
+* Triggers should send commands, not manage motion
+* Platforms should finish what they start, unless explicitly told to stop
+* Small booleans can define large gameplay behaviors when placed correctly
+
+### This system now supports both:
+* `Hold-to-activate` mechanics
+* `Fire-and-forget` mechanics
+
+without duplicating code.
+
+---
+

@@ -49,6 +49,7 @@ void UTriggerBoxZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* 
 	}
 	else
 	{
+		if (!OnlyWhenTigger) return; 
 		SetPlatformActive(false);
 	}
 }

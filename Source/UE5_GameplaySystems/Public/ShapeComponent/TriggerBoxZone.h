@@ -41,6 +41,9 @@ protected:
 	UPROPERTY(EditAnywhere)
 	bool OnlyPlayerCanTrigger = true;
 
+	UPROPERTY(EditAnyWhere)
+	bool OnlyWhenTigger = true;
+
 	// Functions are protected so they can be overridden by child classes if needed
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -49,4 +52,5 @@ protected:
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	void SetPlatformActive(bool bActive);
+
 };
