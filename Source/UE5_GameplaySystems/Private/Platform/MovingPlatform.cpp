@@ -92,14 +92,16 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 {
 	if (ShouldTargetRotation)
 	{
+		//ResultQuat = StartQuat * TargetQuat;
+
 		Alpha = FMath::Clamp(Alpha + (TargetRotationSpeed * DeltaTime), 0.0f, 1.0f);// clamp use for to between min & max value
-		
+
 		FQuat RotatorOffset = FQuat::SlerpFullPath(StartRotationQuat, TargetRotationQuat, Alpha);//for smooth interpolation
 
 		SetActorRotation(RotatorOffset);
 		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
 		DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
-		
+
 		if (Alpha >= 1.0f)
 		{
 			ShouldRotate = false;
@@ -108,6 +110,8 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 			StartRotationQuat = S_Rotate;
 			TargetRotationQuat = T_Rotate;
 			Alpha = 0.0f;
+
+			FQuat Result = S_Rotate * T_Rotate;
 		}
 	}
 	else
@@ -118,7 +122,6 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 	}
 
 }
-
 
 void AMovingPlatform::SetMovePlatform(bool bMove)
 {

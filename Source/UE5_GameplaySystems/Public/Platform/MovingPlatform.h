@@ -60,7 +60,7 @@ private:
 	UPROPERTY(EditAnyWhere, Category = "Rotation", meta = (EditCondition = "ShouldRotate"))
 	bool ShouldTargetRotation = false;
 
-	UPROPERTY(EditAnyWhere, Category = "Rotation" , meta = (EditCondition = "ShouldTargetRotation"))
+	UPROPERTY(EditAnyWhere, Category = "Rotation", meta = (EditCondition = "ShouldTargetRotation"))
 	FRotator TargetRotation;
 
 	UPROPERTY(EditAnyWhere, Category = "Rotation", meta = (EditCondition = "ShouldTargetRotation"))

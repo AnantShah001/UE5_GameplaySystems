@@ -35,7 +35,13 @@ protected:
 	FText Message;
 
 	UPROPERTY(EditAnyWhere)
+	bool OneTimeUse = false;
+
+	UPROPERTY(EditAnyWhere)
 	bool ShouldMove = true;
+
+	UPROPERTY(EditAnyWhere)
+	bool ShouldRotate = false;
 
 	// Type the tag name here in the Editor (e.g., "Elevator01")
 	UPROPERTY(EditAnywhere)
@@ -55,4 +61,8 @@ protected:
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	void SetPlatformActive(bool bActive);
+
+	void OnlyOneTimeUse();
+
+	void MessageOnly();
 };

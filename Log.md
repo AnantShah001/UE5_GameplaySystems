@@ -488,5 +488,57 @@ Next step:
 ➡️ Extend the same concept to **one-time gameplay triggers** (MovingPlatforms)
 
 ---
+## Day 18 – One-Time Gameplay Trigger (Platform / Door)
 
+### Goal
+Extend the trigger system to affect gameplay **only once**.
 
+## What Was Done
+* Used TriggerBoxZone to activate gameplay logic (platform / door)
+* Trigger fires **only on first time overlap**
+* Gameplay action executes once
+* TriggerBox destroys itself after execution
+
+## Why This Matters
+* Prevents repeated activation
+* Matches real gameplay patterns (doors, elevators, level gates)
+* Keeps level logic simple and predictable
+
+## Key Learning
+One-time gameplay triggers should:
+* Execute once
+* Clean themselves up
+* Never rely on Tick or repeated overlap checks
+
+---
+# Day 19 – Code Cleanup & Refactor
+
+## Goal
+Improve readability, structure, and long-term maintainability of gameplay code.
+
+## What Was Done
+- Reviewed TriggerBoxZone and MovingPlatform code
+- Reduced unnecessary condition checks
+- Simplified bool logic
+- Grouped gameplay responsibilities clearly
+- Added meaningful comments for future readability
+
+## Improvements Made
+- Clear separation between:
+  - Trigger logic
+  - Gameplay activation logic
+- Removed duplicate or unclear branches
+- Made variable intent easier to understand
+- Ensured functions do one job only
+
+## Why This Matters
+Clean code:
+- Scales better
+- Is easier to debug
+- Is easier to explain in interviews
+- Reflects professional engineering habits
+
+## Key Learning
+Refactoring is not optional — it is part of real gameplay system development.
+
+---
