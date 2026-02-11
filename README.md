@@ -100,14 +100,25 @@ Early gameplay prototypes are packaged and shared for testing.
 
 > These builds are **system validation prototypes**, not final games.
 
-**Game Level**
+**Game Level Day 10**
 ![Game Level](GamePlayScreenshots/Day_10_GamePlay.png)
 
-**Level Top View**
+**Game Level Day 20**
+![Game Level](GamePlayScreenshots/Day_20_GamePlay.png)
+
+
+**Level Top View Day 10**
 ![Day-10 Level TopView](Screenshots/Day_10_Level_TopView.png)
 
-**Game View**
+**Level Top View Day 20**
+![Day-10 Level TopView](Screenshots/Day_20_Level_TopView.png)
+
+
+**Game View Day 10**
 ![Game View](Screenshots/GameView1.png)
+
+**Game View Day 20**
+![Game View](Screenshots/GameView2.png)
 
 ---
 
@@ -115,7 +126,9 @@ Early gameplay prototypes are packaged and shared for testing.
 
 **[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
 
-**[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1p1YuqYr70H9uFD3_ahaFcNEgR23CierQ/view?usp=sharing)**
+**[UE5_GameplaySystems_10.rar](https://drive.google.com/file/d/1p1YuqYr70H9uFD3_ahaFcNEgR23CierQ/view?usp=sharing)**
+
+**[UE5_GameplaySystems_20.rar](https://drive.google.com/file/d/15W1yzYyk_B-hdotzvP8MeQQ-_WsBPG6F/view?usp=sharing)**
 
 
 ---
