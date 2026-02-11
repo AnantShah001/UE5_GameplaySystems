@@ -37,10 +37,10 @@ void AMovingPlatform::BeginPlay()
 	}
 
 	// Debug
-	DrawDebugSphere(GetWorld(), StartLocation, 20.f, 12, FColor::Cyan, true, -1.f);
+	//DrawDebugSphere(GetWorld(), StartLocation, 20.f, 12, FColor::Cyan, true, -1.f);
 	FVector EndLocation = StartLocation + PlatformVelocity.GetSafeNormal() * MoveDistance;
-	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, true, -1.f);
-	DrawDebugSphere(GetWorld(), EndLocation, 20.f, 12, FColor::Red, true, -1.f);
+	//DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, true, -1.f);
+	//DrawDebugSphere(GetWorld(), EndLocation, 20.f, 12, FColor::Red, true, -1.f);
 
 }
 
@@ -50,7 +50,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	if (ShouldMove) MovePlatform(DeltaTime); // Should Move Check
-	DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f, 0);
+	//DrawDebugPoint(GetWorld(), GetActorLocation(), 20, FColor::Blue, false, -1.0f, 0);S
 	if (ShouldRotate) RotatePlatform(DeltaTime);// if ShouldRotate variable true. Then function cal every frame
 
 }
@@ -99,8 +99,8 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 		FQuat RotatorOffset = FQuat::SlerpFullPath(StartRotationQuat, TargetRotationQuat, Alpha);//for smooth interpolation
 
 		SetActorRotation(RotatorOffset);
-		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
-		DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
+		//DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
+		//DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
 
 		if (Alpha >= 1.0f)
 		{
@@ -117,8 +117,8 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 	else
 	{
 		AddActorLocalRotation(RotationVelocity);
-		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
-		DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
+		//DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
+		//DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
 	}
 
 }

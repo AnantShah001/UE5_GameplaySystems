@@ -542,3 +542,45 @@ Clean code:
 Refactoring is not optional — it is part of real gameplay system development.
 
 ---
+# Day 20 – Packaging & Playable Build
+
+## Goal
+Create a playable packaged build to showcase current gameplay systems.
+
+## What Was Done
+* Packaged the project as a standalone Windows build
+* Tested core gameplay systems in packaged mode
+* Verified:
+  * Moving platforms
+  * Rotating platforms
+  * TriggerBoxZone logic
+  * One-time triggers and messages
+
+## Outcome
+* Project is now playable without Unreal Editor
+* Anyone can download and test the gameplay systems
+* Confirms systems work outside editor environment
+ 
+## Why This Matters
+Packaging proves:
+* Systems are stable
+* Code is not editor-dependent
+* Project is ready for real-world testing and feedback
+
+## Key Learning
+A playable build turns a **real asset**.
+
+## Takeaway
+Shipping small playable builds early helps validate gameplay systems
+and exposes real-world issues faster than theory alone.
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems.rar](https://drive.google.com/file/d/15W1yzYyk_B-hdotzvP8MeQQ-_WsBPG6F/view?usp=sharing)**
+
+![Day-20 Level TopView](Screenshots/Day_20_Level_TopView.png)
+![Day-20 Level DebugView](Screenshots/Day_20_Level_DebugView.png)
+![Game View](Screenshots/GameView2.png)
+
+---
+
