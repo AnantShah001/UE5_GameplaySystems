@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "TimerManager.h"
 #include "UE5_GameplaySystemsCharacter.generated.h"
 
 //Reduce compile time
@@ -63,7 +64,8 @@ class AUE5_GameplaySystemsCharacter : public ACharacter
 
 public:
 	AUE5_GameplaySystemsCharacter();
-	
+
+	void HandleDeath();
 
 protected:
 
@@ -77,6 +79,9 @@ protected:
 
 	void DebugActionPressed();
 			
+	FTimerHandle RestartTimer;
+
+	void RestartLevel();
 
 protected:
 	// APawn interface

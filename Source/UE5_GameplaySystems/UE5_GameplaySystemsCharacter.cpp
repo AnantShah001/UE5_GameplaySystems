@@ -13,6 +13,8 @@
 // Manages input mappings for the local player; used to add the Input Mapping Context at runtime.
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Kismet/GameplayStatics.h"
+
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -162,5 +164,16 @@ void AUE5_GameplaySystemsCharacter::DebugActionPressed()
 	UE_LOG(LogTemp, Display, TEXT("Debug Input Pressed"));
 
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Cyan, TEXT("Debug Input Triggered"));
+}
 
+void AUE5_GameplaySystemsCharacter::HandleDeath()
+{
+	GetMesh()->SetSimulatePhysics(true);
+	GetWorldTimerManager().SetTimer(RestartTimer, this, &AUE5_GameplaySystemsCharacter::RestartLevel, 3.0f, false);
+}
+
+void AUE5_GameplaySystemsCharacter::RestartLevel()
+{
+	UE_LOG(LogTemp, Error, TEXT("Restart Level"));
+	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 }

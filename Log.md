@@ -583,4 +583,31 @@ and exposes real-world issues faster than theory alone.
 ![Game View](Screenshots/GameView2.png)
 
 ---
+Day 21 – Death & Trigger System & Physics
 
+## Goal
+Implement complete death behavior using DeathTriggerBoxZone. Again game Restart System.
+
+## What Was Done
+* Created DeathTriggerBoxZone C++ class
+* Added UBoxComponent
+* Configured overlap
+* Bound overlap event in BeginPlay
+* Overlap detection calls HandleDeath()
+* Logged player entry into death zone
+* Added 3 second timer
+* Restarted level using UGameplayStatics::OpenLevel()
+
+## Architecture
+* Death logic lives inside Character
+* Trigger only detects overlap
+* Restart handled via TimerManager
+
+## Key Learning
+Gameplay systems should be modular.
+Failure logic must be independent from interaction logic.
+
+## Key Learning
+Separation of detection and reaction keeps gameplay systems clean.
+
+---
