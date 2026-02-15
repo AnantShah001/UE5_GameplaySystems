@@ -14,6 +14,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -77,6 +78,27 @@ void AUE5_GameplaySystemsCharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 
 		}
+	}
+}
+
+void AUE5_GameplaySystemsCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (bFallCameraActive)
+	{
+		// 1. Get positions
+		FVector CameraLoc = FollowCamera->GetComponentLocation();
+		FVector TargetLoc = GetMesh()->GetComponentLocation();
+
+		// 2. Calculate the "Look At" rotation
+		FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(CameraLoc, TargetLoc);
+
+		// 3. Apply rotation (use RInterpTo for smoothness)
+		FRotator CurrentRot = FollowCamera->GetComponentRotation();
+		FRotator SmoothedRot = FMath::RInterpTo(CurrentRot, LookAtRot, DeltaTime, 5.0f);
+
+		FollowCamera->SetWorldRotation(SmoothedRot);
 	}
 }
 
@@ -160,20 +182,20 @@ void AUE5_GameplaySystemsCharacter::Look(const FInputActionValue& Value)
 
 void AUE5_GameplaySystemsCharacter::DebugActionPressed()
 {
-
 	UE_LOG(LogTemp, Display, TEXT("Debug Input Pressed"));
-
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Cyan, TEXT("Debug Input Triggered"));
 }
 
 void AUE5_GameplaySystemsCharacter::HandleDeath()
 {
 	GetMesh()->SetSimulatePhysics(true);
+	DisableInput(nullptr);
+	bFallCameraActive = true;
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &AUE5_GameplaySystemsCharacter::RestartLevel, 3.0f, false);
 }
 
 void AUE5_GameplaySystemsCharacter::RestartLevel()
 {
-	UE_LOG(LogTemp, Error, TEXT("Restart Level"));
+	UE_LOG(LogTemp, Warning, TEXT("Restart Level"));
 	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 }

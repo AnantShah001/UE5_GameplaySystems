@@ -65,6 +65,8 @@ class AUE5_GameplaySystemsCharacter : public ACharacter
 public:
 	AUE5_GameplaySystemsCharacter();
 
+	virtual void Tick(float DeltaTime) override;
+
 	void HandleDeath();
 
 protected:
@@ -82,6 +84,8 @@ protected:
 	FTimerHandle RestartTimer;
 
 	void RestartLevel();
+
+	bool bFallCameraActive = false;
 
 protected:
 	// APawn interface

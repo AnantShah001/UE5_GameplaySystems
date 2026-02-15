@@ -29,7 +29,7 @@ void AMovingPlatform::BeginPlay()
 		// Calculate velocity toward TransferLocation using TransferSpeed
 		FVector Direction = (TransferLocation - StartLocation).GetSafeNormal();
 		PlatformVelocity = Direction * TransferSpeed;
-		UE_LOG(LogTemp, Error, TEXT("Platform Velocity : %s"), *PlatformVelocity.ToString());
+		//UE_LOG(LogTemp, Error, TEXT("Platform Velocity : %s"), *PlatformVelocity.ToString());
 
 		// Update MoveDistance to be exactly the distance to the Transfer point
 		MoveDistance = FVector::Dist(StartLocation, TransferLocation);

@@ -8,7 +8,7 @@
 
 UDeathTriggerBoxZone::UDeathTriggerBoxZone()
 {
-	UE_LOG(LogTemp, Warning, TEXT("DeathTriggerBoxZone"));
+	//...
 }
 
 void UDeathTriggerBoxZone::BeginPlay()
@@ -28,4 +28,3 @@ void UDeathTriggerBoxZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 		PlayerCharacter->HandleDeath();
 	}
 }
-
