@@ -583,7 +583,7 @@ and exposes real-world issues faster than theory alone.
 ![Game View](Screenshots/GameView2.png)
 
 ---
-Day 21 – Death & Trigger System & Physics
+# Day 21 – Death & Trigger System & Physics
 
 ## Goal
 Implement complete death behavior using DeathTriggerBoxZone. Again game Restart System.
@@ -609,5 +609,36 @@ Failure logic must be independent from interaction logic.
 
 ## Key Learning
 Separation of detection and reaction keeps gameplay systems clean.
+
+---
+# Day 22 – Death Camera Focus System
+
+## Goal
+Improve death experience by making camera focus on falling **skeletal Mesh**.
+
+## What Was Done
+- Disabled normal camera control when player dies
+- Activated `bFallCameraActive` flag
+- Used `Tick()` to rotate camera toward skeletal mesh
+- Used `FindLookAtRotation` to calculate correct rotation
+- Smoothed rotation using `FMath::RInterpTo`
+- Camera now dynamically tracks falling mesh
+
+## Result
+When player falls:
+- Physics activates
+- Camera stops player control rotation
+- Camera smoothly rotates toward skeletal mesh
+- After 3 seconds level restarts
+
+## Technical Notes
+- Camera location remains unchanged
+- Only rotation is updated
+- Smooth interpolation creates cinematic effect
+- No abrupt snapping
+
+## Key Learning
+Small camera adjustments dramatically improve gameplay feel.
+Polish systems create professional-level presentation.
 
 ---
