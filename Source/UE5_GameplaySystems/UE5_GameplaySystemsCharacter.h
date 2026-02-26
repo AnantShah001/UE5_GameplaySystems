@@ -69,6 +69,14 @@ public:
 
 	void HandleDeath();
 
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<class UDeath> DeathRef;
+
+	UPROPERTY()
+	class UDeath* DeathWidget;
+
+	void DeathWidgetAnimation();
+
 protected:
 
 	/** Called for movement input */
@@ -82,6 +90,8 @@ protected:
 	void DebugActionPressed();
 			
 	FTimerHandle RestartTimer;
+
+	FTimerHandle DeathWidgetTimer;
 
 	void RestartLevel();
 

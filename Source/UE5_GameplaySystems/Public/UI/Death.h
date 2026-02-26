@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Animation/WidgetAnimation.h"
 #include "Death.generated.h"
 
 /**
@@ -14,4 +15,9 @@ class UE5_GAMEPLAYSYSTEMS_API UDeath : public UUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+	UPROPERTY(Transient , meta = (BindWidgetAnim))
+	class UWidgetAnimation* DeathFadeOut;
+
+	void PlayDeathFadeOutAnim();
 };

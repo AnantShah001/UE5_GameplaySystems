@@ -15,7 +15,8 @@
 #include "InputActionValue.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
-
+#include "Blueprint/UserWidget.h"
+#include "UI/Death.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -191,11 +192,28 @@ void AUE5_GameplaySystemsCharacter::HandleDeath()
 	GetMesh()->SetSimulatePhysics(true);
 	DisableInput(nullptr);
 	bFallCameraActive = true;
+	GetWorldTimerManager().SetTimer(DeathWidgetTimer, this, &AUE5_GameplaySystemsCharacter::DeathWidgetAnimation, 2.0f, false);
+	UE_LOG(LogTemp, Error, TEXT("Time Delay :- 1"));
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &AUE5_GameplaySystemsCharacter::RestartLevel, 3.0f, false);
+	UE_LOG(LogTemp, Error, TEXT("Time Delay :- 2"));
+
 }
 
 void AUE5_GameplaySystemsCharacter::RestartLevel()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Restart Level"));
 	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+}
+
+void AUE5_GameplaySystemsCharacter::DeathWidgetAnimation()
+{
+	if (DeathRef)
+	{
+		DeathWidget = CreateWidget<UDeath>(GetWorld(), DeathRef);
+		if (DeathWidget)
+		{
+			DeathWidget->AddToViewport();
+			DeathWidget->PlayDeathFadeOutAnim();
+		}
+	}
 }
