@@ -642,4 +642,53 @@ Small camera adjustments dramatically improve gameplay feel.
 Polish systems create professional-level presentation.
 
 ---
+# Day 23 – Fade Animation (C++ Blueprint)
 
+## Goal
+Implement a custom UUserWidget class (UDeath) and trigger a fade animation before restarting level using C++.
+
+## What Was Done
+* Created new C++ class: UDeath (inherits from UUserWidget)
+* Added `UWidgetAnimation* DeathFadeOut`
+* Linked animation from Blueprint to C++
+* Created DeathWidgetAnimation() function in Character
+* Used TimerManager (2 sec delay) to spawn widget
+* Played fade animation before level restart
+* Restart triggered at 3 sec
+
+## Implementation Flow
+* HandleDeath():
+	* 2 second delay
+	* `CreateWidget<UDeath>()`
+	* `AddToViewport()`
+	* `PlayDeathFadeOutAnim()`
+
+## Architecture Notes
+* Gameplay logic remains inside Character
+* UI logic handled inside UDeath widget
+* Character only controls when to trigger UI
+* Clean separation between gameplay and UI system
+* Animation exposed BindWidgetAnim
+
+## Key Learning
+C++ and Blueprint integration allows powerful UI control.
+Timed animation improves presentation before restart.
+
+* 1. **The Big Difference: Blocking vs. Event-Based**
+In Blueprints: The Delay node is "latent." When the execution hits the Delay node, it literally pauses that specific line of logic and stays there until the time is up.
+In C++: The SetTimer function is just an instruction. You are telling the CPU: "Hey, make a note to run this function in 3 seconds. Now, immediately move to the next line of code."
+This is why your UE_LOG (1 and 2) printed instantly and did not wait. The code "fell through" to the bottom immediately.
+
+* 2. **Visualising the Timeline**
+Here is what happens in the 1 millisecond that your code runs:
+Line 1: You tell the Timer Manager to start a clock for DeathWidgetAnimation.
+Line 2: You print "Time Delay 1" to the log.
+Line 3: You tell the Timer Manager to start a clock for RestartLevel.
+Line 4: You print "Time Delay 2" to the log.
+Line 5...: The CPU continues running the rest of your game (Movement, Physics, etc.).
+... 2 Seconds Later ...
+The Timer Manager says "Time's up!" and jumps into your DeathWidgetAnimation function.
+... 3 Seconds Later ...
+The Timer Manager says "Time's up!" and jumps into your RestartLevel function.
+
+---
