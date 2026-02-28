@@ -692,3 +692,32 @@ The Timer Manager says "Time's up!" and jumps into your DeathWidgetAnimation fun
 The Timer Manager says "Time's up!" and jumps into your RestartLevel function.
 
 ---
+# Day 24 – Deadly Moving Obstacle (built reusable systems)
+
+## Goal
+Create a moving deadly obstacle without modifying existing code.
+
+## What Was Done
+* Placed existing MovingPlatform actor in the level
+* Replaced StaticMesh with a rock mesh
+* Added DeathTriggerBoxZone as a component in the Outliner
+* Adjusted collision to detect player overlap
+
+## Result
+* Moving platform now acts as a dangerous obstacle
+* If player touches the rock, death system triggers
+* Physics fall, camera focus, fade animation, and restart all work automatically
+
+## Architecture Advantage
+No code changes required.
+
+This demonstrates:
+* Modular system design
+* Reusable gameplay components
+* Separation of responsibility
+
+## Key Learning
+Well-structured systems allow new gameplay behaviors 
+to be created directly inside the level editor.
+
+---
