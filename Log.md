@@ -721,3 +721,36 @@ Well-structured systems allow new gameplay behaviors
 to be created directly inside the level editor.
 
 ---
+# Day 25 – Collectible Item System (Gold Pickup)
+
+## Goal
+Implement a basic collectible item system using C++.
+
+## What Was Done
+* Created AItem class (inherits from AActor)
+* Added StaticMeshComponent for visual representation
+* Added SphereComponent for overlap detection
+* Implemented rotation effect using Tick()
+* On overlap:
+  * Cast to player character
+  * Increased player's Gold value
+  * Displayed debug message
+  * Destroyed item after pickup
+
+## Gameplay Result
+* Gold item rotates
+* Player overlaps sphere collision
+* Player Gold value increases
+* Item is removed from level
+
+## Architecture Notes
+* Item handles only pickup logic
+* Player stores total Gold
+* Overlap-based detection (event-driven)
+* Simple and modular design
+
+## Key Learning
+Collectible systems create player motivation and progression.
+Separation of pickup logic and player data keeps the system scalable.
+
+---

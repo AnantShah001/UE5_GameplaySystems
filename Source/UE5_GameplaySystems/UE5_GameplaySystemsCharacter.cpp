@@ -193,10 +193,7 @@ void AUE5_GameplaySystemsCharacter::HandleDeath()
 	DisableInput(nullptr);
 	bFallCameraActive = true;
 	GetWorldTimerManager().SetTimer(DeathWidgetTimer, this, &AUE5_GameplaySystemsCharacter::DeathWidgetAnimation, 2.0f, false);
-	UE_LOG(LogTemp, Error, TEXT("Time Delay :- 1"));
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &AUE5_GameplaySystemsCharacter::RestartLevel, 3.0f, false);
-	UE_LOG(LogTemp, Error, TEXT("Time Delay :- 2"));
-
 }
 
 void AUE5_GameplaySystemsCharacter::RestartLevel()

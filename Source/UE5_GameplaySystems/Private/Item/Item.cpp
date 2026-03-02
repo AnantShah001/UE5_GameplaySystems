@@ -32,7 +32,8 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	FRotator Rotation = Rotate * DeltaTime;
+	AddActorLocalRotation(Rotation);
 }
 
 void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -40,5 +41,9 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 	if (AUE5_GameplaySystemsCharacter* PlayerCharacter = Cast<AUE5_GameplaySystemsCharacter>(OtherActor))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("On_Overlap_Begin : Item"));
+		PlayerCharacter->Gold += Gold;
+		UE_LOG(LogTemp, Warning, TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold);
+		if (GEngine) GEngine->AddOnScreenDebugMessage(1, 10.f, FColor::Red, FString::Printf(TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold));
+		Destroy();
 	}
 }

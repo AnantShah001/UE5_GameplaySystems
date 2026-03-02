@@ -71,7 +71,14 @@ Source/
  │   │   │
  │   │   ├─ ShapeComponent
  │   │   │   ├─ TriggerBoxZone
-
+ │   │   │   ├─ DeathTriggerBoxZone
+ │   │   │
+ │   │   ├─ UI
+ │   │   │   ├─ Death
+ │   │   │
+ │   │   ├─ Item
+ │   │   │   ├─ Item
+ 
 Source/                   # C++ gameplay and system code
 Screenshots/              # Editor & development screenshots
 GamePlayScreenshots/      # In-game runtime visuals

@@ -77,6 +77,8 @@ public:
 
 	void DeathWidgetAnimation();
 
+	int Gold;
+
 protected:
 
 	/** Called for movement input */
