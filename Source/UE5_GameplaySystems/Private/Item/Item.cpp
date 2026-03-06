@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 #include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
+#include "UI/ScoreUI.h"
 
 // Sets default values
 AItem::AItem()
@@ -41,7 +42,9 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 	if (AUE5_GameplaySystemsCharacter* PlayerCharacter = Cast<AUE5_GameplaySystemsCharacter>(OtherActor))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("On_Overlap_Begin : Item"));
-		PlayerCharacter->Gold += Gold;
+		PlayerCharacter->AddScore(Gold);
+		//PlayerCharacter->Gold += Gold;
+		//PlayerCharacter->ScoreWidget->SetScore(PlayerCharacter->Gold);
 		UE_LOG(LogTemp, Warning, TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold);
 		if (GEngine) GEngine->AddOnScreenDebugMessage(1, 10.f, FColor::Red, FString::Printf(TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold));
 		Destroy();

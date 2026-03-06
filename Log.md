@@ -754,3 +754,65 @@ Collectible systems create player motivation and progression.
 Separation of pickup logic and player data keeps the system scalable.
 
 ---
+# Day 26 – Gold Score UI System (Gold Counter)
+
+## Goal
+Add a UI system to display the player's collected Gold in real time.
+
+## What Was Implemented
+
+* Created a new UI Widget:
+* `UUserWidget` Class: `ScoreUI`
+* UI Elements:
+	* Gold icon (Image)
+	* Gold value (Text)
+
+* A function was created inside the widget:
+	* `SetScore(int Score)`
+
+This function updates the text displaying the player's current gold amount.
+
+## Character System Update
+
+Added a new function in the player character class:
+* `void AddScore(int Score);`
+* Purpose:
+	* Update the player's Gold variable
+	* Update the Score UI
+	
+* Implementation:
+	* `ScoreWidget->SetScore(Gold);`
+
+## Item System Refactor
+
+* Previously the item directly modified the player variables:
+	* `PlayerCharacter->ScoreWidget->SetScore(PlayerCharacter->Gold);`
+
+* This was replaced with a cleaner approach:
+	* `PlayerCharacter->AddScore(Gold);`
+
+Now the item only notifies the player that a score should be added.
+
+## Architecture Improvement
+
+Old Flow:
+Item → Modify Player Data → Update UI
+
+New Flow:
+Item → Player.AddScore() → Update Player Data → Update UI
+
+This keeps responsibilities clear and improves scalability.
+
+## Gameplay Result
+
+* Player collects Gold
+* Score UI updates instantly
+* Item disappears after pickup
+
+## Key Learning
+
+Gameplay systems should communicate through functions instead of modifying each other's variables directly.
+
+This improves maintainability and reduces coupling between systems.
+
+---

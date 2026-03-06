@@ -75,9 +75,17 @@ public:
 	UPROPERTY()
 	class UDeath* DeathWidget;
 
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<class UScoreUI> ScoreRef;
+
+	UPROPERTY()
+	class UScoreUI* ScoreWidget;
+
 	void DeathWidgetAnimation();
 
 	int Gold;
+
+	void AddScore(int Score);
 
 protected:
 

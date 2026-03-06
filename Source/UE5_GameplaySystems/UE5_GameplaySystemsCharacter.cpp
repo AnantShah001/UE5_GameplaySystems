@@ -17,6 +17,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Blueprint/UserWidget.h"
 #include "UI/Death.h"
+#include "UI/ScoreUI.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -78,6 +79,12 @@ void AUE5_GameplaySystemsCharacter::BeginPlay()
 			// Priority 0 = default priority
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 
+		}
+
+		ScoreWidget = CreateWidget<UScoreUI>(GetWorld(), ScoreRef);
+		if (ScoreWidget)
+		{
+			ScoreWidget->AddToViewport();
 		}
 	}
 }
@@ -213,4 +220,10 @@ void AUE5_GameplaySystemsCharacter::DeathWidgetAnimation()
 			DeathWidget->PlayDeathFadeOutAnim();
 		}
 	}
+}
+
+void AUE5_GameplaySystemsCharacter::AddScore(int Score)
+{
+	Gold += Score;
+	ScoreWidget->SetScore(Gold);
 }

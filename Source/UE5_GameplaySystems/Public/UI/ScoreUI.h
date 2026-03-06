@@ -13,4 +13,9 @@ class UE5_GAMEPLAYSYSTEMS_API UScoreUI : public UUserWidget
 {
 	GENERATED_BODY()
 
+public:
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* GoldScore;
+
+	void SetScore(int Score);
 };
