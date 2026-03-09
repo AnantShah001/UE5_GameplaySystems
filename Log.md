@@ -816,3 +816,32 @@ Gameplay systems should communicate through functions instead of modifying each 
 This improves maintainability and reduces coupling between systems.
 
 ---
+# Day 27 - Android Build & Gameplay Testing
+
+## What I Did
+Packaged the project for Android and tested the gameplay on a mobile device.
+
+Used Unreal Engine default mobile touch controls for testing.
+
+## Testing Results
+During gameplay testing I discovered several mobile input issues.
+
+* No jump button. Tap anywhere (except the cursor) to jump.
+* Touching different parts of the screen moves the cursor instead of directly controlling gameplay.
+* Camera rotation requires moving a cursor. 
+* On mobile games the camera should rotate directly with touch drag.
+* When the player is moving and rotating the camera, the jump input sometimes does not trigger.
+* Possible multi-touch issue:
+    * If the screen is tapped multiple times (2–4 times) and then movement is attempted
+	* The character can move and jump together
+	* But only while the finger stays on the movement control
+	* If the finger is lifted, the issue resets
+
+## Observations
+These problems suggest limitations or conflicts with the default mobile input system.
+Multi-touch handling and input priority may need improvement.
+
+## Result
+The game successfully runs on Android, but mobile input behavior needs refinement for proper gameplay experience.
+
+---
