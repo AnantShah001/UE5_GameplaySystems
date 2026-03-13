@@ -219,9 +219,18 @@ Today I packaged my project for Android and tested the gameplay on a real device
 
 ---
 
+> Day 28 - Mobile Jump Touch Interface Setup
+
+Today I fixed the mobile jump input issue without writing any new C++ or Blueprint code. Instead, I configured Unreal Engine’s Touch Interface system.
+
+[Linkedin Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7438134651937767426-qwr_?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+
 >
+
+
 
 [Linkedin Post & Video]()
 
-
-
+---

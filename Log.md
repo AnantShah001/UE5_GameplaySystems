@@ -845,3 +845,29 @@ Multi-touch handling and input priority may need improvement.
 The game successfully runs on Android, but mobile input behavior needs refinement for proper gameplay experience.
 
 ---
+# Day 28 - Mobile Jump Touch Interface Setup
+
+## Goal
+Fix mobile jump input without modifying C++ or Blueprint code.
+
+## What I Did
+Disabled the default mobile touch interface that prevented jump input.
+
+Edited the DefaultVirtualJoysticks TouchInterface asset and added a third control element for jumping.
+
+Configured the new control:
+* Main Input Key → Space Bar (same key used for Jump input mapping)
+* Added jump icon
+* Adjusted size and screen position
+
+## Result
+The on-screen jump button now correctly triggers the jump action on mobile devices.
+
+## Notes
+No C++ or Blueprint code changes were required.
+
+This solution uses Unreal Engine’s built-in Touch Interface system as a temporary control method.
+
+In the future the mobile controls may be replaced with a custom UUserWidget system.
+
+---
