@@ -227,10 +227,14 @@ Today I fixed the mobile jump input issue without writing any new C++ or Bluepri
 
 ---
 
->
+> Day 29 - Unreal Engine 5 C++ Gameplay Systems | Implemented Mobile touch-based camera rotation using C++ 🚀
 
+Today I improved the mobile gameplay controls in my UE5 project. And Packaged my project for Android and tested the gameplay on a real device.
 
-
-[Linkedin Post & Video]()
+[Linkedin Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7439226115849625602-0VF8?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+
+>
+
+[Linkedin Post & Video]()

@@ -18,6 +18,7 @@
 #include "Blueprint/UserWidget.h"
 #include "UI/Death.h"
 #include "UI/ScoreUI.h"
+#include "GameFramework/InputSettings.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -134,6 +135,10 @@ void AUE5_GameplaySystemsCharacter::SetupPlayerInputComponent(UInputComponent* P
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::Look);
 
 		EnhancedInputComponent->BindAction(DebugAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::DebugActionPressed);
+
+		// Mobile Touch
+		EnableTouchScreenMovement(EnhancedInputComponent);
+
 	}
 	else
 	{
@@ -226,4 +231,60 @@ void AUE5_GameplaySystemsCharacter::AddScore(int Score)
 {
 	Gold += Score;
 	ScoreWidget->SetScore(Gold);
+}
+
+bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* PlayerInputComponent)
+{
+	if (FPlatformMisc::SupportsTouchInput() || GetDefault<UInputSettings>()->bUseMouseForTouch)
+	{
+		PlayerInputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AUE5_GameplaySystemsCharacter::BeginTouch);
+		PlayerInputComponent->BindTouch(EInputEvent::IE_Released, this, &AUE5_GameplaySystemsCharacter::EndTouch);
+
+		//Commenting this out to be more consistent with FPS BP template.
+		PlayerInputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AUE5_GameplaySystemsCharacter::TouchUpdate);
+		UE_LOG(LogTemp, Display, TEXT("Touch Update in Enable Touch screen"));
+
+		return true;
+	}
+
+	return false;
+}
+
+void AUE5_GameplaySystemsCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
+{
+	// Start Touch Location
+	StartTouchLoc = FVector2D(Location.X, Location.Y);
+	UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
+
+}
+
+void AUE5_GameplaySystemsCharacter::TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location)
+{
+	UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
+
+	// Current touch Location
+	FVector2D CurrentTouchLoc = FVector2D(Location.X, Location.Y);
+	UE_LOG(LogTemp, Display, TEXT("CurrentTouchLoc : %s"), *CurrentTouchLoc.ToString());
+
+	// Update TouchLocation
+	FVector2D MoveTouchDelta = CurrentTouchLoc - StartTouchLoc;
+	UE_LOG(LogTemp, Display, TEXT("MoveTouchDelta : %s"), *MoveTouchDelta.ToString());
+
+	// Apply In the Movement 
+	AddControllerYawInput(MoveTouchDelta.X * TouchSensitivity);
+	AddControllerPitchInput(MoveTouchDelta.Y * TouchSensitivity);
+
+	UE_LOG(LogTemp, Display, TEXT("Location : %s"), *Location.ToString());
+
+	// After this subtraction we set the current location to be the new start location for the next update.
+	StartTouchLoc = CurrentTouchLoc;
+	UE_LOG(LogTemp, Display, TEXT("StartTouchLoc_1 : %s"), *StartTouchLoc.ToString());
+
+}
+
+void AUE5_GameplaySystemsCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
+{
+	StartTouchLoc = FVector2D::ZeroVector;
+	UE_LOG(LogTemp, Display, TEXT("End_TouchLoc : %s"), *StartTouchLoc.ToString());
+
 }

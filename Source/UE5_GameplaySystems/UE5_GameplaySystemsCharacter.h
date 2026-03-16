@@ -119,5 +119,18 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns the follow camera component **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+protected:
+	// This is for Mobile touch input
+	void BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location);
+	void EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location);
+	void TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location);
+
+	bool EnableTouchScreenMovement(UInputComponent* PlayerInputComponent);
+
+	FVector2D StartTouchLoc;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	float TouchSensitivity = 0.3f;
 };
 

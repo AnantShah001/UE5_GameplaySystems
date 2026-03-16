@@ -844,6 +844,10 @@ Multi-touch handling and input priority may need improvement.
 ## Result
 The game successfully runs on Android, but mobile input behavior needs refinement for proper gameplay experience.
 
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems-arm64.apk](https://drive.google.com/file/d/1eh2OyaVNxtwjzNBWmKYEFtIEHQBiGWMA/view?usp=sharing)**
+
 ---
 # Day 28 - Mobile Jump Touch Interface Setup
 
@@ -869,5 +873,43 @@ No C++ or Blueprint code changes were required.
 This solution uses Unreal Engine’s built-in Touch Interface system as a temporary control method.
 
 In the future the mobile controls may be replaced with a custom UUserWidget system.
+
+---
+# Day 29 - Mobile Touch Camera Rotation
+
+## Goal
+Replace cursor-based camera rotation with direct touch drag control for mobile gameplay.
+
+## What I Did
+Implemented touch input handling inside the Character class.
+
+Bound touch events:
+* Touch Pressed -> `BeginTouch()`
+* Touch Released -> `EndTouch()`
+* Touch Repeat -> `TouchUpdate()`
+
+Touch flow:
+* Store the initial touch position.
+* Calculate the difference between current touch and start touch.
+* Use the delta movement to rotate the camera.
+
+Camera rotation applied using:
+
+	AddControllerYawInput()
+	AddControllerPitchInput()
+
+A sensitivity variable was used to control rotation speed.
+
+## Result
+Player can now drag on the screen to rotate the camera.
+
+Cursor-based rotation is removed and controls feel more natural for mobile devices.
+
+## Achievement
+Testing on real hardware (Android) confirmed that all critical input bugs identified on `#Day27` are now RESOLVED 🛠️
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems-arm64.apk](https://drive.google.com/file/d/1eh2OyaVNxtwjzNBWmKYEFtIEHQBiGWMA/view?usp=sharing)**
 
 ---
