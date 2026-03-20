@@ -235,6 +235,9 @@ Today I improved the mobile gameplay controls in my UE5 project. And Packaged my
 
 ---
 
->
+> Day 30/100 – UE5 C++ Gameplay Systems | Playable Build 🚀
 
-[Linkedin Post & Video]()
+Today I reached a small but important milestone. Packaged Windows build of my project.
+
+
+[Linkedin Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7440631804937625600--W6S?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)

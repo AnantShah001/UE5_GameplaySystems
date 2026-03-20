@@ -113,6 +113,9 @@ Early gameplay prototypes are packaged and shared for testing.
 **Game Level Day 20**
 ![Game Level](GamePlayScreenshots/Day_20_GamePlay.png)
 
+**Game Level Day 30**
+![Game Level](GamePlayScreenshots/Day_30_GamePlay.png)
+
 
 **Level Top View Day 10**
 ![Day-10 Level TopView](Screenshots/Day_10_Level_TopView.png)
@@ -127,6 +130,9 @@ Early gameplay prototypes are packaged and shared for testing.
 **Game View Day 20**
 ![Game View](Screenshots/GameView2.png)
 
+**Game View Day 30**
+![Game View](Screenshots/GameView3.png)
+
 ---
 
 ## 🎮 Download Playable Builds (Prototype)
@@ -139,6 +145,7 @@ Early gameplay prototypes are packaged and shared for testing.
 
 **[UE5_GameplaySystems_29-arm64.apk](https://drive.google.com/file/d/1eh2OyaVNxtwjzNBWmKYEFtIEHQBiGWMA/view?usp=sharing)**
 
+**[UE5_GameplaySystems_30.rar](https://drive.google.com/file/d/1Cw78KQcelsN4XBtrGAK3xXpPiI71Dzig/view?usp=sharing)**
 
 ---
 

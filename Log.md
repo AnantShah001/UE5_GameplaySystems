@@ -913,3 +913,49 @@ Testing on real hardware (Android) confirmed that all critical input bugs identi
 **[UE5_GameplaySystems-arm64.apk](https://drive.google.com/file/d/1eh2OyaVNxtwjzNBWmKYEFtIEHQBiGWMA/view?usp=sharing)**
 
 ---
+# Day 30 – Packaging & Playable Build
+
+## Goal
+Create a playable packaged build to showcase current gameplay systems.
+
+## What Was Done
+* Packaged the project as a standalone Windows build
+* Tested core gameplay systems in packaged mode
+* Verified:
+	* Character movement
+	* Moving platforms
+	* Trigger systems
+	* Death system
+	* Camera behavior
+	* Fade UI
+	* Collectible items
+	* Score system
+	* Mobile controls
+	* Android build
+	* PC build
+
+## Outcome
+* Project is now playable without Unreal Editor
+* Anyone can download and test the gameplay systems
+* Confirms systems work outside editor environment
+ 
+## Why This Matters
+Packaging proves:
+* Systems are stable
+* Code is not editor-dependent
+* Project is ready for real-world testing and feedback
+
+## Key Learning
+A playable build turns a **real asset**.
+
+## Result
+Shipping small playable builds early helps validate gameplay systems
+and exposes real-world issues faster than theory alone.
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1Cw78KQcelsN4XBtrGAK3xXpPiI71Dzig/view?usp=sharing)**
+
+[Game View](Screenshots/GameView2.png)
+
+---
