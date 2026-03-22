@@ -959,3 +959,23 @@ and exposes real-world issues faster than theory alone.
 [Game View](Screenshots/GameView2.png)
 
 ---
+# Day 31 - Item Pickup Sound Feedback
+
+## Goal
+Improve gameplay feedback when collecting items play sound effect use C++.
+
+## What I Did:
+* Added sound to the Item system.
+* When overlap Play sound at item location
+
+Used Unreal Engine audio system to trigger sound during item collection.
+
+## Result
+When the player collects Item:
+* A sound plays instantly
+* Feedback feels more responsive and satisfying
+
+## Notes
+This is a small change but improves overall game feel.
+
+---
