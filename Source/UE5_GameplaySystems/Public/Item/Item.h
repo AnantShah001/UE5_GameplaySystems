@@ -41,6 +41,9 @@ protected:
 
 	float CollisionRadius = 10.f;
 
+	UPROPERTY(EditAnyWhere, Category = "Sound")
+	class USoundBase* CollectSound;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
