@@ -979,3 +979,44 @@ When the player collects Item:
 This is a small change but improves overall game feel.
 
 ---
+# Day 32 - Crumbling Platform System (C++ Inheritance)
+
+## Goal
+Create a Crumbling Platform that breaks when the player steps on it child class of MovingPlatform.
+
+## What I Did
+
+Created a new C++ class `ACrumblePlatform` as a child of `AMovingPlatform`.
+
+Reused existing movement and rotation logic from the parent class.
+
+Added:
+* `TriggerBox` for detecting player overlap.
+* `StandBox` for initial collision support.
+* `GeometryCollectionComponent` for fractured mesh
+
+## Logic
+
+* When player overlaps TriggerBox:
+	* Start delay (1 second)
+	* CrumblingFall()
+
+* In StartCrumbling():
+    * Destroy StandBox (remove support)
+	* Platform starts falling apart
+	* Set timer to destroy actor after 10 seconds
+
+## Result
+
+* Platform stays stable initially
+* When player steps on it → delay → platform collapses
+* Actor gets cleaned up after destruction
+* Inspired by games like God of War and Tomb Raider 
+
+## Notes
+
+This system reuses existing MovingPlatform logic using inheritance.
+
+Improves gameplay variety by adding environmental hazards.
+
+---

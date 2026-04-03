@@ -247,4 +247,13 @@ Today I reached a small but important milestone. Packaged Windows build of my pr
 
 Today I improved the item collection system by adding sound feedback.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7441718594280779776-z4ne?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+> Day 32 – Unreal Engine 5 C++ Gameplay Systems | Crumbling Platform 🚀
+
+Today I implemented a Crumbling Platform system using C++. Instead of creating everything from scratch, I extended my existing Moving Platform class using inheritance.
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7445752810018627584-tCwr?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
