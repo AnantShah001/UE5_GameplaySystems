@@ -1020,3 +1020,42 @@ This system reuses existing MovingPlatform logic using inheritance.
 Improves gameplay variety by adding environmental hazards.
 
 ---
+# Day 33 - Delegate Cleanup (RemoveDynamic)
+
+## Goal
+Improve code safety by properly handling dynamic event bindings.
+
+## What I Did
+
+Previously, I was using AddDynamic() to bind overlap events.
+
+Now I added RemoveDynamic() before destroying components or when they are no longer needed.
+
+Example:
+* In `UTriggerBoxZone` class before `DestroyComponent()` 
+	* OnComponentBeginOverlap.RemoveDynamic(this, &UTriggerBoxZone::OnOverlapBegin);
+	* OnComponentEndOverlap.RemoveDynamic(this, &UTriggerBoxZone::OnOverlapEnd);
+* In `ACrumblePlatform` 
+	* TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &ACrumblePlatform::OnOverlapBegin);
+
+
+## Logic
+
+* Unbind event first
+* Then destroy component (if safe)
+
+In CrumblePlatform:
+* Removed overlap binding using RemoveDynamic()
+* Did not destroy TriggerBox because it is part of the component hierarchy
+
+## Result
+
+- Prevents invalid function calls
+- Improves memory safety
+- Cleaner and more professional event handling
+
+## Notes
+
+Understanding delegate lifecycle is important for stable gameplay systems.
+
+---

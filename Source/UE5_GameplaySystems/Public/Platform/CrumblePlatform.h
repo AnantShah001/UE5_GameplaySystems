@@ -47,7 +47,7 @@ protected:
 	FTimerHandle CrumbleTimerHandler;
 	FTimerHandle DestroyActorTimerHandler;
 
-	bool ShouldStand = true;
+	void UnBind();
 
 public:
 	// Called every frame

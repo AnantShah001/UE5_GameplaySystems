@@ -41,15 +41,8 @@ void ACrumblePlatform::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActo
 	// Check if it's the player (optional check)
 	if (OtherActor && OtherActor->IsA(APawn::StaticClass()))
 	{
-		if (ShouldStand)
-		{
-			UE_LOG(LogTemp, Error, TEXT("Trigger"));
-			ShouldStand = false;
-
-			// Start the first delay (e.g., 2 seconds before parts drop)
-			GetWorldTimerManager().SetTimer(CrumbleTimerHandler, this, &ACrumblePlatform::CrumblingFall, 1.0f, false);
-
-		}
+		UE_LOG(LogTemp, Error, TEXT("Trigger"));
+		UnBind();
 	}
 }
 
@@ -58,10 +51,18 @@ void ACrumblePlatform::CrumblingFall()
 	UE_LOG(LogTemp, Error, TEXT("StartCrumbling"));
 	StandBox->DestroyComponent();
 	CrumblePlatform->SetSimulatePhysics(true);
-	GetWorldTimerManager().SetTimer(DestroyActorTimerHandler, this, &ACrumblePlatform::DestroyActor, 10.0f, false);
+	GetWorldTimerManager().SetTimer(DestroyActorTimerHandler, this, &ACrumblePlatform::DestroyActor, 7.0f, false);
 }
 
 void ACrumblePlatform::DestroyActor()
 {
 	Destroy();
+}
+
+void ACrumblePlatform::UnBind()
+{
+	TriggerBox->OnComponentBeginOverlap.RemoveDynamic(this, &ACrumblePlatform::OnOverlapBegin);
+
+	// Start the first delay (e.g., 2 seconds before parts drop)
+	GetWorldTimerManager().SetTimer(CrumbleTimerHandler, this, &ACrumblePlatform::CrumblingFall, 1.2f, false);
 }

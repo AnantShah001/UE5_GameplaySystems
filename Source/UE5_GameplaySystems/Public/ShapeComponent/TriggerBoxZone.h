@@ -65,4 +65,6 @@ protected:
 	void OnlyOneTimeUse();
 
 	void MessageOnly();
+
+	void DestroyTriggerBox();
 };

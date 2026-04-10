@@ -38,7 +38,7 @@ void UTriggerBoxZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor
 		if (ShowMessageOnly)
 		{
 			MessageOnly();
-			DestroyComponent();
+			DestroyTriggerBox();
 
 		}
 		else
@@ -92,7 +92,7 @@ void UTriggerBoxZone::OnlyOneTimeUse()
 	if (OneTimeUse)
 	{
 		SetPlatformActive(true);
-		DestroyComponent();
+		DestroyTriggerBox();
 	}
 	else
 	{
@@ -106,4 +106,11 @@ void UTriggerBoxZone::MessageOnly()
 	{
 		if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Green, (TEXT("Message %s"), *Message.ToString()));
 	}
+}
+
+void UTriggerBoxZone::DestroyTriggerBox()
+{
+	OnComponentBeginOverlap.RemoveDynamic(this, &UTriggerBoxZone::OnOverlapBegin);
+	OnComponentEndOverlap.RemoveDynamic(this, &UTriggerBoxZone::OnOverlapEnd);
+	DestroyComponent();
 }
