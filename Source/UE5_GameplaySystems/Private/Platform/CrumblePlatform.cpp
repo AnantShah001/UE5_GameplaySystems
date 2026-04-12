@@ -4,6 +4,8 @@
 #include "Platform/CrumblePlatform.h"
 #include "Components/BoxComponent.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ACrumblePlatform::ACrumblePlatform()
 {
@@ -20,6 +22,11 @@ ACrumblePlatform::ACrumblePlatform()
 	//Initialize Fractured Mesh
 	CrumblePlatform = CreateDefaultSubobject<UGeometryCollectionComponent>("Platform");
 	CrumblePlatform->SetupAttachment(TriggerBox);
+
+	// Initialize Particle System
+	TriggerParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("TriggerParticle"));
+	TriggerParticle->SetupAttachment(StandBox);
+	TriggerParticle->bAutoActivate = false; 
 
 }
 
@@ -50,8 +57,9 @@ void ACrumblePlatform::CrumblingFall()
 {
 	UE_LOG(LogTemp, Error, TEXT("StartCrumbling"));
 	StandBox->DestroyComponent();
+	ShouldMove = false;
 	CrumblePlatform->SetSimulatePhysics(true);
-	GetWorldTimerManager().SetTimer(DestroyActorTimerHandler, this, &ACrumblePlatform::DestroyActor, 7.0f, false);
+	GetWorldTimerManager().SetTimer(DestroyActorTimerHandler, this, &ACrumblePlatform::DestroyActor, (CrumbleDelay + 5.0f), false);
 }
 
 void ACrumblePlatform::DestroyActor()
@@ -62,7 +70,13 @@ void ACrumblePlatform::DestroyActor()
 void ACrumblePlatform::UnBind()
 {
 	TriggerBox->OnComponentBeginOverlap.RemoveDynamic(this, &ACrumblePlatform::OnOverlapBegin);
+	TriggerParticle->Activate(true);
 
 	// Start the first delay (e.g., 2 seconds before parts drop)
-	GetWorldTimerManager().SetTimer(CrumbleTimerHandler, this, &ACrumblePlatform::CrumblingFall, 1.2f, false);
+	GetWorldTimerManager().SetTimer(CrumbleTimerHandler, this, &ACrumblePlatform::CrumblingFall, CrumbleDelay, false);
+
+	if (CrumbleSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, CrumbleSound, GetActorLocation());
+	}
 }

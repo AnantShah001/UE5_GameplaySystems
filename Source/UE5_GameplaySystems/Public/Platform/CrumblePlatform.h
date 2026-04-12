@@ -40,6 +40,14 @@ protected:
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 		bool bFromSweep, const FHitResult& SweepResult);
 
+	UPROPERTY(VisibleAnywhere, Category = "Effects")
+	class UParticleSystemComponent* TriggerParticle;
+
+	// Looping Sound
+	UPROPERTY(EditAnyWhere, Category = "Effects")
+	class USoundBase* CrumbleSound;
+
+
 	// Sequnce Function
 	void CrumblingFall();
 	void DestroyActor();
@@ -52,5 +60,9 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+
+	float CrumbleDelay = 1.0f;
 
 };
