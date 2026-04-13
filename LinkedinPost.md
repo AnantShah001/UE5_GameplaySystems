@@ -257,3 +257,17 @@ Today I implemented a Crumbling Platform system using C++. Instead of creating e
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7445752810018627584-tCwr?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 33 – Unreal Engine 5 C++ Gameplay Systems | Delegate Cleanup 🚀
+
+Today I focused on improving code safety and event handling (Delegate Cleanup). I worked with Unreal Engine’s dynamic delegates and added proper cleanup using RemoveDynamic().
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7448386989453680640-N0ne?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+> Day 34 - Unreal Engine 5 C++ Gameplay Systems | Add Sound, Particle Effect in Crumbling Platform Polish 🚀
+
+Today I improved my Crumbling Platform system by adding Sound, Particle Effect feedback and better control.
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7449354643815636992-AEWE?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---

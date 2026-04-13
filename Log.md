@@ -1059,3 +1059,36 @@ In CrumblePlatform:
 Understanding delegate lifecycle is important for stable gameplay systems.
 
 ---
+# Day 34 - Crumbling Platform Polish (Sound, Particle Effect, Movement Control)
+
+## Goal
+Improve the crumbling platform system by adding sound, Particle Effect and better control.
+
+## What I Did
+Updated the existing CrumblePlatform system.
+
+Improvements:
+* Stopped platform movement using parent class (AMovingPlatform)
+* Added sound effect when platform Trigger Player
+* Added particle effect for visual feedback
+
+## Logic
+On Trigger Overlap:
+    * Play sound
+    * Spawn particle effect
+* Start delay timer
+* After delay
+	* Stop movement (using parent class variable)
+
+## Result
+* Platform no longer moves when `CrumblingFall()` function call.
+* Sound + particle effect improves feedback.
+* Gameplay feels more interactive and responsive.
+
+## Notes
+
+This update focuses on improving player experience using feedback systems.
+
+MovingPlatform logic from parent class and child class helped reuse existing functionality efficiently.
+
+---
