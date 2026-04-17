@@ -49,6 +49,7 @@ void ACrumblePlatform::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActo
 	if (OtherActor && OtherActor->IsA(APawn::StaticClass()))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Trigger"));
+		CameraShake();
 		UnBind();
 	}
 }
@@ -78,5 +79,23 @@ void ACrumblePlatform::UnBind()
 	if (CrumbleSound)
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, CrumbleSound, GetActorLocation());
+	}
+}
+
+void ACrumblePlatform::CameraShake()
+{
+	if (CrumbleShakeCamera)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Camera Shake 1"));
+		//UGameplayStatics::PlayWorldCameraShake(this, CrumbleShakeCamera, GetActorLocation(), 0.0f, 1000.0f,1.0f);
+
+		APlayerController* MyController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+		if (MyController)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Camera Shake 2"));
+			//MyController->ClientPlayCameraShake(CrumbleShakeCamera);
+			MyController->ClientStartCameraShake(CrumbleShakeCamera);
+		}
 	}
 }

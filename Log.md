@@ -1092,3 +1092,35 @@ This update focuses on improving player experience using feedback systems.
 MovingPlatform logic from parent class and child class helped reuse existing functionality efficiently.
 
 ---
+# Day 35 - Camera Shake Feedback (Game Feel Improvement)
+
+## Goal
+Enhance player feedback during crumbling platform interaction throw camera shake.
+
+## What I Did
+Implemented a Camera Shake system when the platform starts crumbling.
+
+Steps:
+* Created a Camera Shake Blueprint (BP_CrumbleCameraShake)
+* Configured small rotation shake values (Pitch, Yaw, Roll)
+* Set short duration for subtle effect
+* Added CameraShakeClass variable in C++ (ACrumblePlatform)
+* Triggered camera shake using PlayerController ?
+
+## Logic
+When platform is triggered:
+* Sound and particle effects play  
+* Camera shake 
+* Platform collapses  
+
+## Result
+* Added strong visual feedback
+* Improved sense of impact
+* Gameplay feels more immersive and responsive
+
+## Notes
+Small effects like camera shake significantly improve overall game feel.
+
+This system can be reused for other gameplay events like explosions, landing, or hits.
+
+---

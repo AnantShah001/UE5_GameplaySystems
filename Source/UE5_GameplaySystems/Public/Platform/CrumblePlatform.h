@@ -17,6 +17,11 @@ class UE5_GAMEPLAYSYSTEMS_API ACrumblePlatform : public AMovingPlatform //AActor
 public:
 	ACrumblePlatform();
 
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	TSubclassOf<UCameraShakeBase> CrumbleShakeCamera;
+
+	void CameraShake();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
