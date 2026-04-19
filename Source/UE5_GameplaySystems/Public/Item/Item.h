@@ -44,8 +44,13 @@ protected:
 	UPROPERTY(EditAnyWhere, Category = "Sound")
 	class USoundBase* CollectSound;
 
+	UPROPERTY(EditAnyWhere, Category = "Item")
+	bool bIsRespawn = false;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void RespawnPlayerLocation();
 
 };

@@ -7,6 +7,8 @@
 #include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
 #include "UI/ScoreUI.h"
 #include "Kismet/GameplayStatics.h"
+#include "UE5_GameplaySystems/UE5_GameplaySystemsGameInstance.h"
+
 
 // Sets default values
 AItem::AItem()
@@ -53,5 +55,19 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 		}
 		//if (GEngine) GEngine->AddOnScreenDebugMessage(1, 10.f, FColor::Red, FString::Printf(TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold));
 		Destroy();
+	}
+}
+
+void AItem::RespawnPlayerLocation()
+{
+	if (!bIsRespawn)
+	{
+		UUE5_GameplaySystemsGameInstance* GameInstance = Cast<UUE5_GameplaySystemsGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		if (GameInstance)
+		{
+			FVector RespawnLocation = GetActorLocation();
+			GameInstance->RespawnPlayer(RespawnLocation);
+			UE_LOG(LogTemp, Warning, TEXT("Respawn Location : %s"), *RespawnLocation.ToString());
+		}
 	}
 }

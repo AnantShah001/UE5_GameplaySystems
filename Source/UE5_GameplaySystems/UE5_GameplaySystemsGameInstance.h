@@ -13,4 +13,12 @@ UCLASS()
 class UE5_GAMEPLAYSYSTEMS_API UUE5_GameplaySystemsGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
+
+public:
+	UUE5_GameplaySystemsGameInstance();
+	
+	FVector RespawnLocation;
+
+	void RespawnPlayer(FVector Location);
+	
 };

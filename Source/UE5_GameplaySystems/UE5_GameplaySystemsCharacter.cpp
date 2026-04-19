@@ -19,6 +19,8 @@
 #include "UI/Death.h"
 #include "UI/ScoreUI.h"
 #include "GameFramework/InputSettings.h"
+#include "UE5_GameplaySystems/UE5_GameplaySystemsGameInstance.h"
+
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -211,7 +213,31 @@ void AUE5_GameplaySystemsCharacter::HandleDeath()
 void AUE5_GameplaySystemsCharacter::RestartLevel()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Restart Level"));
-	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+	//UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+
+	// 1. Correct Cast to your custom Game Instance
+	UUE5_GameplaySystemsGameInstance* GI = GetGameInstance<UUE5_GameplaySystemsGameInstance>();
+	if (!GI) return;
+
+	// 2. Reset Physics and Velocity
+	GetMesh()->SetSimulatePhysics(false);
+	GetMesh()->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+	GetCharacterMovement()->StopMovementImmediately();
+
+	// 3. Move player to checkpoint
+	if (!GI->RespawnLocation.IsZero())
+	{
+		SetActorLocation(GI->RespawnLocation);
+		// Also reset rotation so they face the right way
+		SetActorRotation(FRotator::ZeroRotator);
+	}
+
+	// 4. Re-enable Control
+	EnableInput(GetLocalViewingPlayerController());
+	bFallCameraActive = false;
+
+	UE_LOG(LogTemp, Warning, TEXT("Respawned at Checkpoint: %s"), *GI->RespawnLocation.ToString());
+
 }
 
 void AUE5_GameplaySystemsCharacter::DeathWidgetAnimation()
