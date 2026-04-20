@@ -14,4 +14,5 @@ UUE5_GameplaySystemsGameInstance::UUE5_GameplaySystemsGameInstance()
 void UUE5_GameplaySystemsGameInstance::RespawnPlayer(FVector Location)
 {
 	RespawnLocation = Location;
+	UE_LOG(LogTemp, Error, TEXT("Game Instance Location : %s"), *RespawnLocation.ToString());
 }

@@ -219,9 +219,24 @@ void AUE5_GameplaySystemsCharacter::RestartLevel()
 	UUE5_GameplaySystemsGameInstance* GI = GetGameInstance<UUE5_GameplaySystemsGameInstance>();
 	if (!GI) return;
 
+
 	// 2. Reset Physics and Velocity
+
+	//CapsulComponent
+	GetCapsuleComponent()->SetRelativeLocation(FVector::ZeroVector);
+	GetCapsuleComponent()->SetRelativeRotation(FRotator::ZeroRotator);
+	//Mesh
 	GetMesh()->SetSimulatePhysics(false);
-	GetMesh()->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+	//GetMesh()->SetupAttachment(GetCapsuleComponent());
+	GetMesh()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+	GetMesh()->SetRelativeLocation((FVector::ZeroVector + FVector(0, 0, -90)));
+	GetMesh()->SetRelativeRotation((FRotator::ZeroRotator + FRotator(0, 270, 0)));
+	//GetMesh()->SetRelativeLocation(FVector(FVector::ZeroVector.X, FVector::ZeroVector.Y,-90));
+	//Camera
+	FollowCamera->SetRelativeLocation(FVector::ZeroVector);
+	FollowCamera->SetRelativeRotation(FRotator::ZeroRotator);
+	
+	//Movement
 	GetCharacterMovement()->StopMovementImmediately();
 
 	// 3. Move player to checkpoint
@@ -230,6 +245,12 @@ void AUE5_GameplaySystemsCharacter::RestartLevel()
 		SetActorLocation(GI->RespawnLocation);
 		// Also reset rotation so they face the right way
 		SetActorRotation(FRotator::ZeroRotator);
+		UE_LOG(LogTemp, Warning, TEXT("Game Instance Working"))
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Game Instance Not Working"));
+		SetActorLocation(RespawnPlayerLocationX);
 	}
 
 	// 4. Re-enable Control

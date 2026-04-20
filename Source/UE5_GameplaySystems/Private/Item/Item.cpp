@@ -30,6 +30,7 @@ void AItem::BeginPlay()
 	Super::BeginPlay();
 	
 	CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnOverlapBegin);
+
 }
 
 // Called every frame
@@ -46,6 +47,7 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 	{
 		UE_LOG(LogTemp, Warning, TEXT("On_Overlap_Begin : Item"));
 		PlayerCharacter->AddScore(Gold);
+		PlayerCharacter->RespawnPlayerLocationX = GetActorLocation();
 		//PlayerCharacter->Gold += Gold;
 		//PlayerCharacter->ScoreWidget->SetScore(PlayerCharacter->Gold);
 		UE_LOG(LogTemp, Warning, TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold);
@@ -54,6 +56,7 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 			UGameplayStatics::PlaySoundAtLocation(this, CollectSound, GetActorLocation());
 		}
 		//if (GEngine) GEngine->AddOnScreenDebugMessage(1, 10.f, FColor::Red, FString::Printf(TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold));
+		RespawnPlayerLocation();
 		Destroy();
 	}
 }

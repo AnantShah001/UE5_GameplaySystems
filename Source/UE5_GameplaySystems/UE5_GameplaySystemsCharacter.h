@@ -87,6 +87,8 @@ public:
 
 	void AddScore(int Score);
 
+	FVector RespawnPlayerLocationX;
+
 protected:
 
 	/** Called for movement input */
