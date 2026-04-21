@@ -271,10 +271,17 @@ Today I improved my Crumbling Platform system by adding Sound, Particle Effect f
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7449354643815636992-AEWE?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
-Day 35 - Unreal Engine 5 C++ Gameplay Systems | Camera Shake effect 🚀
+> Day 35 - Unreal Engine 5 C++ Gameplay Systems | Camera Shake effect 🚀
 
 Today I focused on improving game feel by adding a Camera Shake effect.
 
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7450814632082087937-j4dH?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+> Day 36 - Unreal Engine 5 C++ Gameplay Systems | Checkpoint & Respawn System 🚀
+
+Today I focused on improving Checkpoint & Respawn system without restarting the level. Instead of reloading the level on death, I built a custom respawn pipeline:
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7452232129641377792-GdwF?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---

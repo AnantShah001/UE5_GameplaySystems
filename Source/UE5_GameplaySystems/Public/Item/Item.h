@@ -44,8 +44,9 @@ protected:
 	UPROPERTY(EditAnyWhere, Category = "Sound")
 	class USoundBase* CollectSound;
 
+	//In level we set every item as set as have ablate to checkpoint.
 	UPROPERTY(EditAnyWhere, Category = "Item")
-	bool bIsRespawn = false;
+	bool bIsRespawn = true;
 
 public:	
 	// Called every frame

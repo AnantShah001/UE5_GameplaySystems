@@ -71,6 +71,8 @@ void AUE5_GameplaySystemsCharacter::BeginPlay()
 	// Call the base class BeginPlay (important for inherited functionality)
 	Super::BeginPlay();
 
+	MyGameInstance = GetGameInstance<UUE5_GameplaySystemsGameInstance>();
+	if (!MyGameInstance)return;
 	//Add Input Mapping Context
 	// Get the PlayerController controlling this character
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -203,62 +205,58 @@ void AUE5_GameplaySystemsCharacter::DebugActionPressed()
 
 void AUE5_GameplaySystemsCharacter::HandleDeath()
 {
+	bIsRespawning = true;
 	GetMesh()->SetSimulatePhysics(true);
 	DisableInput(nullptr);
 	bFallCameraActive = true;
 	GetWorldTimerManager().SetTimer(DeathWidgetTimer, this, &AUE5_GameplaySystemsCharacter::DeathWidgetAnimation, 2.0f, false);
-	GetWorldTimerManager().SetTimer(RestartTimer, this, &AUE5_GameplaySystemsCharacter::RestartLevel, 3.0f, false);
+	GetWorldTimerManager().SetTimer(RespawnTimer, this, &AUE5_GameplaySystemsCharacter::RespawnPlayer, 3.0f, false);
 }
 
-void AUE5_GameplaySystemsCharacter::RestartLevel()
+void AUE5_GameplaySystemsCharacter::RespawnPlayer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Restart Level"));
+	UE_LOG(LogTemp, Warning, TEXT("Respawn Player"));
 	//UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 
-	// 1. Correct Cast to your custom Game Instance
-	UUE5_GameplaySystemsGameInstance* GI = GetGameInstance<UUE5_GameplaySystemsGameInstance>();
-	if (!GI) return;
-
-
-	// 2. Reset Physics and Velocity
-
-	//CapsulComponent
-	GetCapsuleComponent()->SetRelativeLocation(FVector::ZeroVector);
-	GetCapsuleComponent()->SetRelativeRotation(FRotator::ZeroRotator);
-	//Mesh
-	GetMesh()->SetSimulatePhysics(false);
-	//GetMesh()->SetupAttachment(GetCapsuleComponent());
-	GetMesh()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
-	GetMesh()->SetRelativeLocation((FVector::ZeroVector + FVector(0, 0, -90)));
-	GetMesh()->SetRelativeRotation((FRotator::ZeroRotator + FRotator(0, 270, 0)));
-	//GetMesh()->SetRelativeLocation(FVector(FVector::ZeroVector.X, FVector::ZeroVector.Y,-90));
-	//Camera
-	FollowCamera->SetRelativeLocation(FVector::ZeroVector);
-	FollowCamera->SetRelativeRotation(FRotator::ZeroRotator);
-	
-	//Movement
-	GetCharacterMovement()->StopMovementImmediately();
-
-	// 3. Move player to checkpoint
-	if (!GI->RespawnLocation.IsZero())
+	if (!MyGameInstance->RespawnLocation.IsZero())
 	{
-		SetActorLocation(GI->RespawnLocation);
-		// Also reset rotation so they face the right way
-		SetActorRotation(FRotator::ZeroRotator);
-		UE_LOG(LogTemp, Warning, TEXT("Game Instance Working"))
+		//Capsule Component
+		GetCapsuleComponent()->SetRelativeLocation(FVector::ZeroVector);
+		GetCapsuleComponent()->SetRelativeRotation(FRotator::ZeroRotator);
+
+		//Mesh
+		GetMesh()->SetSimulatePhysics(false);
+		GetMesh()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+		GetMesh()->SetRelativeLocation((FVector::ZeroVector + FVector(0, 0, -90)));
+		GetMesh()->SetRelativeRotation((FRotator::ZeroRotator + FRotator(0, 270, 0)));
+
+		//CameraBool
+		CameraBoom->SetRelativeLocation(FVector::ZeroVector);
+		CameraBoom->SetRelativeRotation(FRotator::ZeroRotator);
+
+		//Camera
+		FollowCamera->SetRelativeLocation(FVector::ZeroVector);
+		FollowCamera->SetRelativeRotation(FRotator::ZeroRotator);
+
+		//Movement
+		GetCharacterMovement()->StopMovementImmediately();
+
+		// Re Enable Control
+		EnableInput(GetLocalViewingPlayerController());
+		bFallCameraActive = false;
+		bIsRespawning = false;
+		GetWorldTimerManager().ClearTimer(RespawnTimer);
+
+		// Move player to checkpoint
+		SetActorLocation(MyGameInstance->RespawnLocation, false, nullptr, ETeleportType::TeleportPhysics);
+		SetActorRotation(FRotator::ZeroRotator); // Also reset rotation so they face the right way
+		UE_LOG(LogTemp, Display, TEXT("Respawn on checkpoint location : %s"), *MyGameInstance->RespawnLocation.ToString());
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Game Instance Not Working"));
-		SetActorLocation(RespawnPlayerLocationX);
+		UE_LOG(LogTemp, Display, TEXT("No Checkpoint just restart game"));
+		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 	}
-
-	// 4. Re-enable Control
-	EnableInput(GetLocalViewingPlayerController());
-	bFallCameraActive = false;
-
-	UE_LOG(LogTemp, Warning, TEXT("Respawned at Checkpoint: %s"), *GI->RespawnLocation.ToString());
-
 }
 
 void AUE5_GameplaySystemsCharacter::DeathWidgetAnimation()
@@ -271,6 +269,7 @@ void AUE5_GameplaySystemsCharacter::DeathWidgetAnimation()
 			DeathWidget->AddToViewport();
 			DeathWidget->PlayDeathFadeOutAnim();
 		}
+		GetWorldTimerManager().ClearTimer(DeathWidgetTimer);
 	}
 }
 
@@ -278,6 +277,7 @@ void AUE5_GameplaySystemsCharacter::AddScore(int Score)
 {
 	Gold += Score;
 	ScoreWidget->SetScore(Gold);
+	MyGameInstance->SetScore(Gold);
 }
 
 bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* PlayerInputComponent)

@@ -18,7 +18,8 @@ public:
 	UUE5_GameplaySystemsGameInstance();
 	
 	FVector RespawnLocation;
+	int Gold;
 
 	void RespawnPlayer(FVector Location);
-	
+	void SetScore(int Score);
 };

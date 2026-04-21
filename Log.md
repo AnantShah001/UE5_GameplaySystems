@@ -1124,3 +1124,60 @@ Small effects like camera shake significantly improve overall game feel.
 This system can be reused for other gameplay events like explosions, landing, or hits.
 
 ---
+# Day 36 - Checkpoint & Respawn System (Without Level Restart)
+
+## Goal
+Implement a checkpoint system where the player respawns at the last checkpoint without restarting the level.
+
+## What I Did
+
+### 1. Item System Update
+* Added `bIsRespawn` variable in AItem
+* Only specific items act as checkpoints
+* Created function to send checkpoint location to GameInstance
+
+### 2. GameInstance System
+Created custom GameInstance:
+UUE5_GameplaySystemsGameInstance
+
+Functions:
+* RespawnPlayer(FVector Location) -> Stores checkpoint location
+* SetScore(int Score) -> Stores player score
+
+### 3. Character System Update
+Modified existing character class:
+
+#### HandleDeath()
+* `bIsRespawning` -> prevents multiple triggers
+
+#### RespawnPlayer()
+Instead of restarting level:
+* Reset Capsule transform
+* Reattach Mesh to Capsule
+* Disable physics simulation
+* Reset Camera and SpringArm
+* Stop movement
+* Teleport player to checkpoint location
+* Re enable input
+
+Added safety:
+* Cleared RespawnTimer -> avoids infinite loop
+
+## Result
+* No level restart on death
+* Smooth respawn experience
+* Character fully restored after physics simulation
+* System avoids duplicate respawn calls
+* Collected items remain collected
+* Respawns at last checkpoint
+* Score persists correctly
+* System is stable and reusable
+* If no checkpoint is reached, Then Level Restarts
+
+## Notes
+
+This approach avoids full level reload and provides smoother gameplay experience.
+
+Understanding actor reset vs level reload was a key learning point.
+
+---

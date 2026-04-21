@@ -63,14 +63,14 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 
 void AItem::RespawnPlayerLocation()
 {
-	if (!bIsRespawn)
+	if (bIsRespawn) // This check only which Item have checkpoint abelite
 	{
 		UUE5_GameplaySystemsGameInstance* GameInstance = Cast<UUE5_GameplaySystemsGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 		if (GameInstance)
 		{
 			FVector RespawnLocation = GetActorLocation();
 			GameInstance->RespawnPlayer(RespawnLocation);
-			UE_LOG(LogTemp, Warning, TEXT("Respawn Location : %s"), *RespawnLocation.ToString());
+			UE_LOG(LogTemp, Warning, TEXT("Item Respawn Location : %s"), *RespawnLocation.ToString());
 		}
 	}
 }

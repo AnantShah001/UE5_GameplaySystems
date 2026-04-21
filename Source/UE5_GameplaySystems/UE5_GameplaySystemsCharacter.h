@@ -81,6 +81,8 @@ public:
 	UPROPERTY()
 	class UScoreUI* ScoreWidget;
 
+	class UUE5_GameplaySystemsGameInstance* MyGameInstance;
+
 	void DeathWidgetAnimation();
 
 	int Gold;
@@ -101,11 +103,11 @@ protected:
 
 	void DebugActionPressed();
 			
-	FTimerHandle RestartTimer;
+	FTimerHandle RespawnTimer;
 
 	FTimerHandle DeathWidgetTimer;
 
-	void RestartLevel();
+	void RespawnPlayer();
 
 	bool bFallCameraActive = false;
 
@@ -134,5 +136,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	float TouchSensitivity = 0.3f;
+
+public:
+	bool bIsRespawning = false;
 };
 

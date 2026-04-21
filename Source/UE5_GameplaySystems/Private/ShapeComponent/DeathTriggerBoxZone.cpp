@@ -21,10 +21,10 @@ void UDeathTriggerBoxZone::BeginPlay()
 
 void UDeathTriggerBoxZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Death Trigger Player Name : %s"), *OtherActor->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("Death Trigger Player Name : %s | Component: %s"), *OtherActor->GetName(), *OtherComp->GetName());
 
 	if (AUE5_GameplaySystemsCharacter* PlayerCharacter = Cast<AUE5_GameplaySystemsCharacter>(OtherActor))
 	{
-		PlayerCharacter->HandleDeath();
+		if (!PlayerCharacter->bIsRespawning)PlayerCharacter->HandleDeath();
 	}
 }
