@@ -20,6 +20,7 @@
 #include "UI/ScoreUI.h"
 #include "GameFramework/InputSettings.h"
 #include "UE5_GameplaySystems/UE5_GameplaySystemsGameInstance.h"
+#include "UI/Health/Health_UI.h"
 
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -90,6 +91,12 @@ void AUE5_GameplaySystemsCharacter::BeginPlay()
 		if (ScoreWidget)
 		{
 			ScoreWidget->AddToViewport();
+		}
+		HealthUI = CreateWidget<UHealth_UI>(GetWorld(), Health_UI_Ref);
+		if (HealthUI)
+		{
+			HealthUI->AddToViewport();
+			HealthUI->InitializeHearts();
 		}
 	}
 }
@@ -278,6 +285,9 @@ void AUE5_GameplaySystemsCharacter::AddScore(int Score)
 	Gold += Score;
 	ScoreWidget->SetScore(Gold);
 	MyGameInstance->SetScore(Gold);
+
+	/// Health 
+	HealthUI->InitializeHearts();
 }
 
 bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* PlayerInputComponent)

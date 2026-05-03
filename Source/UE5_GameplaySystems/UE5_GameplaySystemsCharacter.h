@@ -91,6 +91,14 @@ public:
 
 	FVector RespawnPlayerLocationX;
 
+	/// Health
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UHealth_UI> Health_UI_Ref;
+
+	class UHealth_UI* HealthUI;
+	///
+
+
 protected:
 
 	/** Called for movement input */
