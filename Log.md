@@ -1181,3 +1181,30 @@ This approach avoids full level reload and provides smoother gameplay experience
 Understanding actor reset vs level reload was a key learning point.
 
 ---
+# Day 37 - Unreal Engine 5 C++ Gameplay Systems | Heart Lifeline System & dynamic UI, Animation 🚀
+
+## Implemented
+* Create Two UUserWidget Classes
+* Reusable Heart Widget (MyLives_UI)
+* Main Heart_UI (HorizontalBox + TArray)
+* Dynamic heart creation using loop (MaxLives)
+* Heart remove system on death
+* Animation play before removal
+* UI auto-update using Array.Num()
+
+## Integration
+* Connected with Character death system
+* Synced with Respawn system (Day 36)
+* GameInstance updated with lives
+
+## Result
+* Hearts decrease with animation
+* No duplicate UI logic
+* Fully dynamic & scalable system
+
+## Learning
+* Dynamic UI using TArray
+* Sync UI + gameplay timing
+* Clean UI architecture (modular widgets)
+
+---

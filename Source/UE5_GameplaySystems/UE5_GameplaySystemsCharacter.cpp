@@ -72,8 +72,13 @@ void AUE5_GameplaySystemsCharacter::BeginPlay()
 	// Call the base class BeginPlay (important for inherited functionality)
 	Super::BeginPlay();
 
+	CurrentLifeLine = MaxLifeLine;
+
 	MyGameInstance = GetGameInstance<UUE5_GameplaySystemsGameInstance>();
 	if (!MyGameInstance)return;
+	MyGameInstance->RespawnPlayer(GetActorLocation());
+	MyGameInstance->HealthLifeLine(CurrentLifeLine);
+
 	//Add Input Mapping Context
 	// Get the PlayerController controlling this character
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -92,11 +97,15 @@ void AUE5_GameplaySystemsCharacter::BeginPlay()
 		{
 			ScoreWidget->AddToViewport();
 		}
+		// Create the Health UI Widget and add it to the viewport.
 		HealthUI = CreateWidget<UHealth_UI>(GetWorld(), Health_UI_Ref);
 		if (HealthUI)
 		{
 			HealthUI->AddToViewport();
-			HealthUI->InitializeHearts();
+			for (int i = 0; i < CurrentLifeLine; i++)
+			{
+				HealthUI->InitializeHearts();
+			}
 		}
 	}
 }
@@ -212,20 +221,29 @@ void AUE5_GameplaySystemsCharacter::DebugActionPressed()
 
 void AUE5_GameplaySystemsCharacter::HandleDeath()
 {
+	UE_LOG(LogTemp, Display, TEXT("0) HandleDeath"));
+	CurrentLifeLine -= 1;
+	MyGameInstance->HealthLifeLine(CurrentLifeLine);
+
 	bIsRespawning = true;
 	GetMesh()->SetSimulatePhysics(true);
 	DisableInput(nullptr);
 	bFallCameraActive = true;
 	GetWorldTimerManager().SetTimer(DeathWidgetTimer, this, &AUE5_GameplaySystemsCharacter::DeathWidgetAnimation, 2.0f, false);
 	GetWorldTimerManager().SetTimer(RespawnTimer, this, &AUE5_GameplaySystemsCharacter::RespawnPlayer, 3.0f, false);
+
+	// HealthLifeLine
+	MyGameInstance->HeartLifeLine -= 1;
+	HealthUI->PlayRemoveHeartAnim();
 }
 
 void AUE5_GameplaySystemsCharacter::RespawnPlayer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Respawn Player"));
+	UE_LOG(LogTemp, Warning, TEXT("1) Respawn Player : %d"), CurrentLifeLine);
 	//UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 
-	if (!MyGameInstance->RespawnLocation.IsZero())
+	HealthUI->RemoveHeart();
+	if(CurrentLifeLine >= 1)
 	{
 		//Capsule Component
 		GetCapsuleComponent()->SetRelativeLocation(FVector::ZeroVector);
@@ -257,11 +275,11 @@ void AUE5_GameplaySystemsCharacter::RespawnPlayer()
 		// Move player to checkpoint
 		SetActorLocation(MyGameInstance->RespawnLocation, false, nullptr, ETeleportType::TeleportPhysics);
 		SetActorRotation(FRotator::ZeroRotator); // Also reset rotation so they face the right way
-		UE_LOG(LogTemp, Display, TEXT("Respawn on checkpoint location : %s"), *MyGameInstance->RespawnLocation.ToString());
+		UE_LOG(LogTemp, Display, TEXT("3) Respawn on checkpoint location : %s"), *MyGameInstance->RespawnLocation.ToString());
 	}
 	else
 	{
-		UE_LOG(LogTemp, Display, TEXT("No Checkpoint just restart game"));
+		UE_LOG(LogTemp, Display, TEXT("4) No Checkpoint just restart game"));
 		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 	}
 }
@@ -285,9 +303,6 @@ void AUE5_GameplaySystemsCharacter::AddScore(int Score)
 	Gold += Score;
 	ScoreWidget->SetScore(Gold);
 	MyGameInstance->SetScore(Gold);
-
-	/// Health 
-	HealthUI->InitializeHearts();
 }
 
 bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* PlayerInputComponent)

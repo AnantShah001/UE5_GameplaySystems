@@ -19,7 +19,10 @@ public:
 	
 	FVector RespawnLocation;
 	int Gold;
+	int HeartLifeLine;
 
 	void RespawnPlayer(FVector Location);
 	void SetScore(int Score);
+
+	void HealthLifeLine(int LifeLine);
 };

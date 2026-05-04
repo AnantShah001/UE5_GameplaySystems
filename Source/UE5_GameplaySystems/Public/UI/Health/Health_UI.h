@@ -22,9 +22,13 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UMyLives_UI> HeartWidgetClass;
 
+	UPROPERTY()
 	TArray<class UMyLives_UI*> HeartWidgets;
 
-	void InitializeHearts();
+	UPROPERTY()
+	class UMyLives_UI* Heart;
 
-	int N = 0;
+	void InitializeHearts();
+	void PlayRemoveHeartAnim();
+	void RemoveHeart();
 };

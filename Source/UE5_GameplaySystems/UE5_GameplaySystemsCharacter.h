@@ -95,7 +95,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UHealth_UI> Health_UI_Ref;
 
+	UPROPERTY()
 	class UHealth_UI* HealthUI;
+
+	UPROPERTY(EditAnyWhere, Category = "Health")
+	int MaxLifeLine = 3;
+	int CurrentLifeLine;
 	///
 
 

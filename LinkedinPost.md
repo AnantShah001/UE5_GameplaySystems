@@ -285,3 +285,10 @@ Today I focused on improving Checkpoint & Respawn system without restarting the 
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7452232129641377792-GdwF?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 37 - Unreal Engine 5 C++ Gameplay Systems | Heart Lifeline System & dynamic UI, Animation 🚀
+
+Today I focused to built a Heart Lifeline System with dynamic UI and animation. Instead of hardcoding UI elements, I designed a scalable system:
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7457047495609638912-UxDV?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---

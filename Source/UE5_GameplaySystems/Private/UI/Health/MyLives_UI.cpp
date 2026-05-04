@@ -20,7 +20,7 @@ void UMyLives_UI::PlayHeartLoseAnim()
 
 void UMyLives_UI::SetNumber(int Num)
 {
-	if (HeartLoseAnim && HeartNumber)
+	if (HeartNumber)
 	{
 		HeartNumber->SetText(FText::AsNumber(Num));
 	}

@@ -22,3 +22,8 @@ void UUE5_GameplaySystemsGameInstance::SetScore(int Score)
 	Gold = Score;
 	UE_LOG(LogTemp, Warning, TEXT("In Game Instance store Gold Score"));
 }
+
+void UUE5_GameplaySystemsGameInstance::HealthLifeLine(int LifeLine)
+{
+	HeartLifeLine = LifeLine;
+}
