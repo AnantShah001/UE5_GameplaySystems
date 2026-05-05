@@ -20,4 +20,10 @@ public:
 	class UWidgetAnimation* DeathFadeOut;
 
 	void PlayDeathFadeOutAnim();
+
+protected:
+	UFUNCTION()
+	void OnDeathFadeOutAnimFinished();
+
+	
 };

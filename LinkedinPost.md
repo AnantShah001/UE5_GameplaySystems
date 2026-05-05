@@ -289,6 +289,6 @@ Today I focused on improving Checkpoint & Respawn system without restarting the 
 
 Today I focused to built a Heart Lifeline System with dynamic UI and animation. Instead of hardcoding UI elements, I designed a scalable system:
 
-[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7457047495609638912-UxDV?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7457072811015147520-18jm?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---

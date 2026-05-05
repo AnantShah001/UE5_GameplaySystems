@@ -9,6 +9,18 @@ void UMyLives_UI::PlayHeartLoseAnim()
 {
 	if (HeartLoseAnim)
 	{
+		if(HeartLoseSound)PlaySound(HeartLoseSound);
+		// Create Delegate
+		FWidgetAnimationDynamicEvent EndDelegate;
+
+		// Bind it to our Function
+		EndDelegate.BindDynamic(this, &UMyLives_UI::OnHeartLoseAnimFinished);
+
+		//HeartLoseAnim->BindToAnimationFinished(this, EndDelegate);//1)
+
+		// Tell Animation to call this delegate when it finishes
+		BindToAnimationFinished(HeartLoseAnim, EndDelegate); //2)
+
 		PlayAnimation(HeartLoseAnim);
 		UE_LOG(LogTemp, Error, TEXT("HeartLoseAnim Playing Animation"));
 	}
@@ -25,3 +37,14 @@ void UMyLives_UI::SetNumber(int Num)
 		HeartNumber->SetText(FText::AsNumber(Num));
 	}
 }
+
+void UMyLives_UI::OnHeartLoseAnimFinished()
+{
+	if (HeartLoseAnim)
+	{
+		// Instead of RemoveFromParent, we "Broadcast" (shout) that we are done
+		OnAnimationFinishedDelegate.Broadcast(this);
+		UE_LOG(LogTemp, Warning, TEXT("11) Heart Removed from Delegate"));
+	}
+}
+

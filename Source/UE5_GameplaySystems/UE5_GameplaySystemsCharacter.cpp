@@ -235,6 +235,7 @@ void AUE5_GameplaySystemsCharacter::HandleDeath()
 	// HealthLifeLine
 	MyGameInstance->HeartLifeLine -= 1;
 	HealthUI->PlayRemoveHeartAnim();
+
 }
 
 void AUE5_GameplaySystemsCharacter::RespawnPlayer()
@@ -242,7 +243,7 @@ void AUE5_GameplaySystemsCharacter::RespawnPlayer()
 	UE_LOG(LogTemp, Warning, TEXT("1) Respawn Player : %d"), CurrentLifeLine);
 	//UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 
-	HealthUI->RemoveHeart();
+	//HealthUI->RemoveHeart();
 	if(CurrentLifeLine >= 1)
 	{
 		//Capsule Component
@@ -303,6 +304,9 @@ void AUE5_GameplaySystemsCharacter::AddScore(int Score)
 	Gold += Score;
 	ScoreWidget->SetScore(Gold);
 	MyGameInstance->SetScore(Gold);
+
+	// Health 
+	HealthUI->InitializeHearts();
 }
 
 bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* PlayerInputComponent)

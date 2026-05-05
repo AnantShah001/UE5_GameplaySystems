@@ -6,7 +6,6 @@
 #include "Blueprint/UserWidget.h"
 #include "Health_UI.generated.h"
 
-
 /**
  * 
  */
@@ -31,4 +30,8 @@ public:
 	void InitializeHearts();
 	void PlayRemoveHeartAnim();
 	void RemoveHeart();
+
+protected:
+	UFUNCTION()
+	void OnHeartAnimationFinished(UMyLives_UI* WidgetToRemove);
 };
