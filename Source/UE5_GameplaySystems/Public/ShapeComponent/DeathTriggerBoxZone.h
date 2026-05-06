@@ -6,6 +6,8 @@
 #include "Components/BoxComponent.h"
 #include "DeathTriggerBoxZone.generated.h"
 
+class UPrimitiveComponent;
+
 /**
  * 
  */

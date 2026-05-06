@@ -3,6 +3,7 @@
 
 #include "UI/Death.h"
 #include "Kismet/GameplayStatics.h"
+#include "Animation/WidgetAnimation.h"
 
 void UDeath::PlayDeathFadeOutAnim()
 {

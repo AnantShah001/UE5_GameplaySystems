@@ -30,21 +30,13 @@ void UMyLives_UI::PlayHeartLoseAnim()
 	}
 }
 
-void UMyLives_UI::SetNumber(int Num)
-{
-	if (HeartNumber)
-	{
-		HeartNumber->SetText(FText::AsNumber(Num));
-	}
-}
-
 void UMyLives_UI::OnHeartLoseAnimFinished()
 {
 	if (HeartLoseAnim)
 	{
 		// Instead of RemoveFromParent, we "Broadcast" (shout) that we are done
 		OnAnimationFinishedDelegate.Broadcast(this);
-		UE_LOG(LogTemp, Warning, TEXT("11) Heart Removed from Delegate"));
+		UE_LOG(LogTemp, Warning, TEXT("Heart Removed from Delegate"));
 	}
 }
 

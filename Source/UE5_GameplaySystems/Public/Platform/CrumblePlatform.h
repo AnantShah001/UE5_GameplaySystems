@@ -6,6 +6,12 @@
 #include "Platform/MovingPlatform.h"
 #include "CrumblePlatform.generated.h"
 
+class UCameraShakeBase;
+class UBoxComponent;
+class UGeometryCollectionComponent;
+class UPrimitiveComponent;
+class USoundBase;
+
 /**
  * 
  */
@@ -28,13 +34,13 @@ protected:
 
 	//Components
 	UPROPERTY(VisibleAnyWhere)
-	class UBoxComponent* TriggerBox;
+	TObjectPtr<UBoxComponent> TriggerBox;
 
 	UPROPERTY(VisibleAnyWhere)
-	class UBoxComponent* StandBox;
+	TObjectPtr<UBoxComponent> StandBox;
 
 	UPROPERTY(EditAnyWhere)
-	class UGeometryCollectionComponent* CrumblePlatform; //UE5+ Version
+	TObjectPtr<UGeometryCollectionComponent> CrumblePlatform; //UE5+ Version
 
 	//UPROPERTY(VisibleAnywhere)
 	//class UDestructibleComponent* Platform; //UE4 Version
@@ -46,11 +52,11 @@ protected:
 		bool bFromSweep, const FHitResult& SweepResult);
 
 	UPROPERTY(VisibleAnywhere, Category = "Effects")
-	class UParticleSystemComponent* TriggerParticle;
+	TObjectPtr<UParticleSystemComponent> TriggerParticle;
 
 	// Looping Sound
 	UPROPERTY(EditAnyWhere, Category = "Effects")
-	class USoundBase* CrumbleSound;
+	TObjectPtr<USoundBase> CrumbleSound;
 
 
 	// Sequnce Function
@@ -67,7 +73,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-
+	UPROPERTY(EditAnyWhere)
 	float CrumbleDelay = 1.0f;
 
 };

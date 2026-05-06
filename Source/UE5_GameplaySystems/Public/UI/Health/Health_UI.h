@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "Health_UI.generated.h"
 
+class UHorizontalBox;
+class UMyLives_UI;
 /**
  * 
  */
@@ -16,20 +18,19 @@ class UE5_GAMEPLAYSYSTEMS_API UHealth_UI : public UUserWidget
 
 public:
 	UPROPERTY(meta = (BindWidget))
-	class UHorizontalBox* HeartsContainerBox;
+	TObjectPtr<UHorizontalBox> HeartsContainerBox;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UMyLives_UI> HeartWidgetClass;
+	TSubclassOf<UMyLives_UI> HeartWidgetClass;
 
 	UPROPERTY()
-	TArray<class UMyLives_UI*> HeartWidgets;
+	TArray<TObjectPtr<UMyLives_UI>> HeartWidgets;
 
 	UPROPERTY()
-	class UMyLives_UI* Heart;
+	TObjectPtr<UMyLives_UI> Heart;
 
 	void InitializeHearts();
 	void PlayRemoveHeartAnim();
-	void RemoveHeart();
 
 protected:
 	UFUNCTION()

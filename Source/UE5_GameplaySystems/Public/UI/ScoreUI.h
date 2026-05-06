@@ -5,6 +5,8 @@
 #include "Blueprint/UserWidget.h"
 #include "ScoreUI.generated.h"
 
+class UTextBlock;
+
 /**
  *
  */
@@ -15,7 +17,7 @@ class UE5_GAMEPLAYSYSTEMS_API UScoreUI : public UUserWidget
 
 public:
 	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* GoldScore;
+	TObjectPtr<UTextBlock> GoldScore;
 
 	void SetScore(int Score);
 };

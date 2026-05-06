@@ -11,11 +11,20 @@
 //Reduce compile time
 //Avoid circular dependencies
 //These are pointers or references, so forward declaration is enough
+//Forward Declaration
+
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+
+class USoundBase;
+class UDeath;
+class UScoreUI;
+class UUE5_GameplaySystemsGameInstance;
+class UHealth_UI;
+
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -26,41 +35,41 @@ class AUE5_GameplaySystemsCharacter : public ACharacter
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	USpringArmComponent* CameraBoom;
+	TObjectPtr<USpringArmComponent> CameraBoom;
 
 	/** Follow camera that follows the character at the end of the boom */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	UCameraComponent* FollowCamera;
+	TObjectPtr<UCameraComponent> FollowCamera;
 	
 	/** MappingContext */
 	// Input Mapping Context that defines which input actions are active for this character.
 	// Added to the local player at runtime using Enhanced Input subsystem.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputMappingContext* DefaultMappingContext;
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
 	/** Jump Input Action */
 	// Represents the jump input for this character.
 	// Triggered when the player presses or releases the jump key or button.
 	// Bound to the Jump() and StopJumping() functions in SetupPlayerInputComponent().
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* JumpAction;
+	TObjectPtr<UInputAction> JumpAction;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
-	UInputAction* DebugAction;
+	TObjectPtr<UInputAction> DebugAction;
 
 	/** Move Input Action */
 	// Represents the movement input for this character.
 	// Typically returns a Vector2D where X = right / left, Y = forward / back.
 	// Bound to the Move() function to move the character relative to camera direction.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* MoveAction;
+	TObjectPtr<UInputAction> MoveAction;
 
 	/** Look Input Action */
 	// Represents the camera rotation input for this character.
 	// Typically returns a Vector2D where X = yaw(left / right), Y = pitch(up / down).
 	// Bound to the Look() function to rotate the camera / controller.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* LookAction;
+	TObjectPtr<UInputAction> LookAction;
 
 public:
 	AUE5_GameplaySystemsCharacter();
@@ -70,18 +79,22 @@ public:
 	void HandleDeath();
 
 	UPROPERTY(EditAnywhere, Category = "UI")
-	TSubclassOf<class UDeath> DeathRef;
+	TSubclassOf<UDeath> DeathRef;
 
 	UPROPERTY()
-	class UDeath* DeathWidget;
+	TObjectPtr<UDeath> DeathWidget;
+
+	UPROPERTY(EditAnyWhere, Category = "Sound")
+	TObjectPtr<USoundBase> DeathSound;
 
 	UPROPERTY(EditAnywhere, Category = "UI")
-	TSubclassOf<class UScoreUI> ScoreRef;
+	TSubclassOf<UScoreUI> ScoreRef;
 
 	UPROPERTY()
-	class UScoreUI* ScoreWidget;
+	TObjectPtr<UScoreUI> ScoreWidget;
 
-	class UUE5_GameplaySystemsGameInstance* MyGameInstance;
+	UPROPERTY()
+	TObjectPtr<UUE5_GameplaySystemsGameInstance> MyGameInstance;
 
 	void DeathWidgetAnimation();
 
@@ -93,16 +106,15 @@ public:
 
 	/// Health
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UHealth_UI> Health_UI_Ref;
+	TSubclassOf<UHealth_UI> Health_UI_Ref;
 
 	UPROPERTY()
-	class UHealth_UI* HealthUI;
+	TObjectPtr<UHealth_UI> HealthUI;
 
 	UPROPERTY(EditAnyWhere, Category = "Health")
 	int MaxLifeLine = 3;
-	int CurrentLifeLine;
-	///
 
+	int CurrentLifeLine;
 
 protected:
 

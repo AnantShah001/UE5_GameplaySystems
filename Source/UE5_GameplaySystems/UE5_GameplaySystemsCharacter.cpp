@@ -236,6 +236,8 @@ void AUE5_GameplaySystemsCharacter::HandleDeath()
 	MyGameInstance->HeartLifeLine -= 1;
 	HealthUI->PlayRemoveHeartAnim();
 
+	if (DeathSound) UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+
 }
 
 void AUE5_GameplaySystemsCharacter::RespawnPlayer()
@@ -305,8 +307,6 @@ void AUE5_GameplaySystemsCharacter::AddScore(int Score)
 	ScoreWidget->SetScore(Gold);
 	MyGameInstance->SetScore(Gold);
 
-	// Health 
-	HealthUI->InitializeHearts();
 }
 
 bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* PlayerInputComponent)

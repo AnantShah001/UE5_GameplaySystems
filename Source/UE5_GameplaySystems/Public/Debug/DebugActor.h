@@ -26,5 +26,5 @@ protected:
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	class UDebugInfoComponent* DebugInfoComponent;
+	TObjectPtr<UDebugInfoComponent> DebugInfoComponent;
 };

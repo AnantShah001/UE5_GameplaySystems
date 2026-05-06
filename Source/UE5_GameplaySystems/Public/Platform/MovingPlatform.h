@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "MovingPlatform.generated.h"
 
+class USceneComponent;
+
 UCLASS()
 class UE5_GAMEPLAYSYSTEMS_API AMovingPlatform : public AActor
 {
@@ -20,7 +22,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnyWhere)
-	class USceneComponent* Root;
+	TObjectPtr<USceneComponent> Root;
 
 public:
 	// Called every frame
@@ -43,7 +45,7 @@ private:
 	FRotator StartRotation;
 
 	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove")) // Variable Show in UE_Editer
-		FVector PlatformVelocity = FVector(100, 0, 0);
+	FVector PlatformVelocity = FVector(100, 0, 0);
 
 	UPROPERTY(EditAnywhere, Category = "Moving", meta = (EditCondition = "ShouldMove"))
 	float MoveDistance = 1000;

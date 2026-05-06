@@ -6,6 +6,8 @@
 #include "Components/BoxComponent.h"
 #include "TriggerBoxZone.generated.h" 
 
+class UPrimitiveComponent;
+
 /** UCLASS macro makes this visible to the Unreal Engine.
  *  ClassGroup = (Custom): Categories it in the "Add Component" menu.
  *  meta = (BlueprintSpawnableComponent): Allows you to add this component to any Blueprint Actor.

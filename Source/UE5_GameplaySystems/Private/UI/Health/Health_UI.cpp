@@ -16,7 +16,6 @@ void UHealth_UI::InitializeHearts()
 		HeartsContainerBox->AddChildToHorizontalBox(Heart);
 
 		HeartWidgets.Add(Heart);
-		Heart->SetNumber(HeartWidgets.Num());
 
 		//Bind delegate so the Heart tells us when it's done animating
 		Heart->OnAnimationFinishedDelegate.AddDynamic(this, &UHealth_UI::OnHeartAnimationFinished);
@@ -28,20 +27,9 @@ void UHealth_UI::PlayRemoveHeartAnim()
 	if (HeartWidgets.Last())
 	{
 		HeartWidgets.Last()->PlayHeartLoseAnim();
-
 	}
 }
 
-void UHealth_UI::RemoveHeart()
-{
-	if (HeartWidgets.Last())
-	{	
-		HeartsContainerBox->RemoveChild(HeartWidgets.Last());
-		HeartWidgets.Last()->RemoveFromParent();
-		UE_LOG(LogTemp, Warning, TEXT("Heart Removed"));
-	}
-	HeartWidgets.Pop();
-}
 
 void UHealth_UI::OnHeartAnimationFinished(UMyLives_UI* WidgetToRemove)
 {

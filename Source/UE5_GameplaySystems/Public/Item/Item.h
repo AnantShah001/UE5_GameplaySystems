@@ -8,6 +8,8 @@
 
 class UStaticMeshComponent;
 class USphereComponent;
+class UPrimitiveComponent;
+class USoundBase;
 
 UCLASS()
 class UE5_GAMEPLAYSYSTEMS_API AItem : public AActor
@@ -27,11 +29,11 @@ protected:
 
 	// StaticMeshComponent
 	UPROPERTY(VisibleDefaultsOnly, Category = "Item")
-	UStaticMeshComponent* Mesh;
+	TObjectPtr<UStaticMeshComponent> Mesh;
 
 	// Sphere collision component
 	UPROPERTY(VisibleDefaultsOnly, Category = "Item")
-	USphereComponent* CollisionComp;
+	TObjectPtr<USphereComponent> CollisionComp;
 
 	UPROPERTY(EditAnyWhere)
 	FRotator Rotate;
@@ -42,11 +44,11 @@ protected:
 	float CollisionRadius = 10.f;
 
 	UPROPERTY(EditAnyWhere, Category = "Sound")
-	class USoundBase* CollectSound;
+	TObjectPtr<USoundBase> CollectSound;
 
 	//In level we set every item as set as have ablate to checkpoint.
 	UPROPERTY(EditAnyWhere, Category = "Item")
-	bool bIsRespawn = true;
+	bool bIsRespawn = false;
 
 public:	
 	// Called every frame
