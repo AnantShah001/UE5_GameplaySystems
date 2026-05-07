@@ -38,6 +38,5 @@ void UHealth_UI::OnHeartAnimationFinished(UMyLives_UI* WidgetToRemove)
 		HeartsContainerBox->RemoveChild(WidgetToRemove);
 		HeartWidgets.Remove(WidgetToRemove);
 		WidgetToRemove->RemoveFromParent();
-		UE_LOG(LogTemp, Warning, TEXT("10) Heart Removed from Delegate"));
 	}
 }

@@ -20,7 +20,6 @@ void UDeath::PlayDeathFadeOutAnim()
 		BindToAnimationFinished(DeathFadeOut, EndDelegate);
 
 		PlayAnimation(DeathFadeOut, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f);
-		UE_LOG(LogTemp, Error, TEXT("DeathFadeOut Valid"));
 	}
 	else
 	{
@@ -32,5 +31,5 @@ void UDeath::OnDeathFadeOutAnimFinished()
 {
 	// This removes the widget from the screen and memory safely
 	RemoveFromParent();
-	UE_LOG(LogTemp, Error, TEXT("20) DeathFadeOut Widgetwidget from the screen "));
+	UE_LOG(LogTemp, Error, TEXT("DeathFadeOut remove Widget from the screen "));
 }

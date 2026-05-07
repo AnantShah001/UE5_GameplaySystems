@@ -292,3 +292,10 @@ Today I focused to built a Heart Lifeline System with dynamic UI and animation. 
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7457072811015147520-18jm?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 37 - Unreal Engine 5 C++ Gameplay Systems | UI Animation Delegates & Code Optimization 🚀
+
+Today I focused to upgraded my UI system using Animation Delegates | Dynamic Multicast Delegate in Unreal Engine 5 C++.
+
+[LinkedIn Post & Video]()
+
+---

@@ -221,7 +221,6 @@ void AUE5_GameplaySystemsCharacter::DebugActionPressed()
 
 void AUE5_GameplaySystemsCharacter::HandleDeath()
 {
-	UE_LOG(LogTemp, Display, TEXT("0) HandleDeath"));
 	CurrentLifeLine -= 1;
 	MyGameInstance->HealthLifeLine(CurrentLifeLine);
 
@@ -242,7 +241,7 @@ void AUE5_GameplaySystemsCharacter::HandleDeath()
 
 void AUE5_GameplaySystemsCharacter::RespawnPlayer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("1) Respawn Player : %d"), CurrentLifeLine);
+	UE_LOG(LogTemp, Warning, TEXT("Respawn Player"));
 	//UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 
 	//HealthUI->RemoveHeart();
@@ -278,11 +277,11 @@ void AUE5_GameplaySystemsCharacter::RespawnPlayer()
 		// Move player to checkpoint
 		SetActorLocation(MyGameInstance->RespawnLocation, false, nullptr, ETeleportType::TeleportPhysics);
 		SetActorRotation(FRotator::ZeroRotator); // Also reset rotation so they face the right way
-		UE_LOG(LogTemp, Display, TEXT("3) Respawn on checkpoint location : %s"), *MyGameInstance->RespawnLocation.ToString());
+		UE_LOG(LogTemp, Display, TEXT("Respawn on checkpoint location"));
 	}
 	else
 	{
-		UE_LOG(LogTemp, Display, TEXT("4) No Checkpoint just restart game"));
+		UE_LOG(LogTemp, Display, TEXT("No Checkpoint just restart game"));
 		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 	}
 }
@@ -330,37 +329,37 @@ void AUE5_GameplaySystemsCharacter::BeginTouch(const ETouchIndex::Type FingerInd
 {
 	// Start Touch Location
 	StartTouchLoc = FVector2D(Location.X, Location.Y);
-	UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
 
 }
 
 void AUE5_GameplaySystemsCharacter::TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
-	UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
 
 	// Current touch Location
 	FVector2D CurrentTouchLoc = FVector2D(Location.X, Location.Y);
-	UE_LOG(LogTemp, Display, TEXT("CurrentTouchLoc : %s"), *CurrentTouchLoc.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("CurrentTouchLoc : %s"), *CurrentTouchLoc.ToString());
 
 	// Update TouchLocation
 	FVector2D MoveTouchDelta = CurrentTouchLoc - StartTouchLoc;
-	UE_LOG(LogTemp, Display, TEXT("MoveTouchDelta : %s"), *MoveTouchDelta.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("MoveTouchDelta : %s"), *MoveTouchDelta.ToString());
 
 	// Apply In the Movement 
 	AddControllerYawInput(MoveTouchDelta.X * TouchSensitivity);
 	AddControllerPitchInput(MoveTouchDelta.Y * TouchSensitivity);
 
-	UE_LOG(LogTemp, Display, TEXT("Location : %s"), *Location.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("Location : %s"), *Location.ToString());
 
 	// After this subtraction we set the current location to be the new start location for the next update.
 	StartTouchLoc = CurrentTouchLoc;
-	UE_LOG(LogTemp, Display, TEXT("StartTouchLoc_1 : %s"), *StartTouchLoc.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("StartTouchLoc_1 : %s"), *StartTouchLoc.ToString());
 
 }
 
 void AUE5_GameplaySystemsCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	StartTouchLoc = FVector2D::ZeroVector;
-	UE_LOG(LogTemp, Display, TEXT("End_TouchLoc : %s"), *StartTouchLoc.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("End_TouchLoc : %s"), *StartTouchLoc.ToString());
 
 }

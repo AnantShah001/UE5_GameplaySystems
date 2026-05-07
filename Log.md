@@ -1208,3 +1208,34 @@ Understanding actor reset vs level reload was a key learning point.
 * Clean UI architecture (modular widgets)
 
 ---
+# Day 38 - UI Animation Delegates & Code Optimization
+
+## UI System Upgrade
+* Added Animation Delegates for UI animation finish events
+* Dynamic Multicast Delegate
+* Using Decoupling
+* Heart widgets now auto remove after animation finish
+* Asynchronous UI Cleanup
+* Death Fade UI now self removes using RemoveFromParent()
+
+## Sound Polish
+* Added sound feedback for heart/life loss
+* Improved gameplay feel with UI + audio sync
+
+## Code Optimization
+* Replaced raw pointers with TObjectPtr<>
+* Applied Forward Declarations
+* Reduced unnecessary includes
+
+## Result
+* Cleaner & safer memory handling
+* Faster compile times
+* Better garbage collection support
+* More professional UE5 C++ architecture
+
+## Learning
+* UUserWidget Animation Delegates
+* Event-driven UI workflow
+* Professional UE5 memory-safe coding structure
+
+---

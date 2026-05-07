@@ -45,12 +45,12 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 {
 	if (AUE5_GameplaySystemsCharacter* PlayerCharacter = Cast<AUE5_GameplaySystemsCharacter>(OtherActor))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("On_Overlap_Begin : Item"));
+		//UE_LOG(LogTemp, Warning, TEXT("On_Overlap_Begin : Item"));
 		PlayerCharacter->AddScore(Gold);
 		PlayerCharacter->RespawnPlayerLocationX = GetActorLocation();
 		//PlayerCharacter->Gold += Gold;
 		//PlayerCharacter->ScoreWidget->SetScore(PlayerCharacter->Gold);
-		UE_LOG(LogTemp, Warning, TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold);
+		//UE_LOG(LogTemp, Warning, TEXT("Gold : %d | Total Gold : %d"), Gold, PlayerCharacter->Gold);
 		if (CollectSound)
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, CollectSound, GetActorLocation());
@@ -70,7 +70,7 @@ void AItem::RespawnPlayerLocation()
 		{
 			FVector RespawnLocation = GetActorLocation();
 			GameInstance->RespawnPlayer(RespawnLocation);
-			UE_LOG(LogTemp, Warning, TEXT("Item Respawn Location : %s"), *RespawnLocation.ToString());
+			//UE_LOG(LogTemp, Warning, TEXT("Item Respawn Location : %s"), *RespawnLocation.ToString());
 		}
 	}
 }

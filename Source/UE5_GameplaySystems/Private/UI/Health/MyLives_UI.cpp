@@ -22,11 +22,10 @@ void UMyLives_UI::PlayHeartLoseAnim()
 		BindToAnimationFinished(HeartLoseAnim, EndDelegate); //2)
 
 		PlayAnimation(HeartLoseAnim);
-		UE_LOG(LogTemp, Error, TEXT("HeartLoseAnim Playing Animation"));
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("HeartLoseAnim Not Play"));
+		UE_LOG(LogTemp, Error, TEXT("Not Play HeartLoseAnim"));
 	}
 }
 
@@ -36,7 +35,6 @@ void UMyLives_UI::OnHeartLoseAnimFinished()
 	{
 		// Instead of RemoveFromParent, we "Broadcast" (shout) that we are done
 		OnAnimationFinishedDelegate.Broadcast(this);
-		UE_LOG(LogTemp, Warning, TEXT("Heart Removed from Delegate"));
 	}
 }
 
