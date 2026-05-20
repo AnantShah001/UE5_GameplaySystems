@@ -1239,3 +1239,30 @@ Understanding actor reset vs level reload was a key learning point.
 * Professional UE5 memory-safe coding structure
 
 ---
+# Day 39 - Pause Menu System
+
+## Implemented
+* Created custom 'APlayerController' class.
+* Created custom 'AHUD' class.
+* Created Pause Menu 'UUserWidget'
+
+## Features
+* ESC key → Open / Close Pause Menu
+* Pause Menu has:
+	* Continue Play Button
+	* Restart Button
+	* Quit Button
+
+## Result
+* Full pause system working
+* Clean separation of concerns:
+	* PlayerController handles input
+	* And Call function 'PauseMenuWidget()'
+	* Widget handles menu logic
+
+## Learning
+* Controller → Widget communication
+* Input handling in PlayerController
+* Managing game pause states through UI
+
+---

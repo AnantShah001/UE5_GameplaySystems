@@ -13,5 +13,13 @@ UCLASS()
 class UE5_GAMEPLAYSYSTEMS_API AUE5_GameplaySystemsHUD : public AHUD
 {
 	GENERATED_BODY()
-	
+
+public:
+
+	AUE5_GameplaySystemsHUD();
+
+protected:
+
+	virtual void BeginPlay() override;
+
 };

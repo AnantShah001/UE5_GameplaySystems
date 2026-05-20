@@ -88,7 +88,6 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 			ShouldMove = false;
 		}
 	}
-
 }
 
 void AMovingPlatform::RotatePlatform(float DeltaTime)
@@ -119,7 +118,7 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 	}
 	else
 	{
-		AddActorLocalRotation(RotationVelocity);
+		AddActorLocalRotation(RotationVelocity * DeltaTime);
 		//DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100, FColor::Red, false, -1.f);
 		//DrawDebugPoint(GetWorld(), GetActorLocation() + GetActorForwardVector() * 100, 20, FColor::Red, false, -1.0f, 0);
 	}
