@@ -1265,4 +1265,6 @@ Understanding actor reset vs level reload was a key learning point.
 * Input handling in PlayerController
 * Managing game pause states through UI
 
+![Pause Menu](GamePlayScreenshots/PauseMenu.png)
+
 ---

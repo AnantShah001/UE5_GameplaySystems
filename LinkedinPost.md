@@ -299,3 +299,17 @@ Today I focused to upgraded my UI system using Animation Delegates | Dynamic Mul
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7459882871290273793-C5DV?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 39 - Unreal Engine 5 C++ Gameplay Systems | Pause Menu System 🚀
+
+Today I focused to implemented a complete Pause Menu system using Unreal Engine 5 C++.
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7463148602513817601-P2Ev?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+> Day 40 - Unreal Engine 5 C++ Gameplay Systems | Prototype Build Packaged 🚀
+
+Packaged and tested the latest build of my Unreal Engine 5 C++ project. Over the last development cycles, I moved beyond isolated mechanics and focused on connecting systems into an actual gameplay loop.
+
+[LinkedIn Post & Video]()
+
+---
