@@ -12,6 +12,7 @@
 
 # Except these:
 !.gitignore
+!LICENSE.txt
 !README.md
 !Log.md
 !LinkedinPost.md

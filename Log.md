@@ -956,7 +956,7 @@ and exposes real-world issues faster than theory alone.
 
 **[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1Cw78KQcelsN4XBtrGAK3xXpPiI71Dzig/view?usp=sharing)**
 
-[Game View](Screenshots/GameView2.png)
+![Game View](Screenshots/GameView2.png)
 
 ---
 # Day 31 - Item Pickup Sound Feedback
@@ -1266,5 +1266,52 @@ Understanding actor reset vs level reload was a key learning point.
 * Managing game pause states through UI
 
 ![Pause Menu](GamePlayScreenshots/PauseMenu.png)
+
+---
+# Day 40 - Prototype Package & Showcase Build
+
+## Completed
+* Packaged latest prototype build
+* Tested gameplay loop & core systems
+* Prepared showcase version
+
+## Systems Included
+* Moving / rotating platforms
+* Crumbling platforms
+* Death + Respawn system
+* Checkpoint system
+* Collectibles + Score UI
+* Heart/Lives system
+* UI animations + sound
+* Pause menu
+* Mobile touch improvements
+* Camera effects
+* Fade transitions
+
+## Optimization
+* Forward Declaration
+* TObjectPtr<>
+* Cleaner UE5 architecture
+* Reduced compile dependency
+
+## Result
+Playable prototype with gameplay loop:
+Explore → Collect → Survive → Respawn → Progress
+
+## Learning
+Building features is one skill.
+Connecting systems into a playable experience is another.
+
+Packaging the game regularly helps ensure that new systems work correctly in a standalone build.
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1pzkMjLs5b1J27s-z6F9PEJB6AOor3q5d/view?usp=sharing)**
+
+**[GitHub__Repository](https://github.com/AnantShah001/UE5_GameplaySystems)**
+
+![Day-40 Level TopView](Screenshots/Day_40_Level_TopView.png)
+![Day-40 Level DebugView](GamePlayScreenshots/Day_40_GamePlay.png)
+![Game View](Screenshots/GameView4.png)
 
 ---

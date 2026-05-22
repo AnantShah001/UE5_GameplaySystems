@@ -1,0 +1,36 @@
+TERMS OF RISK AND USE - PROPRIETARY SOURCE LICENSE
+Project Name: UE5_GameplaySystems (100-Day Development Challenge)
+Original Author: Anant Shah
+Copyright (c) 2026 Anant Shah. All rights reserved.
+
+This software and its accompanying source code (including but not limited to C++ classes, 
+header files, Blueprints, configurations, and assets) are the exclusive property of Anant Shah.
+
+1. PERMITTED USE
+You are granted a limited, non-exclusive, non-transferable license to view, download, 
+and execute this source code SOLELY for educational purposes, personal review, and 
+portfolio evaluation related to the author's 100-Day LinkedIn development journey.
+
+2. PROHIBITED USE
+You are strictly FORBIDDEN from performing any of the following actions without explicit, 
+written, and signed permission from Anant Shah:
+- Integrating this code, modules, or core systems (such as the Moving/Rotating Platforms, 
+  Crumbling Platforms, Checkpoint/Respawn mechanics, Mobile Input Systems, UI) 
+  into any commercial game, product, or software.
+- Modifying, rewriting, or adapting this code for commercial distribution.
+- Selling, sub-licensing, renting, or charging money for this code or any derivative works 
+  created from it.
+
+3. COMMERCIAL LICENSING AND PAID USAGE
+If you wish to utilize these gameplay systems, C++ classes, or specific architecture 
+mechanics for a paid, commercial, or enterprise project, you must obtain a commercial 
+license. 
+
+For commercial inquiries, licensing costs, and permission requests, please contact:
+Email : shahanant04@gmail.com 
+LINKEDIN : https://www.linkedin.com/in/anantshah001/
+
+4. NO WARRANTY
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER "AS IS" WITHOUT ANY EXPRESS OR IMPLIED 
+WARRANTIES, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND 
+FITNESS FOR A PARTICULAR PURPOSE.
