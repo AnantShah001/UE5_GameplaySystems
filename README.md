@@ -299,7 +299,7 @@ LinkedinPost.md           # LinkedIn post content and videos related to this pro
 
 **[UE5_GameplaySystems_40.rar](https://drive.google.com/file/d/1pzkMjLs5b1J27s-z6F9PEJB6AOor3q5d/view?usp=sharing)**
 
-**[UE5_GameplaySystems-Android-Shipping_41-arm64.apk](https://drive.google.com/file/d/128-kBn51dJJq-rPotfppvJdI9pnmM15B/view?usp=sharing)** Android 13 support (Under Development or Testing)
+**[UE5_GameplaySystems-Android-Shipping_41-arm64.apk](https://drive.google.com/file/d/128-kBn51dJJq-rPotfppvJdI9pnmM15B/view?usp=sharing)** Android 13,16
 
 ---
 
@@ -360,6 +360,9 @@ LinkedinPost.md           # LinkedIn post content and videos related to this pro
 
 **Game View Day 40**
 ![Game View](Screenshots/GameView4.png)
+
+**Game View Android Day 41**
+![Game View](Screenshots/GameView4_Android.png)
 
 ---
 

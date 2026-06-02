@@ -1308,10 +1308,62 @@ Packaging the game regularly helps ensure that new systems work correctly in a s
 
 **[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1pzkMjLs5b1J27s-z6F9PEJB6AOor3q5d/view?usp=sharing)**
 
-**[GitHub__Repository](https://github.com/AnantShah001/UE5_GameplaySystems)**
+**[GitHub_Repository](https://github.com/AnantShah001/UE5_GameplaySystems)**
 
 ![Day-40 Level TopView](Screenshots/Day_40_Level_TopView.png)
 ![Day-40 Level DebugView](GamePlayScreenshots/Day_40_GamePlay.png)
 ![Game View](Screenshots/GameView4.png)
+
+---
+# Day 40 - Shipping Build Packaged for Mobile Phones
+
+## Completed
+* Packaged latest build for Android
+* Tested gameplay loop & core systems
+* Tested on multiple Android devices
+* Prepared showcase version
+* Improved compatibility
+* Reduced package size significantly
+
+## Systems Included
+* Moving / rotating platforms
+* Crumbling platforms
+* Death + Respawn system
+* Checkpoint system
+* Collectibles + Score UI
+* Heart/Lives system
+* UI animations + sound
+* Pause menu
+* Mobile touch improvements
+* Camera effects
+* Fade transitions
+
+## Optimization
+* Forward Declaration
+* TObjectPtr<>
+* Cleaner UE5 architecture
+* Reduced compile dependency
+
+## Result
+* Reduced package size 33.18%
+* Playable prototype with gameplay loop:
+     Explore → Collect → Survive → Respawn → Progress
+
+## Learning
+Building features is one skill.
+Connecting systems into a playable experience is another.
+
+Packaging the game regularly helps ensure that new systems work correctly in a standalone build.
+
+The project is now easier to distribute, test, and share across different Android devices.
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems_Day41-Android-Shipping-arm64.apk](https://drive.google.com/file/d/1vNTVMb0ctvT6qpxFZrHj3lgdmR_KIu27/view?usp=sharing)**
+
+**[GitHub_Repository](https://github.com/AnantShah001/UE5_GameplaySystems)**
+
+![Day-41 Game Play](GamePlayScreenshots/Day_41_GamePlay_.png)
+![Game View](Screenshots/GameView4_Android.png)
 
 ---
