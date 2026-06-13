@@ -1315,7 +1315,7 @@ Packaging the game regularly helps ensure that new systems work correctly in a s
 ![Game View](Screenshots/GameView4.png)
 
 ---
-# Day 40 - Shipping Build Packaged for Mobile Phones
+# Day 41 - Shipping Build Packaged for Mobile Phones
 
 ## Completed
 * Packaged latest build for Android
@@ -1394,5 +1394,31 @@ The project is now easier to distribute, test, and share across different Androi
 * Better locomotion blending
 * Character customization
 * Clothing & attachment systems
+
+---
+# Day 43 - 8 Direction Blend Space (Speed & Direction)
+
+## Completed
+* Created 3D Blend Space for locomotion
+* Added Idle animations
+* Added Walk animations
+* Added Jog animations
+* Added Run animations
+* Configured Speed and Direction parameters
+
+## Result
+* Animation system now supports 8-direction movement
+* Foundation ready for advanced locomotion
+* Character animation transitions working correctly
+
+## Learning
+* Blend Space setup
+* Speed & Direction driven animation
+* Locomotion system design
+
+## Next
+* Walk / Jog / Run input controls
+* Sprint system
+* Character movement state management
 
 ---

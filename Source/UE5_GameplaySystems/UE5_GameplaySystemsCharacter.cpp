@@ -186,6 +186,9 @@ void AUE5_GameplaySystemsCharacter::Move(const FInputActionValue& Value)
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
+		// Set Character Speed hear for now
+		GetCharacterMovement()->MaxWalkSpeed = 200;
+
 		// add movement 
 		// Move the character forward/backward
 		AddMovementInput(ForwardDirection, MovementVector.Y);

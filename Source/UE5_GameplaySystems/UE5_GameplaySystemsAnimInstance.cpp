@@ -19,6 +19,12 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 {
 	if (MyCharacter)
 	{
-		Speed = UKismetMathLibrary::VSizeXY(MyCharacterMovement->Velocity);
+		//Speed = UKismetMathLibrary::VSizeXY(MyCharacterMovement->Velocity);
+		FVector Velocity = MyCharacter->GetVelocity();
+		Speed = Velocity.Size();
+
+		FRotator ControlRotation = MyCharacter->GetControlRotation();
+		Direction = CalculateDirection(Velocity, FRotator(0.f, ControlRotation.Yaw,0.f));
+		
 	}
 }

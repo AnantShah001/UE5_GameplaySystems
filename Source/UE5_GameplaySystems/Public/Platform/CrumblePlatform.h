@@ -40,7 +40,7 @@ protected:
 	TObjectPtr<UBoxComponent> StandBox;
 
 	UPROPERTY(EditAnyWhere)
-	TObjectPtr<UGeometryCollectionComponent> CrumblePlatform; //UE5+ Version
+	TObjectPtr<UGeometryCollectionComponent> Crumble; //UE5+ Version
 
 	//UPROPERTY(VisibleAnywhere)
 	//class UDestructibleComponent* Platform; //UE4 Version

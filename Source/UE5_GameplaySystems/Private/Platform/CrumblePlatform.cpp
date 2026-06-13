@@ -20,8 +20,8 @@ ACrumblePlatform::ACrumblePlatform()
 	StandBox->SetupAttachment(TriggerBox);
 
 	//Initialize Fractured Mesh
-	CrumblePlatform = CreateDefaultSubobject<UGeometryCollectionComponent>("Platform");
-	CrumblePlatform->SetupAttachment(TriggerBox);
+	Crumble = CreateDefaultSubobject<UGeometryCollectionComponent>("Platform");
+	Crumble->SetupAttachment(TriggerBox);
 
 	// Initialize Particle System
 	TriggerParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("TriggerParticle"));
@@ -34,7 +34,10 @@ void ACrumblePlatform::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &ACrumblePlatform::OnOverlapBegin);
+	if (TriggerBox)
+	{
+		TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &ACrumblePlatform::OnOverlapBegin);
+	}
 
 }
 
@@ -57,7 +60,7 @@ void ACrumblePlatform::CrumblingFall()
 {
 	StandBox->DestroyComponent();
 	ShouldMove = false;
-	CrumblePlatform->SetSimulatePhysics(true);
+	Crumble->SetSimulatePhysics(true);
 	GetWorldTimerManager().SetTimer(DestroyActorTimerHandler, this, &ACrumblePlatform::DestroyActor, (CrumbleDelay + 5.0f), false);
 }
 

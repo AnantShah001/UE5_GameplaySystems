@@ -310,7 +310,27 @@ Today I focused to implemented a complete Pause Menu system using Unreal Engine 
 
 Packaged and tested the latest build of my Unreal Engine 5 C++ project. Over the last development cycles, I moved beyond isolated mechanics and focused on connecting systems into an actual gameplay loop.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7465260481646198785-efcF?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 41 - Unreal Engine 5 C++ Gameplay Systems | Shipping Build Packaged for Mobile Phones 🚀
 
+Today I focused to implemented Shipping Build Packaged for Android and tested the latest build of my Unreal Engine 5 C++ project.
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7467469103679614976-GA3q?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+> Day 42 - Unreal Engine 5 C++ Gameplay Systems | Character Animation Foundation (3C) 🚀
+
+Today I started working on the Character side of the project.
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7471587586583691264-8INN?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+> Day 43 -  Unreal Engine 5 C++ Gameplay Systems | 8 Direction Locomotion Setup 🚀
+
+Today I expanded the character animation system by creating a full 8 Direction Movement Blend Space.
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7473629259740372992-CgW0/?highlightedUpdateUrn=urn%3Ali%3Aactivity%3A7473629340971290624&origin=SOCIAL_SHARE&utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---

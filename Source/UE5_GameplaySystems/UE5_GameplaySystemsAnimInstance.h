@@ -30,4 +30,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	float Speed;
 
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	float Direction;
+
 };
