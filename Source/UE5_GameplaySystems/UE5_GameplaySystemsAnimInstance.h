@@ -33,4 +33,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	float Direction;
 
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	float Pitch;
+
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	float Yaw;
 };
