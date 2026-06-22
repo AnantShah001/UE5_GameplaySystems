@@ -334,3 +334,10 @@ Today I expanded the character animation system by creating a full 8 Direction M
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7473629259740372992-CgW0/?highlightedUpdateUrn=urn%3Ali%3Aactivity%3A7473629340971290624&origin=SOCIAL_SHARE&utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 44 - Unreal Engine 5 C++ Gameplay Systems | Aim Offset System 🚀
+
+Today I worked on the character animation system and implemented a 3D Aim Offset.
+
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7474702192491417600-LrRb/?highlightedUpdateUrn=urn%3Ali%3AugcPost%3A7474702192491417600&origin=SOCIAL_SHARE&utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---

@@ -31,39 +31,39 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 AUE5_GameplaySystemsCharacter::AUE5_GameplaySystemsCharacter()
 {
 	// Set size for the collision capsule (width = 42, height = 96)
-	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-		
-	// Don't rotate when the controller rotates. Let that just affect the camera.
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
-	bUseControllerRotationRoll = false;
+GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
-	// Configure character movement
-	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
+// Don't rotate when the controller rotates. Let that just affect the camera.
+bUseControllerRotationPitch = false;
+bUseControllerRotationYaw = false;
+bUseControllerRotationRoll = false;
 
-	// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
-	// instead of recompiling to adjust them
-	GetCharacterMovement()->JumpZVelocity = 700.f;
-	GetCharacterMovement()->AirControl = 0.35f;
-	GetCharacterMovement()->MaxWalkSpeed = 500.f;
-	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
-	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
-	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
+// Configure character movement
+GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
+GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
 
-	// Create camera boom (spring arm) to position camera behind the character
-	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	CameraBoom->SetupAttachment(RootComponent);
-	CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
-	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
+// instead of recompiling to adjust them
+GetCharacterMovement()->JumpZVelocity = 700.f;
+GetCharacterMovement()->AirControl = 0.35f;
+GetCharacterMovement()->MaxWalkSpeed = 200.f;
+GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
+GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
+GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 
-	// Create a follow camera
-	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+// Create camera boom (spring arm) to position camera behind the character
+CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+CameraBoom->SetupAttachment(RootComponent);
+CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
+CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 
-	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
-	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+// Create a follow camera
+FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
+FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+
+// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
+// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
 // Called when the game starts or when the character is spawned
@@ -128,6 +128,7 @@ void AUE5_GameplaySystemsCharacter::Tick(float DeltaTime)
 		FRotator SmoothedRot = FMath::RInterpTo(CurrentRot, LookAtRot, DeltaTime, 5.0f);
 
 		FollowCamera->SetWorldRotation(SmoothedRot);
+
 	}
 }
 
@@ -185,9 +186,6 @@ void AUE5_GameplaySystemsCharacter::Move(const FInputActionValue& Value)
 	
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		// Set Character Speed hear for now
-		GetCharacterMovement()->MaxWalkSpeed = 200;
 
 		// add movement 
 		// Move the character forward/backward

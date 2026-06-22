@@ -1422,3 +1422,26 @@ The project is now easier to distribute, test, and share across different Androi
 * Character movement state management
 
 ---
+# Day 44 - Aim Offset Setup
+
+## Completed
+* Created Aim Offset
+* Imported and configured aim poses
+* Set up Pitch and Yaw blending
+* Connected Aim Offset to Animation Blueprint
+
+## Result
+* Character can now blend upper-body aiming poses
+* Foundation ready for camera-driven aiming
+* Improved animation responsiveness
+
+## Learning
+* Aim Offset workflow
+* Pitch & Yaw animation blending
+* Animation Blueprint integration
+
+## Next
+* Character rotation improvements
+* Advanced locomotion features
+
+---

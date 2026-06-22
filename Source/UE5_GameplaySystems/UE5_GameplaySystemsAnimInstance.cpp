@@ -5,6 +5,8 @@
 #include "UE5_GameplaySystemsCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "KismetAnimationLibrary.h"
+
 
 void UUE5_GameplaySystemsAnimInstance::NativeInitializeAnimation()
 {
@@ -24,7 +26,7 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		Speed = Velocity.Size();
 
 		FRotator ControlRotation = MyCharacter->GetControlRotation();
-		Direction = CalculateDirection(Velocity, FRotator(0.f, ControlRotation.Yaw,0.f));
+		Direction = UKismetAnimationLibrary::CalculateDirection(Velocity, FRotator(0.f, ControlRotation.Yaw,0.f));
 		
 		FRotator ActorRotation = MyCharacter->GetActorRotation();
 		FRotator DeltaRotator = (ControlRotation - ActorRotation).GetNormalized();
@@ -32,6 +34,14 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		Pitch = DeltaRotator.Pitch;
 		Yaw = DeltaRotator.Yaw;
 
-		
+		if (Speed > 0)
+		{
+			MyCharacter->bUseControllerRotationYaw = true;
+		}
+		else if (Speed <=0 )
+		{
+			MyCharacter->bUseControllerRotationYaw = false;
+		}
+
 	}
 }

@@ -38,4 +38,5 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	float Yaw;
+
 };
