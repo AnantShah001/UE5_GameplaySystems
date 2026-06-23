@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Anant Shah All Rights Reserved
 
 
 #include "UE5_GameplaySystemsAnimInstance.h"

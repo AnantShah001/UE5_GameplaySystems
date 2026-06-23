@@ -10,6 +10,7 @@ class UInputAction;
 struct FInputActionValue;
 class UInputMappingContext;
 class UPauseMenu_UI;
+class AUE5_GameplaySystemsCharacter;
 
 /**
  * 
@@ -25,11 +26,19 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Select UI")
 	TSubclassOf<UPauseMenu_UI> PauseMenuRef;
 
+	UPROPERTY()
 	TObjectPtr<UPauseMenu_UI> PauseMenu;
+
+	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr< AUE5_GameplaySystemsCharacter> MyCharacter;
 
 	bool bIsPauseGame = false;
 
 	void PauseMenuWidget();
+
+	void Jump();
+
+	void StopJumping();
 
 protected:
 	virtual void BeginPlay() override;
@@ -41,6 +50,9 @@ protected:
 
 	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> PauseMenuAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UInputAction> JumpAction;
 
 private:
 

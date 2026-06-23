@@ -9,6 +9,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/Menu/PauseMenu_UI.h"
+#include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
 
 
 AUE5_GameplayPlayerController::AUE5_GameplayPlayerController()
@@ -28,6 +29,7 @@ void AUE5_GameplayPlayerController::BeginPlay()
 		}
 	}
 
+	MyCharacter = Cast< AUE5_GameplaySystemsCharacter>(GetPawn());
 }
 
 void AUE5_GameplayPlayerController::SetupInputComponent()
@@ -36,6 +38,12 @@ void AUE5_GameplayPlayerController::SetupInputComponent()
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
 		EnhancedInputComponent->BindAction(PauseMenuAction, ETriggerEvent::Triggered, this,	&AUE5_GameplayPlayerController::PauseMenuWidget);
+
+		// Jumping
+		// Bind jump input: start jumping when key/button is pressed
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AUE5_GameplayPlayerController::Jump);
+		// Bind jump input: stop jumping when key/button is released
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::StopJumping);
 	}
 }
 
@@ -77,5 +85,21 @@ void AUE5_GameplayPlayerController::PauseMenuWidget()
 		SetShowMouseCursor(false);
 		bIsPauseGame = false;
 		UE_LOG(LogTemp, Warning, TEXT("Paus Remove To viewPort"));
+	}
+}
+
+void AUE5_GameplayPlayerController::Jump()
+{
+	if (MyCharacter)
+	{
+		MyCharacter->Jump();
+	}
+}
+
+void AUE5_GameplayPlayerController::StopJumping()
+{
+	if (MyCharacter)
+	{
+		MyCharacter->StopJumping();
 	}
 }
