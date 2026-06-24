@@ -34,14 +34,31 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		Pitch = DeltaRotator.Pitch;
 		Yaw = DeltaRotator.Yaw;
 
-		if (Speed > 0)
-		{
-			MyCharacter->bUseControllerRotationYaw = true;
-		}
-		else if (Speed <=0 )
-		{
-			MyCharacter->bUseControllerRotationYaw = false;
-		}
+		UseControllerRotationYaw();
+		InAirCheck();
+	}
+}
 
+void UUE5_GameplaySystemsAnimInstance::UseControllerRotationYaw()
+{
+	if (Speed > 0)
+	{
+		MyCharacter->bUseControllerRotationYaw = true;
+	}
+	else if (Speed <= 0)
+	{
+		MyCharacter->bUseControllerRotationYaw = false;
+	}
+}
+
+void UUE5_GameplaySystemsAnimInstance::InAirCheck()
+{
+	if (MyCharacterMovement->IsFalling())
+	{
+		IsInAir = true;
+	}
+	else
+	{
+		IsInAir = false;
 	}
 }

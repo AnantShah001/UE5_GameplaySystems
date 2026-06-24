@@ -39,4 +39,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	float Yaw;
 
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	bool IsInAir = false;
+
+private:
+	void UseControllerRotationYaw();
+
+	void InAirCheck();
+
 };
