@@ -46,7 +46,7 @@ GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at th
 // instead of recompiling to adjust them
 GetCharacterMovement()->JumpZVelocity = 700.f;
 GetCharacterMovement()->AirControl = 0.35f;
-GetCharacterMovement()->MaxWalkSpeed = 200.f;
+GetCharacterMovement()->MaxWalkSpeed = 390.f;
 GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
@@ -141,11 +141,6 @@ void AUE5_GameplaySystemsCharacter::SetupPlayerInputComponent(UInputComponent* P
 	// Set up action bindings	
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) 
 	{
-
-		// Moving
-		// Bind movement input (WASD / joystick) to the Move() function
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::Move);
-
 		// Looking
 		// Bind look input (mouse / right joystick) to the Look() function
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::Look);
@@ -161,35 +156,6 @@ void AUE5_GameplaySystemsCharacter::SetupPlayerInputComponent(UInputComponent* P
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
-
-// Called when movement input is received (WASD / joystick)
-// Moves the character forward/back and right/left based on the input vector
-void AUE5_GameplaySystemsCharacter::Move(const FInputActionValue& Value)
-{
-	// input is a Vector2D
-	// Get the input vector (X = right/left, Y = forward/back)
-	FVector2D MovementVector = Value.Get<FVector2D>();
-
-	if (Controller != nullptr)
-	{
-		// find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		// get forward vector
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	
-		// get right vector 
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		// add movement 
-		// Move the character forward/backward
-		AddMovementInput(ForwardDirection, MovementVector.Y);
-		// Move the character right/left
-		AddMovementInput(RightDirection, MovementVector.X);
-	}
-}
-
 
 // Called when look input is received (mouse / right joystick)
 // Rotates the camera/controller based on input

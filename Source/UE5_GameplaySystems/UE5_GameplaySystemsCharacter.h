@@ -50,13 +50,6 @@ class AUE5_GameplaySystemsCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> DebugAction;
 
-	/** Move Input Action */
-	// Represents the movement input for this character.
-	// Typically returns a Vector2D where X = right / left, Y = forward / back.
-	// Bound to the Move() function to move the character relative to camera direction.
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputAction> MoveAction;
-
 	/** Look Input Action */
 	// Represents the camera rotation input for this character.
 	// Typically returns a Vector2D where X = yaw(left / right), Y = pitch(up / down).
@@ -110,10 +103,6 @@ public:
 	int CurrentLifeLine;
 
 protected:
-
-	/** Called for movement input */
-	// Handles movement input (X = right/left, Y = forward/back).
-	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	// Handles look input (X = yaw, Y = pitch).

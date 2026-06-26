@@ -11,6 +11,8 @@ struct FInputActionValue;
 class UInputMappingContext;
 class UPauseMenu_UI;
 class AUE5_GameplaySystemsCharacter;
+class UCharacterMovementComponent;
+
 
 /**
  * 
@@ -32,6 +34,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr< AUE5_GameplaySystemsCharacter> MyCharacter;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	TObjectPtr<UCharacterMovementComponent> MyCharacterMovement;
+
 	bool bIsPauseGame = false;
 
 	void PauseMenuWidget();
@@ -40,22 +45,53 @@ public:
 
 	void StopJumping();
 
+	void Runing(const FInputActionValue& Value);
+
+	void Walking(const FInputActionValue& Value);
+
 protected:
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;
 
+	/** Called for movement input */
+	// Handles movement input (X = right/left, Y = forward/back).
+	void Move(const FInputActionValue& Value);
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
-	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = "Input")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> PauseMenuAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> JumpAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UInputAction> MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> RunAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> WalkAction;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	bool bIsRuning = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	bool bIsWalking = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	float WalkSpeed = 200.f;
+
+
 private:
 
 	bool bIsMainMenueWidget = false;
+
+	void SmoothSpeed();
+
+	void MovementSpeed();
 	
 };

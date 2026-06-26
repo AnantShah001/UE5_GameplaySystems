@@ -10,6 +10,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "UI/Menu/PauseMenu_UI.h"
 #include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 AUE5_GameplayPlayerController::AUE5_GameplayPlayerController()
@@ -30,6 +31,10 @@ void AUE5_GameplayPlayerController::BeginPlay()
 	}
 
 	MyCharacter = Cast< AUE5_GameplaySystemsCharacter>(GetPawn());
+	if (MyCharacter)
+	{
+		MyCharacterMovement = MyCharacter->GetCharacterMovement();
+	}
 }
 
 void AUE5_GameplayPlayerController::SetupInputComponent()
@@ -39,11 +44,22 @@ void AUE5_GameplayPlayerController::SetupInputComponent()
 	{
 		EnhancedInputComponent->BindAction(PauseMenuAction, ETriggerEvent::Triggered, this,	&AUE5_GameplayPlayerController::PauseMenuWidget);
 
+		// Moving
+		// Bind movement input (WASD / joystick) to the Move() function
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Move);
+
 		// Jumping
 		// Bind jump input: start jumping when key/button is pressed
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AUE5_GameplayPlayerController::Jump);
 		// Bind jump input: stop jumping when key/button is released
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::StopJumping);
+
+		EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Runing);
+		EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Runing);
+
+		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Walking);
+		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Walking);
+
 	}
 }
 
@@ -102,4 +118,95 @@ void AUE5_GameplayPlayerController::StopJumping()
 	{
 		MyCharacter->StopJumping();
 	}
+}
+
+void AUE5_GameplayPlayerController::Runing(const FInputActionValue& Value)
+{
+	bIsRuning = Value.Get<bool>();
+
+	if (Value.Get<bool>())
+	{
+		bIsWalking = false;
+	}
+}
+
+void AUE5_GameplayPlayerController::Walking(const FInputActionValue& Value)
+{
+	bIsWalking = Value.Get<bool>();
+
+	if (Value.Get<bool>())
+	{
+		bIsRuning = false;
+	}
+}
+
+// Called when movement input is received (WASD / joystick)
+// Moves the character forward/back and right/left based on the input vector
+void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
+{
+	// input is a Vector2D
+	// Get the input vector (X = right/left, Y = forward/back)
+	FVector2D MovementVector = Value.Get<FVector2D>();
+
+	if (MyCharacter != nullptr)
+	{
+		// find out which way is forward
+		const FRotator Rotation = GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		// get forward vector
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+
+		// get right vector 
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		// add movement 
+		// Move the character forward/backward
+
+		MyCharacter->AddMovementInput(ForwardDirection, MovementVector.Y);
+		// Move the character right/left
+		MyCharacter->AddMovementInput(RightDirection, MovementVector.X);
+
+		SmoothSpeed();
+		MovementSpeed();
+	}
+}
+
+void AUE5_GameplayPlayerController::SmoothSpeed()
+{
+	if (MyCharacter)
+	{
+		float AddSpeed = 5.f;
+		float CurrentSpeed = MyCharacter->GetVelocity().Size() + AddSpeed;
+
+		UE_LOG(LogTemp, Error, TEXT("Current Speed : %f <= WalkSpeed : %f"), CurrentSpeed,WalkSpeed);
+
+		if (CurrentSpeed <= WalkSpeed)
+		{
+			MyCharacterMovement->MaxWalkSpeed = CurrentSpeed;
+			UE_LOG(LogTemp, Warning, TEXT("Current Speed : %f"), CurrentSpeed);
+		}
+		else
+		{
+			MyCharacterMovement->MaxWalkSpeed = WalkSpeed;
+			UE_LOG(LogTemp, Error, TEXT("Current Speed : %f"), WalkSpeed);
+		}
+	}
+}
+
+void AUE5_GameplayPlayerController::MovementSpeed()
+{
+	if (bIsRuning)
+	{
+		WalkSpeed = 650.f;
+	}
+	else if (bIsWalking)
+	{
+		WalkSpeed = 195.f;
+	}
+	else
+	{
+		WalkSpeed = 390.f;
+	}
+	UE_LOG(LogTemp, Display, TEXT("Current Speed : %f"), WalkSpeed);
 }
