@@ -47,13 +47,6 @@ class AUE5_GameplaySystemsCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
-	/** Jump Input Action */
-	// Represents the jump input for this character.
-	// Triggered when the player presses or releases the jump key or button.
-	// Bound to the Jump() and StopJumping() functions in SetupPlayerInputComponent().
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UInputAction> JumpAction;
-
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> DebugAction;
 

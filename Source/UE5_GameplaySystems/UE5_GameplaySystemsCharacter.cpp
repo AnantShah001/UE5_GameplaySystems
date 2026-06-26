@@ -141,11 +141,6 @@ void AUE5_GameplaySystemsCharacter::SetupPlayerInputComponent(UInputComponent* P
 	// Set up action bindings	
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) 
 	{
-		// Jumping
-		// Bind jump input: start jumping when key/button is pressed
-		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		// Bind jump input: stop jumping when key/button is released
-		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		// Moving
 		// Bind movement input (WASD / joystick) to the Move() function

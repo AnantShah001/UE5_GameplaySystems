@@ -341,3 +341,8 @@ Today I worked on the character animation system and implemented a 3D Aim Offset
 [LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7474702192491417600-LrRb/?highlightedUpdateUrn=urn%3Ali%3AugcPost%3A7474702192491417600&origin=SOCIAL_SHARE&utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 45 - Unreal Engine 5 C++ Gameplay Systems | Android HUD & Touch Controls(Jump Button) 🚀
+
+Today I focused to replacing Unreal Engine's default mobile touch interface with my own Android UI control system. And improving project architecture.
+
+[LinkedIn Post & Video]()

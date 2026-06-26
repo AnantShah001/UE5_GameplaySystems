@@ -1445,3 +1445,37 @@ The project is now easier to distribute, test, and share across different Androi
 * Advanced locomotion features
 
 ---
+# Day 45 - Android HUD & Touch Controls(Jump Button)
+
+## Completed
+* Created `UE5_Gameplay_AndroidScreen_HUD` child class of our (UE5_GameplaySystemsHUD)
+* Created `Android_ScreenControls_UI` widget
+* Separated HUD class for Android & PC
+* Added custom mobile jump button
+* Switch Jump InputAction Character to our Controller
+* Started migrating mobile controls from Touch Interface to UMG
+* Add Jump Animations in our AnimGraph in AnimBP
+* Connected jump state to animation system
+* Improved character locomotion pipeline
+* Check Player `IsInAir` to identify jump state
+* Improved separation of responsibilities
+* Centralized player input management
+
+## Result
+* Android HUD architecture
+* Better control over mobile UI layout
+* Foundation for future mobile-specific features
+
+## Learning
+* Platform-specific HUD design
+* UUserWidget based mobile controls
+* UI architecture separation (PC vs Android)
+
+## Next
+* Connect movement controls
+* Sprint & action buttons
+* Full UMG mobile control system
+
+The first solves a problem in (day 28). The second creates a system. That's the difference between prototyping and long-term game development.
+
+---
