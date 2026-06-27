@@ -85,6 +85,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	float WalkSpeed = 200.f;
 
+	FVector2D MovementVector;
+
 
 private:
 
@@ -93,5 +95,10 @@ private:
 	void SmoothSpeed();
 
 	void MovementSpeed();
+
+	FName MovementPosition();
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true", RowType = "ControlSpeed"))
+	FDataTableRowHandle SpeedData;
+
 };

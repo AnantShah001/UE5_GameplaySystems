@@ -11,6 +11,7 @@
 #include "UI/Menu/PauseMenu_UI.h"
 #include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Data/Struct/ControlSpeed.h"
 
 
 AUE5_GameplayPlayerController::AUE5_GameplayPlayerController()
@@ -124,20 +125,14 @@ void AUE5_GameplayPlayerController::Runing(const FInputActionValue& Value)
 {
 	bIsRuning = Value.Get<bool>();
 
-	if (Value.Get<bool>())
-	{
-		bIsWalking = false;
-	}
+	if (Value.Get<bool>()) bIsWalking = false;
 }
 
 void AUE5_GameplayPlayerController::Walking(const FInputActionValue& Value)
 {
 	bIsWalking = Value.Get<bool>();
 
-	if (Value.Get<bool>())
-	{
-		bIsRuning = false;
-	}
+	if (Value.Get<bool>()) bIsRuning = false;
 }
 
 // Called when movement input is received (WASD / joystick)
@@ -146,7 +141,7 @@ void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	// Get the input vector (X = right/left, Y = forward/back)
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	MovementVector = Value.Get<FVector2D>();
 
 	if (MyCharacter != nullptr)
 	{
@@ -179,34 +174,59 @@ void AUE5_GameplayPlayerController::SmoothSpeed()
 		float AddSpeed = 5.f;
 		float CurrentSpeed = MyCharacter->GetVelocity().Size() + AddSpeed;
 
-		UE_LOG(LogTemp, Error, TEXT("Current Speed : %f <= WalkSpeed : %f"), CurrentSpeed,WalkSpeed);
-
 		if (CurrentSpeed <= WalkSpeed)
 		{
 			MyCharacterMovement->MaxWalkSpeed = CurrentSpeed;
-			UE_LOG(LogTemp, Warning, TEXT("Current Speed : %f"), CurrentSpeed);
 		}
 		else
 		{
 			MyCharacterMovement->MaxWalkSpeed = WalkSpeed;
-			UE_LOG(LogTemp, Error, TEXT("Current Speed : %f"), WalkSpeed);
 		}
 	}
 }
 
 void AUE5_GameplayPlayerController::MovementSpeed()
 {
+	FName FindRow = MovementPosition();
+	const UDataTable* SpeedTable = SpeedData.DataTable;
+
+	if (SpeedTable != nullptr)
+	{
+		FControlSpeed* SelectRow = SpeedTable->FindRow<FControlSpeed>(FindRow, TEXT("Movement"));
+		if (SelectRow != nullptr)
+		{
+			if (MovementVector.Y > 0.f)
+			{
+				WalkSpeed = SelectRow->Forward_Dir;
+			}
+			else
+			{
+				WalkSpeed = SelectRow->Other_Dir;
+			}
+		}
+	}
+
+}
+
+FName AUE5_GameplayPlayerController::MovementPosition()
+{
+	FName Position;
+
 	if (bIsRuning)
 	{
-		WalkSpeed = 650.f;
+		Position = FName(TEXT("Stand_Run"));
 	}
 	else if (bIsWalking)
 	{
-		WalkSpeed = 195.f;
+		Position = FName(TEXT("Stand_Walk"));
 	}
 	else
 	{
-		WalkSpeed = 390.f;
+		Position = FName(TEXT("Stand_Jog"));
 	}
-	UE_LOG(LogTemp, Display, TEXT("Current Speed : %f"), WalkSpeed);
+	
+	UE_LOG(LogTemp, Display, TEXT("Current Speed : %s"), *Position.ToString());
+
+	return Position;
+
 }
