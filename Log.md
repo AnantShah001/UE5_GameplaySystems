@@ -1479,3 +1479,32 @@ The project is now easier to distribute, test, and share across different Androi
 The first solves a problem in (day 28). The second creates a system. That's the difference between prototyping and long-term game development.
 
 ---
+# Day 46 - Locomotion Controls & Enhanced Input(Walk, Jog, Run)
+
+## Completed
+* Added Idle, Walk, Jog, Run controls using Enhanced Input
+* Completed 8-direction locomotion system
+* Connected Blend Space with movement speeds
+* Moved movement input handling to PlayerController
+* Now player Idle, Walk, Jog and Run states are fully functional and connected to the animation system
+
+
+## Improvements
+* Used Started & Completed triggers for state changes
+* Simplified input flow with event-driven actions
+* Improved gameplay architecture and input management
+
+## Result
+* Full Walk, Jog and Run movement
+* Smooth 8-direction locomotion
+* Cleaner Controller → Character workflow
+
+## Learning
+* Enhanced Input Triggers
+* Event-driven input handling
+* PlayerController architecture
+
+## Current Bug
+Backward movement plays the wrong animation state (forward animation running at high speed) due to missing backward assets.The Fix is set up a Data Table matching our Blend Space to manage directional speeds dynamically.
+
+---

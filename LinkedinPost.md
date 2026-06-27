@@ -346,3 +346,10 @@ Today I worked on the character animation system and implemented a 3D Aim Offset
 Today I focused to replacing Unreal Engine's default mobile touch interface with my own Android UI control system. And improving project architecture.
 
 [LinkedIn Post & Video]()
+
+---
+> Day 46 - Unreal Engine 5 C++ Gameplay Systems | 8 Direction Locomotion Complete & Enhanced Input(Walk, Jog, Run)
+
+Today I completed the locomotion system that I started a few days ago. Previously, I had built an 8-direction Blend Space with Idle, Walk, Jog, and Run animations, but the character could only walk because movement states were not implemented.
+
+[LinkedIn Post & Video]()
