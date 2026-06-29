@@ -97,8 +97,8 @@ private:
 	void MovementSpeed();
 
 	FName MovementPosition();
+	float InterpSpeed;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true", RowType = "ControlSpeed"))
-	FDataTableRowHandle SpeedData;
-
+	FDataTableRowHandle SpeedDataTable;
 };

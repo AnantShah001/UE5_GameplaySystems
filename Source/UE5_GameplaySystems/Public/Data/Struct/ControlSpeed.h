@@ -19,4 +19,6 @@ struct UE5_GAMEPLAYSYSTEMS_API FControlSpeed : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Other_Dir;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float InterpSpeed;
 };

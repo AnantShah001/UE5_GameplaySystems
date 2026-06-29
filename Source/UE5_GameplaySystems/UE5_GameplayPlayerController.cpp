@@ -155,24 +155,24 @@ void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
+		// Player Move Smoothly
+		SmoothSpeed();
+		
 		// add movement 
 		// Move the character forward/backward
-
 		MyCharacter->AddMovementInput(ForwardDirection, MovementVector.Y);
 		// Move the character right/left
 		MyCharacter->AddMovementInput(RightDirection, MovementVector.X);
-
-		SmoothSpeed();
-		MovementSpeed();
 	}
 }
 
 void AUE5_GameplayPlayerController::SmoothSpeed()
 {
+	MovementSpeed();
 	if (MyCharacter)
 	{
-		float AddSpeed = 5.f;
-		float CurrentSpeed = MyCharacter->GetVelocity().Size() + AddSpeed;
+		float CurrentSpeed = MyCharacter->GetVelocity().Size() + InterpSpeed;
+		UE_LOG(LogTemp, Warning, TEXT("Current Speed : %f"), CurrentSpeed);
 
 		if (CurrentSpeed <= WalkSpeed)
 		{
@@ -187,31 +187,31 @@ void AUE5_GameplayPlayerController::SmoothSpeed()
 
 void AUE5_GameplayPlayerController::MovementSpeed()
 {
-	FName FindRow = MovementPosition();
-	const UDataTable* SpeedTable = SpeedData.DataTable;
+	FName DataRow = MovementPosition();
+	const UDataTable* Data_Table = SpeedDataTable.DataTable;
 
-	if (SpeedTable != nullptr)
+	if (Data_Table != nullptr)
 	{
-		FControlSpeed* SelectRow = SpeedTable->FindRow<FControlSpeed>(FindRow, TEXT("Movement"));
-		if (SelectRow != nullptr)
+		FControlSpeed* Data = Data_Table->FindRow<FControlSpeed>(DataRow, TEXT("Movement Data"));
+		if (Data != nullptr)
 		{
+			InterpSpeed = Data->InterpSpeed;
+
 			if (MovementVector.Y > 0.f)
 			{
-				WalkSpeed = SelectRow->Forward_Dir;
+				WalkSpeed = Data->Forward_Dir;
 			}
 			else
 			{
-				WalkSpeed = SelectRow->Other_Dir;
+				WalkSpeed = Data->Other_Dir;
 			}
 		}
 	}
-
 }
 
 FName AUE5_GameplayPlayerController::MovementPosition()
 {
 	FName Position;
-
 	if (bIsRuning)
 	{
 		Position = FName(TEXT("Stand_Run"));
@@ -225,8 +225,8 @@ FName AUE5_GameplayPlayerController::MovementPosition()
 		Position = FName(TEXT("Stand_Jog"));
 	}
 	
-	UE_LOG(LogTemp, Display, TEXT("Current Speed : %s"), *Position.ToString());
+	UE_LOG(LogTemp, Display, TEXT("Position : %s"), *Position.ToString());
 
+	// Return Movement Position for DataTable
 	return Position;
-
 }
