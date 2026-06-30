@@ -1508,3 +1508,28 @@ The first solves a problem in (day 28). The second creates a system. That's the 
 Backward movement plays the wrong animation state (forward animation running at high speed) due to missing backward assets.The Fix is set up a Data Table matching our Blend Space to manage directional speeds dynamically.
 
 ---
+# Day 47 - Data-Driven Locomotion System
+
+## Completed
+* Created new C++ class movement data struct(ControlSpeed)
+* Created Data Table for movement settings
+* Implemented data-driven Walk / Jog / Run speeds
+* Added smooth speed transitions
+* Moved movement configuration outside C++ code
+
+## Improvements
+* Character movement now reads values from Data Tables
+* Different movement states use independent speed settings
+* Easier gameplay balancing without recompiling
+
+## Result
+* Smooth acceleration between movement states
+* Cleaner and more scalable movement architecture
+* Designer-friendly movement configuration
+
+## Learning
+* UE5 Data Tables
+* Data-driven gameplay systems
+* Runtime movement configuration
+
+---

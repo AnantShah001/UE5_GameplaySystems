@@ -353,3 +353,12 @@ Today I focused to replacing Unreal Engine's default mobile touch interface with
 Today I completed the locomotion system that I started a few days ago. Previously, I had built an 8-direction Blend Space with Idle, Walk, Jog, and Run animations, but the character could only walk because movement states were not implemented.
 
 [LinkedIn Post & Video]()
+
+---
+> Day 47 - Unreal Engine 5 C++ Gameplay Systems | Data-Driven Character Movement 🚀
+
+Today I upgraded my character locomotion system by making it data-driven. Instead of hardcoding movement values, I created a C++ Struct and a Data Table to control movement settings.
+
+[LinkedIn Post & Video]()
+
+---
