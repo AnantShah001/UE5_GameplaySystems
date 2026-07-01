@@ -61,6 +61,9 @@ void AUE5_GameplayPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Walking);
 		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Walking);
 
+		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::FreeLook);
+		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::FreeLook);
+
 	}
 }
 
@@ -133,6 +136,15 @@ void AUE5_GameplayPlayerController::Walking(const FInputActionValue& Value)
 	bIsWalking = Value.Get<bool>();
 
 	if (Value.Get<bool>()) bIsRuning = false;
+}
+
+void AUE5_GameplayPlayerController::FreeLook(const FInputActionValue& Value)
+{
+	bIsFreeLook =  Value.Get<bool>();
+	if (!MyCharacter) return;
+
+	MyCharacter->GetActorRotation();
+
 }
 
 // Called when movement input is received (WASD / joystick)

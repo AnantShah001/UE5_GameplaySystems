@@ -49,6 +49,8 @@ public:
 
 	void Walking(const FInputActionValue& Value);
 
+	void FreeLook(const FInputActionValue& Value);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -87,7 +89,10 @@ protected:
 
 	FVector2D MovementVector;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> FreeLookAction;
 
+	bool bIsFreeLook = false;
 private:
 
 	bool bIsMainMenueWidget = false;
