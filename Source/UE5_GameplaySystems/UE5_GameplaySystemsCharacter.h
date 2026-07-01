@@ -33,6 +33,7 @@ class AUE5_GameplaySystemsCharacter : public ACharacter
 {
 	GENERATED_BODY()// Required for UE's reflection system
 
+public:
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<USpringArmComponent> CameraBoom;

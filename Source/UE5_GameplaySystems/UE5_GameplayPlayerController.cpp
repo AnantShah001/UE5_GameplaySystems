@@ -12,11 +12,22 @@
 #include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Data/Struct/ControlSpeed.h"
+#include "Components/TimelineComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
 
 AUE5_GameplayPlayerController::AUE5_GameplayPlayerController()
 {
-	//
+	PrimaryActorTick.bCanEverTick = true;
+}
+
+void AUE5_GameplayPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+	if (FreeLookTimeLine.IsPlaying())
+	{
+		FreeLookTimeLine.TickTimeline(DeltaTime);
+	}
 }
 
 void AUE5_GameplayPlayerController::BeginPlay()
@@ -35,6 +46,19 @@ void AUE5_GameplayPlayerController::BeginPlay()
 	if (MyCharacter)
 	{
 		MyCharacterMovement = MyCharacter->GetCharacterMovement();
+	}
+
+	if (FreeLookCurve)
+	{
+		// Bind the timeline progress event to a function
+		FOnTimelineFloat FreeLookProgress;
+		FreeLookProgress.BindUFunction(this, FName("FreeLookTimelineProgress"));
+		FreeLookTimeLine.AddInterpFloat(FreeLookCurve, FreeLookProgress);
+
+		// Bind the timeline finished event to a function
+		FOnTimelineEvent FreeLookFinished;
+		FreeLookFinished.BindUFunction(this, FName("FreeLookTimelineFinished"));
+		FreeLookTimeLine.SetTimelineFinishedFunc(FreeLookFinished);
 	}
 }
 
@@ -60,6 +84,9 @@ void AUE5_GameplayPlayerController::SetupInputComponent()
 
 		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Walking);
 		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Walking);
+
+		EnhancedInputComponent->BindAction(FreeLookAction, ETriggerEvent::Started, this, &AUE5_GameplayPlayerController::FreeLook_Start);
+		EnhancedInputComponent->BindAction(FreeLookAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::FreeLook_Release);
 
 	}
 }
@@ -133,6 +160,50 @@ void AUE5_GameplayPlayerController::Walking(const FInputActionValue& Value)
 	bIsWalking = Value.Get<bool>();
 
 	if (Value.Get<bool>()) bIsRuning = false;
+}
+
+void AUE5_GameplayPlayerController::FreeLook(const FInputActionValue& Value)
+{
+	//
+}
+
+void AUE5_GameplayPlayerController::FreeLook_Start()
+{
+	//bIsFreeLook =  Value.Get<bool>();
+	if (!MyCharacter) return;
+
+	bIsFreeLook = true;
+	UE_LOG(LogTemp, Warning, TEXT("IsFreeLook : Start"));
+
+	//FreeLookStart = MyCharacter->GetControlRotation();
+	FreeLookStart = MyCharacter->GetCameraBoom()->GetTargetRotation().Quaternion();
+
+	UE_LOG(LogTemp, Warning, TEXT("FreeLook_Start: %s "), *FreeLookStart.ToString());
+}
+
+void AUE5_GameplayPlayerController::FreeLook_Release()
+{
+	if (!MyCharacter) return;
+	if (!FreeLookCurve) return;
+	//FreeLookEnd = MyCharacter->GetActorRotation();
+	FreeLookEnd = MyCharacter->GetCameraBoom()->GetTargetRotation().Quaternion();
+	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Release"));
+	FreeLookTimeLine.PlayFromStart();
+}
+
+void AUE5_GameplayPlayerController::FreeLookTimelineProgress(float Value)
+{
+	UE_LOG(LogTemp, Warning, TEXT("FreeLook_Value: %f | Oter Time is : %f "), Value, FreeLookTimeLine.GetPlaybackPosition());
+	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Progress"));
+	FQuat LerpFreeLookQuat = FQuat::Slerp(FreeLookEnd, FreeLookStart, Value); //FreeLookTimeLine.GetPlaybackPosition()
+
+	SetControlRotation(LerpFreeLookQuat.Rotator());
+}
+
+void AUE5_GameplayPlayerController::FreeLookTimelineFinished()
+{
+	bIsFreeLook = false;
+	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Finished"));
 }
 
 // Called when movement input is received (WASD / joystick)

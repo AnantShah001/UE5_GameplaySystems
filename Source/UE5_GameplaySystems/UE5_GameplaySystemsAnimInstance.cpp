@@ -41,14 +41,14 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
 void UUE5_GameplaySystemsAnimInstance::UseControllerRotationYaw()
 {
-	if (Speed > 0)
-	{
-		MyCharacter->bUseControllerRotationYaw = true;
-	}
-	else if (Speed <= 0)
-	{
-		MyCharacter->bUseControllerRotationYaw = false;
-	}
+	//if (Speed > 0)
+	//{
+	//	MyCharacter->bUseControllerRotationYaw = true;
+	//}
+	//else if (Speed <= 0)
+	//{
+	//	MyCharacter->bUseControllerRotationYaw = false;
+	//}
 }
 
 void UUE5_GameplaySystemsAnimInstance::InAirCheck()

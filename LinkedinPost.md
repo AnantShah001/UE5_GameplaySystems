@@ -345,7 +345,7 @@ Today I worked on the character animation system and implemented a 3D Aim Offset
 
 Today I focused to replacing Unreal Engine's default mobile touch interface with my own Android UI control system. And improving project architecture.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7478124517165330436-DWbg/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
 > Day 46 - Unreal Engine 5 C++ Gameplay Systems | 8 Direction Locomotion Complete & Enhanced Input(Walk, Jog, Run)

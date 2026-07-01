@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Components/TimelineComponent.h"
 #include "UE5_GameplayPlayerController.generated.h"
 
 class UInputAction;
@@ -12,6 +13,7 @@ class UInputMappingContext;
 class UPauseMenu_UI;
 class AUE5_GameplaySystemsCharacter;
 class UCharacterMovementComponent;
+class UCurveFloat;
 
 
 /**
@@ -24,6 +26,8 @@ class UE5_GAMEPLAYSYSTEMS_API AUE5_GameplayPlayerController : public APlayerCont
 
 public:
 	AUE5_GameplayPlayerController();
+
+	virtual void PlayerTick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, Category = "Select UI")
 	TSubclassOf<UPauseMenu_UI> PauseMenuRef;
@@ -48,6 +52,14 @@ public:
 	void Runing(const FInputActionValue& Value);
 
 	void Walking(const FInputActionValue& Value);
+
+	void FreeLook(const FInputActionValue& Value);
+
+	//UFUNCTION(BlueprintCallable, Category = "Camera")
+	//void StartFreeLook(FRotator TargetRotation);
+
+	void FreeLook_Start();
+	void FreeLook_Release();
 
 protected:
 	virtual void BeginPlay() override;
@@ -87,6 +99,24 @@ protected:
 
 	FVector2D MovementVector;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> FreeLookAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Timeline")
+	TObjectPtr<UCurveFloat> FreeLookCurve;
+
+	FTimeline FreeLookTimeLine;
+
+	UFUNCTION()
+	void FreeLookTimelineProgress(float Value);
+
+	UFUNCTION()
+	void FreeLookTimelineFinished();
+
+	bool bIsFreeLook = false;
+
+	FQuat FreeLookStart;
+	FQuat FreeLookEnd;
 
 private:
 
