@@ -57,6 +57,19 @@ CameraBoom->SetupAttachment(RootComponent);
 CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
 CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 
+// Create Cloth Components in Mesh (SkeletalMesh)
+Helmet = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Helmet"));
+Helmet->SetupAttachment(GetMesh());
+
+Chest = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Chest"));
+Chest->SetupAttachment(GetMesh());
+
+Pants = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Pants"));
+Pants->SetupAttachment(GetMesh());
+
+Shoes = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Shoes"));
+Shoes->SetupAttachment(GetMesh());
+
 // Create a follow camera
 FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
@@ -64,6 +77,13 @@ FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relativ
 
 // Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 // are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+}
+
+void AUE5_GameplaySystemsCharacter::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	SetClothLeaderPose();
 }
 
 // Called when the game starts or when the character is spawned
@@ -188,6 +208,7 @@ void AUE5_GameplaySystemsCharacter::HandleDeath()
 
 	bIsRespawning = true;
 	GetMesh()->SetSimulatePhysics(true);
+
 	DisableInput(nullptr);
 	bFallCameraActive = true;
 	GetWorldTimerManager().SetTimer(DeathWidgetTimer, this, &AUE5_GameplaySystemsCharacter::DeathWidgetAnimation, 2.0f, false);
@@ -239,6 +260,11 @@ void AUE5_GameplaySystemsCharacter::RespawnPlayer()
 		// Move player to checkpoint
 		SetActorLocation(MyGameInstance->RespawnLocation, false, nullptr, ETeleportType::TeleportPhysics);
 		SetActorRotation(FRotator::ZeroRotator); // Also reset rotation so they face the right way
+		// SetClothLeaderPose();
+		Helmet->ForceClothNextUpdateTeleportAndReset();
+        Chest->ForceClothNextUpdateTeleportAndReset();
+        Pants->ForceClothNextUpdateTeleportAndReset();
+        Shoes->ForceClothNextUpdateTeleportAndReset();
 		UE_LOG(LogTemp, Display, TEXT("Respawn on checkpoint location"));
 	}
 	else
@@ -324,4 +350,12 @@ void AUE5_GameplaySystemsCharacter::EndTouch(const ETouchIndex::Type FingerIndex
 	StartTouchLoc = FVector2D::ZeroVector;
 	//UE_LOG(LogTemp, Display, TEXT("End_TouchLoc : %s"), *StartTouchLoc.ToString());
 
+}
+
+void AUE5_GameplaySystemsCharacter::SetClothLeaderPose()
+{
+	Shoes->SetLeaderPoseComponent(GetMesh(), true, false);
+	Pants->SetLeaderPoseComponent(GetMesh(), true, false);
+	Chest->SetLeaderPoseComponent(GetMesh(), true, false);
+	Helmet->SetLeaderPoseComponent(GetMesh(), true, false);
 }

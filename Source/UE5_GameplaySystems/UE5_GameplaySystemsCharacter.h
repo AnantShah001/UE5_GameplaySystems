@@ -41,6 +41,19 @@ public:
 	/** Follow camera that follows the character at the end of the boom */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
+
+	// Use Cloth Component for Helmet, Chest, Pants, and Shoes
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Cloth, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<USkeletalMeshComponent> Helmet;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Cloth, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<USkeletalMeshComponent> Chest;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Cloth, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<USkeletalMeshComponent> Pants;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Cloth, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<USkeletalMeshComponent> Shoes;
 	
 	/** MappingContext */
 	// Input Mapping Context that defines which input actions are active for this character.
@@ -125,6 +138,11 @@ protected:
 	
 	// called when the game starts or when spawned; used to add input mapping context
 	virtual void BeginPlay();
+
+	// This is the EXACT C++ equivalent of the Blueprint Construction Script
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	void SetClothLeaderPose();
 
 public:
 	/** Returns CameraBoom (spring arm) component **/
