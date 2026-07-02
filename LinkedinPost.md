@@ -362,3 +362,10 @@ Today I upgraded my character locomotion system by making it data-driven. Instea
 [LinkedIn Post & Video]()
 
 ---
+> Day 48 - Unreal Engine 5 C++ Gameplay Systems | Free Look Camera System
+
+Today I implemented a Free Look Camera system inspired by games like PUBG. The goal wasn't to copy another game—it was to improve player awareness during exploration and puzzle gameplay.
+
+[LinkedIn Post & Video]()
+
+---

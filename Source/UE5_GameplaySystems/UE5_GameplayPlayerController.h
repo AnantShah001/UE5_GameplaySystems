@@ -118,6 +118,8 @@ protected:
 	FQuat FreeLookStart;
 	FQuat FreeLookEnd;
 
+	FRotator RotationValue();
+
 private:
 
 	bool bIsMainMenueWidget = false;

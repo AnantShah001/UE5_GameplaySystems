@@ -24,10 +24,15 @@ AUE5_GameplayPlayerController::AUE5_GameplayPlayerController()
 void AUE5_GameplayPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
-	if (FreeLookTimeLine.IsPlaying())
-	{
-		FreeLookTimeLine.TickTimeline(DeltaTime);
-	}
+	if (!MyCharacter) return;
+	
+	// Update the FreeLook timeline if it's playing
+	if (FreeLookTimeLine.IsPlaying()) FreeLookTimeLine.TickTimeline(DeltaTime);
+
+	// Update the character rotation based on FreeLook Mode;
+	//if (bIsFreeLook == false) MyCharacter->SetActorRotation(RotationValue());
+	if (bIsFreeLook == false) MyCharacter->SetActorRotation(FRotator(0.f, RotationValue().Yaw, 0.f));
+
 }
 
 void AUE5_GameplayPlayerController::BeginPlay()
@@ -206,6 +211,20 @@ void AUE5_GameplayPlayerController::FreeLookTimelineFinished()
 	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Finished"));
 }
 
+FRotator AUE5_GameplayPlayerController::RotationValue()
+{
+	FRotator Rotation;
+	if (bIsFreeLook)
+	{
+		Rotation = FreeLookStart.Rotator();
+	}
+	else
+	{
+		Rotation = GetControlRotation();
+	}
+	return Rotation;
+}
+
 // Called when movement input is received (WASD / joystick)
 // Moves the character forward/back and right/left based on the input vector
 void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
@@ -216,8 +235,11 @@ void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
 
 	if (MyCharacter != nullptr)
 	{
+		// Player Move Smoothly
+		SmoothSpeed();
+
 		// find out which way is forward
-		const FRotator Rotation = GetControlRotation();
+		const FRotator Rotation = RotationValue(); // GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 		// get forward vector
@@ -225,9 +247,6 @@ void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
 
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		// Player Move Smoothly
-		SmoothSpeed();
 		
 		// add movement 
 		// Move the character forward/backward

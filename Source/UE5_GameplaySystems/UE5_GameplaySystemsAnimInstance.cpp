@@ -25,16 +25,18 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		FVector Velocity = MyCharacter->GetVelocity();
 		Speed = Velocity.Size();
 
-		FRotator ControlRotation = MyCharacter->GetControlRotation();
-		Direction = UKismetAnimationLibrary::CalculateDirection(Velocity, FRotator(0.f, ControlRotation.Yaw,0.f));
-		
+		//FRotator ControlRotation = MyCharacter->GetControlRotation();
 		FRotator ActorRotation = MyCharacter->GetActorRotation();
+		Direction = UKismetAnimationLibrary::CalculateDirection(Velocity, FRotator(0.f, ActorRotation.Yaw,0.f));
+		
+		//FRotator ActorRotation = MyCharacter->GetActorRotation();
+		FRotator ControlRotation = MyCharacter->GetControlRotation();
 		FRotator DeltaRotator = (ControlRotation - ActorRotation).GetNormalized();
 
 		Pitch = DeltaRotator.Pitch;
 		Yaw = DeltaRotator.Yaw;
 
-		UseControllerRotationYaw();
+		//UseControllerRotationYaw();
 		InAirCheck();
 	}
 }

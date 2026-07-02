@@ -1533,3 +1533,29 @@ Backward movement plays the wrong animation state (forward animation running at 
 * Runtime movement configuration
 
 ---
+
+# Day 48 - Free Look Camera System 
+
+## Completed
+* Implemented PUBG inspired Free Look system
+* Added Enhanced Input actions for Free Look
+* Used Timeline + Quaternion Slerp for smooth camera return
+* Separated camera rotation from character rotation
+* Updated movement logic to support Free Look mode
+
+## Improvements
+* Removed unnecessary rotation logic from AnimInstance
+* Improved gameplay architecture by centralizing camera input
+
+## Result
+* Player can freely look around without changing movement direction
+* Camera smoothly returns to its original rotation
+* Better exploration and puzzle gameplay experience
+
+## Learning
+* Timeline in C++
+* Quaternion interpolation (Slerp)
+* Camera & Character rotation separation
+* Advanced PlayerController architecture
+
+---
