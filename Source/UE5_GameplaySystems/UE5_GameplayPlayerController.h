@@ -53,11 +53,6 @@ public:
 
 	void Walking(const FInputActionValue& Value);
 
-	void FreeLook(const FInputActionValue& Value);
-
-	//UFUNCTION(BlueprintCallable, Category = "Camera")
-	//void StartFreeLook(FRotator TargetRotation);
-
 	void FreeLook_Start();
 	void FreeLook_Release();
 

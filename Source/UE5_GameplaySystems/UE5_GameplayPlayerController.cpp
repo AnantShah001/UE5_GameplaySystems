@@ -167,11 +167,6 @@ void AUE5_GameplayPlayerController::Walking(const FInputActionValue& Value)
 	if (Value.Get<bool>()) bIsRuning = false;
 }
 
-void AUE5_GameplayPlayerController::FreeLook(const FInputActionValue& Value)
-{
-	//
-}
-
 void AUE5_GameplayPlayerController::FreeLook_Start()
 {
 	//bIsFreeLook =  Value.Get<bool>();

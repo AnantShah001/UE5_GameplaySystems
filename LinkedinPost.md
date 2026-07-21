@@ -352,20 +352,37 @@ Today I focused to replacing Unreal Engine's default mobile touch interface with
 
 Today I completed the locomotion system that I started a few days ago. Previously, I had built an 8-direction Blend Space with Idle, Walk, Jog, and Run animations, but the character could only walk because movement states were not implemented.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7481756587783684096-7mN7?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
 > Day 47 - Unreal Engine 5 C++ Gameplay Systems | Data-Driven Character Movement 🚀
 
 Today I upgraded my character locomotion system by making it data-driven. Instead of hardcoding movement values, I created a C++ Struct and a Data Table to control movement settings.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7483073714503462912-zRUi?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
 > Day 48 - Unreal Engine 5 C++ Gameplay Systems | Free Look Camera System
 
 Today I implemented a Free Look Camera system inspired by games like PUBG. The goal wasn't to copy another game—it was to improve player awareness during exploration and puzzle gameplay.
 
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7485909240872775680-hjBp?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+> Day 49 - Unreal Engine 5 C++ Gameplay Systems | Modular Character & Clothing System
+
+Today I focus to worked on building a modular character setup and Clothing System in Unreal Engine 5 C++.
+
 [LinkedIn Post & Video]()
+
+---
+
+
+// 1. Tell Slate to trigger the jump but let the touch pass through
+JumpButton->WidgetStyle.SetClickMethod(EButtonClickMethod::PreciseClick);
+JumpButton->WidgetStyle.SetTouchMethod(EButtonTouchMethod::PreciseTap);
+
+// 2. Prevent the button from locking your finger focus
+JumpButton->IsFocusable = false; 
 
 ---
