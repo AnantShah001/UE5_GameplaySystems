@@ -1,22 +1,31 @@
-﻿# UE5_GameplaySystems
+﻿![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5-black?logo=unrealengine)
+![C++](https://img.shields.io/badge/C++-17-blue?logo=cplusplus)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Android-green)
+![Status](https://img.shields.io/badge/Status-Active%20Development-orange)
+![Architecture](https://img.shields.io/badge/Focus-Gameplay%20Architecture-red)
+![Architecture](https://img.shields.io/badge/Copyright-%20_Copyright_(C)_2026_Anant_Shah-white)
+
+Copyright (c) 2026 Anant Shah.
+# UE5_GameplaySystems
 
  A modular gameplay systems project built with **Unreal Engine 5 & C++**,
- focused on gameplay architecture, reusable systems, UI workflows,
+ focused on gameplay architecture, reusable systems,character systems, UI workflows,
  checkpoint handling, player state management, and scalable engine patterns.
 
-**Game View Day 40**
-![Game View](Screenshots/GameView4.png)
+**Game View Day 50**
+![Game View](Screenshots/GameView5.png)
 
+---
 ## Project Overview
-**UE5_GameplaySystems** is an evolving gameplay engineering project where systems
-are designed, tested, refactored, and integrated into playable prototypes.
+**UE5_GameplaySystems** is a modular gameplay framework built with **Unreal Engine 5** and **C++**, focused on scalable gameplay architecture rather than isolated mechanics.
 
-The focus is not building a single mechanic — but understanding
-how **independent gameplay systems communicate and scale together**.
+The project explores how gameplay systems, character systems, UI, animation, input, and engine architecture work together to create reusable and production-ready gameplay foundations.
 
 **Current Development Includes:**
 
-- Gameplay Actors & Components
+- Gameplay Framework
+- Character Animation Pipeline
+- Modular Character System
 - Crumbling Platforms and Moving Platforms
 - Moving Obstacles
 - Trigger Systems
@@ -26,10 +35,13 @@ how **independent gameplay systems communicate and scale together**.
 - Health / Lives Management
 - UI Animation Delegates
 - Event-driven UI workflows
+- Enhanced Input Architecture
 - Mobile input experimentation
+- Mobile & PC Support
+- Data-Driven Gameplay
 - Memory-safe UE5 C++ patterns
 - Packaging & Prototype validation
-- Cross-Platform testing or packaging (PC, Android)
+- Cross-Platform Gameplay Prototype Packaging or Build (PC, Android)
 
 ---
 
@@ -45,6 +57,88 @@ how **independent gameplay systems communicate and scale together**.
 - UI Architecture  
 - Optimization & Scalability  
 - Prototype Shipping & Testing  
+
+---
+
+# Character Framework
+
+A complete third-person character framework built entirely around Unreal Engine 5 C++.
+
+## Animation
+
+- Custom AnimInstance
+- Animation Blueprint integration
+- Animation Retargeting
+- 8-Direction Blend Space
+- Aim Offset
+- Jump Animation
+
+---
+
+## Locomotion
+
+Implemented:
+
+- Idle
+- Walk
+- Jog
+- Run
+
+Movement is controlled using:
+
+- Enhanced Input
+- PlayerController
+- Data Tables
+- Smooth Speed Interpolation
+
+---
+
+## Camera
+
+Implemented:
+
+- Third Person Camera
+- Free Look Camera
+- Camera Return Timeline
+- Quaternion Slerp interpolation
+
+---
+
+## Character Customization
+
+Implemented modular character support:
+
+- Helmet
+- Chest
+- Pants
+- Shoes
+
+Features:
+
+- Leader Pose Component
+- Shared Skeleton Animation
+- Cloth Simulation Support
+- Ragdoll Compatible
+
+---
+
+# Data-Driven Gameplay
+
+Movement tuning is data-driven.
+
+Implemented using:
+
+- C++ Structs
+- Unreal Data Tables
+
+Current configurable systems:
+
+- Walk Speed
+- Jog Speed
+- Run Speed
+- Movement Interpolation
+
+This allows gameplay balancing without recompiling C++ code.
 
 ---
 
@@ -199,17 +293,33 @@ Heart system
 Game pause/resume 
 
 ---
+# Cross Platform Development
 
-# Mobile Development
+Supported platforms:
 
-Experimented with:
+## Windows
 
-- Android Packaging  
-- Touch Input  
+- Playable prototype
+- Full gameplay systems
+- Keyboard & Mouse
+
+---
+
+## Android
+
+Implemented:
+
+- Custom Android HUD
+- Android Control Widget
+- Mobile Jump Button
+- Touch Controls
 - Camera Rotation  
+- Free Look Camera
 - Jump Controls  
 - Virtual Joystick Configuration  
-
+- Mobile Packaging
+- Shipping Builds
+  
 ---
 
 # UE5 C++ Optimization
@@ -237,52 +347,65 @@ Experimented with:
 # Tech Stack
 
 | Category | Technology |
-|---------|-------------|
+|----------|------------|
 | Engine | Unreal Engine 5 |
 | Language | C++ |
 | UI | UMG |
-| Scripting | C++ |
+| Animation | Animation Blueprint |
+| Input | Enhanced Input |
+| Data | Data Tables |
 | Version Control | Git + GitHub |
 | Platforms | Windows + Android |
 
 ---
 
+
 # Repository Structure
 
 ```
 Source/
- ├─ UE5_GameplaySystems
- │   ├─ UE5_GameplaySystemsGameMode
- │   ├─ UE5_GameplayPlayerController
- │   ├─ UE5_GameplaySystemsCharacter
- │   ├─ UE5_GameplaySystemsGameInstance
- │   ├─ UE5_GameplaySystemsHUD
- │   ├─ Public || Private
- │   │   ├─ Debug
- │   │   │   ├─ DebugActor
- │   │   │   ├─ DebugInfoComponent
- │   │   │
- │   │   ├─ Platform
- │   │   │   ├─ MovingPlatform
- │   │   │   ├─ CrumblePlatform
- │   │   │
- │   │   ├─ ShapeComponent
- │   │   │   ├─ TriggerBoxZone
- │   │   │   ├─ DeathTriggerBoxZone
- │   │   │  
- │   │   ├─ Item
- │   │   │   ├─ Item
- │   │   │
- │   │   ├─ UI
- │   │   │   ├─ Death
- │   │   │   ├─ ScoreUI
- │   │   │   │
- │   │   │   ├─ Health
- │   │   │   │   ├─ Health_UI
- │   │   │   │   ├─ MyLives_UI
- │   │   │   │
- │   │   │   ├─ Menu
- │   │   │   │   ├─ PauseMenu_UI.h
+ └─ UE5_GameplaySystems
+     ├─ UE5_GameplaySystems
+     ├─ UE5_GameplaySystemsCharacter
+     ├─ UE5_GameplaySystemsAnimInstance
+     ├─ UE5_GameplaySystemsGameMode
+     ├─ UE5_GameplayPlayerController
+     ├─ UE5_GameplaySystemsGameInstance
+     ├─ UE5_GameplaySystemsHUD
+     ├─ UE5_Gameplay_AndroidScreen_HUD
+     └─ Public || Private
+         ├─ Data
+         │   └─ Struct
+         │       └─ ControlSpeed
+         │
+         ├─ Debug
+         │   ├─ DebugActor
+         │   └─ DebugInfoComponent
+         │
+         ├─ Platform
+         │   ├─ MovingPlatform
+         │   └─ CrumblePlatform
+         │
+         ├─ ShapeComponent
+         │   ├─ TriggerBoxZone
+         │   └─ DeathTriggerBoxZone
+         │  
+         ├─ Item
+         │   └─ Item
+         │
+         └─ UI
+             ├─ Death
+             ├─ ScoreUI
+             │
+             ├─ Android_ScreenControls_UI
+             │   └─ Android_ScreenControls_UI
+             │
+             ├─ Health
+             │   ├─ Health_UI
+             │   └─ MyLives_UI
+             │
+             └─ Menu
+                 └─ PauseMenu_UI.h
 
  
 Source/                   # C++ gameplay and system code
@@ -297,9 +420,9 @@ LinkedinPost.md           # LinkedIn post content and videos related to this pro
 
 **[All Packages Games of UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** All game versions are available in this folder for testing and validation.
 
-**[UE5_GameplaySystems_40.rar](https://drive.google.com/file/d/1pzkMjLs5b1J27s-z6F9PEJB6AOor3q5d/view?usp=sharing)**
+**[UE5_GameplaySystems_50.rar](https://drive.google.com/file/d/1VqFf4hp7da6QXLMb8CyVvcGoqY1Spm-W/view?usp=sharing)**
 
-**[UE5_GameplaySystems-Android-Shipping_41-arm64.apk](https://drive.google.com/file/d/128-kBn51dJJq-rPotfppvJdI9pnmM15B/view?usp=sharing)** Android 13,16
+**[UE5_GameplaySystems-Android-Shipping_51-arm64.apk](https://drive.google.com/file/d/1mMXc6Dhl-S73CHxgoR1QxEeyqHyHQJZ7/view?usp=drive_link)** Android 13,16
 
 ---
 
@@ -331,6 +454,10 @@ LinkedinPost.md           # LinkedIn post content and videos related to this pro
 
 **Game Level Day 40**
 ![Game Level](GamePlayScreenshots/Day_40_GamePlay.png)
+
+**Game Level Day 40**
+![Game Level](Screenshots/GameView5.png)
+
 
 ---
 
@@ -364,6 +491,9 @@ LinkedinPost.md           # LinkedIn post content and videos related to this pro
 **Game View Android Day 41**
 ![Game View](Screenshots/GameView4_Android.png)
 
+**Game View Day 50**
+![Game View](Screenshots/GameView5.png)
+
 ---
 
 ## 🎮 Prototype Builds
@@ -383,6 +513,10 @@ LinkedinPost.md           # LinkedIn post content and videos related to this pro
 **[UE5_GameplaySystems_40.rar](https://drive.google.com/file/d/1pzkMjLs5b1J27s-z6F9PEJB6AOor3q5d/view?usp=sharing)**
 
 **[UE5_GameplaySystems-Android-Shipping_41-arm64.apk](https://drive.google.com/file/d/128-kBn51dJJq-rPotfppvJdI9pnmM15B/view?usp=sharing)** Android 13 support (Under Development or Testing)
+
+**[UE5_GameplaySystems_50.rar](https://drive.google.com/file/d/1VqFf4hp7da6QXLMb8CyVvcGoqY1Spm-W/view?usp=sharing)**
+
+**[UE5_GameplaySystems-Android-Shipping_51-arm64.apk](https://drive.google.com/file/d/1mMXc6Dhl-S73CHxgoR1QxEeyqHyHQJZ7/view?usp=drive_link)** **Under Development**(Glitch) Android 13,16
 
 ---
 

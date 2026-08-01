@@ -1583,3 +1583,43 @@ Backward movement plays the wrong animation state (forward animation running at 
 * Skeletal mesh synchronization
 
 ---
+# Day 50 - PC Prototype Build & Character Framework Milestone
+
+## Completed
+* Packaged latest Windows build
+* Tested gameplay systems
+* Prepared showcase prototype
+
+## Character Systems
+* Custom AnimInstance
+* 8-direction locomotion
+* Walk / Jog / Run controls
+* Aim Offset
+* Free Look camera
+* Data-driven movement
+* Modular clothing system
+
+## Architecture
+* Enhanced Input
+* PlayerController-driven input
+* Data Tables
+* Modular character pipeline
+
+## Result
+* Stable PC prototype
+* Improved character experience
+* Foundation ready for abilities & advanced gameplay
+
+## Learning
+Building gameplay systems is important. 
+Connecting them into a scalable character framework is even more valuable.
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems.rar](https://drive.google.com/file/d/1VqFf4hp7da6QXLMb8CyVvcGoqY1Spm-W/view?usp=sharing)**
+
+**[GitHub_Repository](https://github.com/AnantShah001/UE5_GameplaySystems)**
+
+![Game View](Screenshots/GameView5.png)
+
+---

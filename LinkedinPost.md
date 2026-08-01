@@ -373,16 +373,13 @@ Today I implemented a Free Look Camera system inspired by games like PUBG. The g
 
 Today I focus to worked on building a modular character setup and Clothing System in Unreal Engine 5 C++.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-activity-7488981121267949569-M2dw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
+> Day 50 - Unreal Engine 5 C++ Gameplay Systems | Character Framework Milestone & Packaged build
 
+Today I focus to packaged the latest Windows prototype of my Unreal Engine 5 C++ project. Over the last development phase (Day 42–50), the focus has been on building a complete character framework rather than adding isolated features.
 
-// 1. Tell Slate to trigger the jump but let the touch pass through
-JumpButton->WidgetStyle.SetClickMethod(EButtonClickMethod::PreciseClick);
-JumpButton->WidgetStyle.SetTouchMethod(EButtonTouchMethod::PreciseTap);
-
-// 2. Prevent the button from locking your finger focus
-JumpButton->IsFocusable = false; 
+[LinkedIn Post & Video]()
 
 ---
