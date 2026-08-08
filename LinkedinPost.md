@@ -380,6 +380,13 @@ Today I focus to worked on building a modular character setup and Clothing Syste
 
 Today I focus to packaged the latest Windows prototype of my Unreal Engine 5 C++ project. Over the last development phase (Day 42–50), the focus has been on building a complete character framework rather than adding isolated features.
 
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7491772527497715712-R__u/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
+
+---
+Day 51 - Unreal Engine 5 C++ Gameplay Systems | Android Packaged build & Planning the Next Iteration 🚀
+
+Today I focus to packaged the latest Android build and spent time testing it on a physical device. Rather than adding new features, I focused on identifying areas where the mobile experience can be improved.
+
 [LinkedIn Post & Video]()
 
 ---

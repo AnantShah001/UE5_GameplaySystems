@@ -1623,3 +1623,33 @@ Connecting them into a scalable character framework is even more valuable.
 ![Game View](Screenshots/GameView5.png)
 
 ---
+# Day 51 - Android Testing & Bug Analysis
+
+## Completed
+* Packaged latest Android build
+* Tested gameplay on physical device
+* Identified mobile gameplay issues
+
+## Issues Found
+* Blend Space animation mismatch with virtual joystick
+* No movement radius for Walk / Jog / Run
+* Free Look limited to a single axis
+* Default Touch Interface limitations
+
+## Result
+* Identified improvements for custom mobile controls
+* Planned migration to a fully UMG-based input system
+
+## Learning
+Testing on a real device reveals issues that are difficult to notice in the editor. The current mobile controls have reached their limits, making this the right time to build a custom touch input system.
+
+**[Package Game UE5_GameplaySystems](https://drive.google.com/drive/folders/1QIhK1hpFOOMEeoCmNDTRWaWlEdhMFzTM?usp=sharing)** 
+
+**[UE5_GameplaySystems_Day51-Android-Shipping-arm64.apk](https://drive.google.com/file/d/1mMXc6Dhl-S73CHxgoR1QxEeyqHyHQJZ7/view?usp=sharing)**
+
+**[GitHub_Repository](https://github.com/AnantShah001/UE5_GameplaySystems)**
+
+![Day-41 Game Play](GamePlayScreenshots/Day_41_GamePlay_.png)
+![Game View](Screenshots/GameView4_Android.png)
+
+---
