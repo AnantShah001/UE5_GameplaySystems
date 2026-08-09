@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Anant Shah All Rights Reserved
 // Player character using UE's third-person movement template
 
 #include "UE5_GameplaySystemsCharacter.h"
@@ -171,8 +171,6 @@ void AUE5_GameplaySystemsCharacter::Tick(float DeltaTime)
 	// Update the FreeLook timeline if it's playing
 	if (FreeLookTimeLine.IsPlaying()) FreeLookTimeLine.TickTimeline(DeltaTime);
 	
-	// Update the character rotation based on FreeLook Mode;
-	//if (bIsFreeLook == false) SetActorRotation(FRotator(0.f, RotationValue().Yaw, 0.f));
 	UpdateControlledRotations();
 }
 
@@ -194,10 +192,10 @@ void AUE5_GameplaySystemsCharacter::SetupPlayerInputComponent(UInputComponent* P
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AUE5_GameplaySystemsCharacter::Jump);
 		// Bind jump input: stop jumping when key/button is released
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUE5_GameplaySystemsCharacter::StopJumping);
-
+		//Run
 		EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::Runing);
 		EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Completed, this, &AUE5_GameplaySystemsCharacter::Runing);
-
+		//Walk
 		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AUE5_GameplaySystemsCharacter::Walking);
 		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AUE5_GameplaySystemsCharacter::Walking);
 
@@ -408,40 +406,33 @@ void AUE5_GameplaySystemsCharacter::SetClothLeaderPose()
 // Free Look Mode
 void AUE5_GameplaySystemsCharacter::FreeLook_Start()
 {
-	//bIsFreeLook =  Value.Get<bool>();
-
 	bIsFreeLook = true;
-	UE_LOG(LogTemp, Warning, TEXT("1) IsFreeLook : Start"));
 
-	//FreeLookStart = MyCharacter->GetControlRotation();
 	FreeLookStart = GetCameraBoom()->GetTargetRotation().Quaternion();
-
-	UE_LOG(LogTemp, Warning, TEXT("2) FreeLook_Start: %s "), *FreeLookStart.ToString());
 }
 
 void AUE5_GameplaySystemsCharacter::FreeLook_Release()
 {
 	if (!FreeLookCurve) return;
-	//FreeLookEnd = MyCharacter->GetActorRotation();
+
 	FreeLookEnd = GetCameraBoom()->GetTargetRotation().Quaternion();
-	UE_LOG(LogTemp, Warning, TEXT("3) FreeLook : Release"));
+
 	FreeLookTimeLine.PlayFromStart();
 }
 
 void AUE5_GameplaySystemsCharacter::FreeLookTimelineProgress(float Value)
 {
-	UE_LOG(LogTemp, Warning, TEXT("FreeLook_Value: %f | Oter Time is : %f "), Value, FreeLookTimeLine.GetPlaybackPosition());
-	UE_LOG(LogTemp, Warning, TEXT("4) FreeLook : Progress"));
+	//UE_LOG(LogTemp, Warning, TEXT("FreeLook_Value: %f | Oter Time is : %f "), Value, FreeLookTimeLine.GetPlaybackPosition());
+	
 	FQuat LerpFreeLookQuat = FQuat::Slerp(FreeLookEnd, FreeLookStart, Value); //FreeLookTimeLine.GetPlaybackPosition()
-	UE_LOG(LogTemp, Warning, TEXT("5) SetRotation :%s"), *LerpFreeLookQuat.Rotator().ToString());
-
+	
 	if(MyController) MyController->SetControlRotation(LerpFreeLookQuat.Rotator());
 }
 
 void AUE5_GameplaySystemsCharacter::FreeLookTimelineFinished()
 {
 	bIsFreeLook = false;
-	UE_LOG(LogTemp, Warning, TEXT("6) FreeLook : Finished"));
+	//UE_LOG(LogTemp, Warning, TEXT("FreeLook : Finished"));
 }
 
 FRotator AUE5_GameplaySystemsCharacter::RotationValue()
@@ -550,19 +541,6 @@ FName AUE5_GameplaySystemsCharacter::MovementPosition()
 	return Position;
 }
 
-/// <summary>
-/// /
-/// </summary>
-//void AUE5_GameplaySystemsCharacter::Jump()
-//{
-//	Jump();
-//}
-//
-//void AUE5_GameplaySystemsCharacter::StopJumping()
-//{
-//	StopJumping();
-//}
-
 void AUE5_GameplaySystemsCharacter::Runing(const FInputActionValue& Value)
 {
 	bIsRuning = Value.Get<bool>();
@@ -584,23 +562,19 @@ void AUE5_GameplaySystemsCharacter::UpdateControlledRotations()
 	float Speed = GetVelocity().Size();
 	if (Speed > 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("1) Speed : True"));
 		if (bIsFreeLook)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("2) Free_Look : True"));
 			GetCharacterMovement()->bOrientRotationToMovement = false;
 			bUseControllerRotationYaw = false;
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("3) Free_Look : False"));
 			GetCharacterMovement()->bOrientRotationToMovement = false;
 			bUseControllerRotationYaw = true;
 		}
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("4) Speed : False"));
 		GetCharacterMovement()->bOrientRotationToMovement = true;
 		bUseControllerRotationYaw = false;
 	}

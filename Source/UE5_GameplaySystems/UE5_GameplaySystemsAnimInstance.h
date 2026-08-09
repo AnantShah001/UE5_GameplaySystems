@@ -47,7 +47,6 @@ public:
 	bool IsInAir = false;
 
 private:
-	void UsedControlledRotations();
 
 	void InAirCheck();
 

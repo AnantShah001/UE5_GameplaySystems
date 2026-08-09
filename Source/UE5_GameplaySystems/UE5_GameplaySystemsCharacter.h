@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Anant Shah All Rights Reserved
 
 #pragma once
 
@@ -179,8 +179,6 @@ public:
 
 	bool bIsFreeLook = false;
 
-	FRotator RotationValue(); //Protected
-
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> FreeLookAction;
@@ -193,6 +191,8 @@ protected:
 	UFUNCTION()
 	void FreeLookTimelineProgress(float Value);
 
+	FRotator RotationValue();
+
 	UFUNCTION()
 	void FreeLookTimelineFinished();
 
@@ -201,9 +201,6 @@ protected:
 	
 // Player Movement System
 	public:
-		//void Jump();
-
-		//void StopJumping();
 
 		void Runing(const FInputActionValue& Value);
 
