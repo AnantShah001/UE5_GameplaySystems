@@ -11,7 +11,7 @@
 #include "UI/Menu/PauseMenu_UI.h"
 #include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Data/Struct/ControlSpeed.h"
+//#include "Data/Struct/ControlSpeed.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -27,11 +27,11 @@ void AUE5_GameplayPlayerController::PlayerTick(float DeltaTime)
 	if (!MyCharacter) return;
 	
 	// Update the FreeLook timeline if it's playing
-	if (FreeLookTimeLine.IsPlaying()) FreeLookTimeLine.TickTimeline(DeltaTime);
+	//if (FreeLookTimeLine.IsPlaying()) FreeLookTimeLine.TickTimeline(DeltaTime);
 
 	// Update the character rotation based on FreeLook Mode;
 	//if (bIsFreeLook == false) MyCharacter->SetActorRotation(RotationValue());
-	if (bIsFreeLook == false) MyCharacter->SetActorRotation(FRotator(0.f, RotationValue().Yaw, 0.f));
+	//if (bIsFreeLook == false) MyCharacter->SetActorRotation(FRotator(0.f, RotationValue().Yaw, 0.f));
 
 }
 
@@ -53,18 +53,18 @@ void AUE5_GameplayPlayerController::BeginPlay()
 		MyCharacterMovement = MyCharacter->GetCharacterMovement();
 	}
 
-	if (FreeLookCurve)
-	{
-		// Bind the timeline progress event to a function
-		FOnTimelineFloat FreeLookProgress;
-		FreeLookProgress.BindUFunction(this, FName("FreeLookTimelineProgress"));
-		FreeLookTimeLine.AddInterpFloat(FreeLookCurve, FreeLookProgress);
+	//if (FreeLookCurve)
+	//{
+	//	// Bind the timeline progress event to a function
+	//	FOnTimelineFloat FreeLookProgress;
+	//	FreeLookProgress.BindUFunction(this, FName("FreeLookTimelineProgress"));
+	//	FreeLookTimeLine.AddInterpFloat(FreeLookCurve, FreeLookProgress);
 
-		// Bind the timeline finished event to a function
-		FOnTimelineEvent FreeLookFinished;
-		FreeLookFinished.BindUFunction(this, FName("FreeLookTimelineFinished"));
-		FreeLookTimeLine.SetTimelineFinishedFunc(FreeLookFinished);
-	}
+	//	// Bind the timeline finished event to a function
+	//	FOnTimelineEvent FreeLookFinished;
+	//	FreeLookFinished.BindUFunction(this, FName("FreeLookTimelineFinished"));
+	//	FreeLookTimeLine.SetTimelineFinishedFunc(FreeLookFinished);
+	//}
 }
 
 void AUE5_GameplayPlayerController::SetupInputComponent()
@@ -74,24 +74,24 @@ void AUE5_GameplayPlayerController::SetupInputComponent()
 	{
 		EnhancedInputComponent->BindAction(PauseMenuAction, ETriggerEvent::Triggered, this,	&AUE5_GameplayPlayerController::PauseMenuWidget);
 
-		// Moving
-		// Bind movement input (WASD / joystick) to the Move() function
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Move);
+		//// Moving
+		//// Bind movement input (WASD / joystick) to the Move() function
+		//EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Move);
 
-		// Jumping
-		// Bind jump input: start jumping when key/button is pressed
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AUE5_GameplayPlayerController::Jump);
-		// Bind jump input: stop jumping when key/button is released
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::StopJumping);
+		//// Jumping
+		//// Bind jump input: start jumping when key/button is pressed
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AUE5_GameplayPlayerController::Jump);
+		//// Bind jump input: stop jumping when key/button is released
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::StopJumping);
 
-		EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Runing);
-		EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Runing);
+		//EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Runing);
+		//EnhancedInputComponent->BindAction(RunAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Runing);
 
-		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Walking);
-		EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Walking);
+		//EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::Walking);
+		//EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::Walking);
 
-		EnhancedInputComponent->BindAction(FreeLookAction, ETriggerEvent::Started, this, &AUE5_GameplayPlayerController::FreeLook_Start);
-		EnhancedInputComponent->BindAction(FreeLookAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::FreeLook_Release);
+		//EnhancedInputComponent->BindAction(FreeLookAction, ETriggerEvent::Triggered, this, &AUE5_GameplayPlayerController::FreeLook_Start);
+		//EnhancedInputComponent->BindAction(FreeLookAction, ETriggerEvent::Completed, this, &AUE5_GameplayPlayerController::FreeLook_Release);
 
 	}
 }
@@ -137,181 +137,182 @@ void AUE5_GameplayPlayerController::PauseMenuWidget()
 	}
 }
 
-void AUE5_GameplayPlayerController::Jump()
-{
-	if (MyCharacter)
-	{
-		MyCharacter->Jump();
-	}
-}
+//void AUE5_GameplayPlayerController::Jump()
+//{
+//	if (MyCharacter)
+//	{
+//		MyCharacter->Jump();
+//	}
+//}
+//
+//void AUE5_GameplayPlayerController::StopJumping()
+//{
+//	if (MyCharacter)
+//	{
+//		MyCharacter->StopJumping();
+//	}
+//}
+//
+//void AUE5_GameplayPlayerController::Runing(const FInputActionValue& Value)
+//{
+//	bIsRuning = Value.Get<bool>();
+//
+//	if (Value.Get<bool>()) bIsWalking = false;
+//}
+//
+//void AUE5_GameplayPlayerController::Walking(const FInputActionValue& Value)
+//{
+//	bIsWalking = Value.Get<bool>();
+//
+//	if (Value.Get<bool>()) bIsRuning = false;
+//}
 
-void AUE5_GameplayPlayerController::StopJumping()
-{
-	if (MyCharacter)
-	{
-		MyCharacter->StopJumping();
-	}
-}
+//void AUE5_GameplayPlayerController::FreeLook_Start()
+//{
+//	//bIsFreeLook =  Value.Get<bool>();
+//	if (!MyCharacter) return;
+//
+//	bIsFreeLook = true;
+//	UE_LOG(LogTemp, Warning, TEXT("IsFreeLook : Start"));
+//
+//	//FreeLookStart = MyCharacter->GetControlRotation();
+//	FreeLookStart = MyCharacter->GetCameraBoom()->GetTargetRotation().Quaternion();
+//
+//	UE_LOG(LogTemp, Warning, TEXT("FreeLook_Start: %s "), *FreeLookStart.ToString());
+//}
+//
+//void AUE5_GameplayPlayerController::FreeLook_Release()
+//{
+//	if (!MyCharacter) return;
+//	if (!FreeLookCurve) return;
+//	//FreeLookEnd = MyCharacter->GetActorRotation();
+//	FreeLookEnd = MyCharacter->GetCameraBoom()->GetTargetRotation().Quaternion();
+//	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Release"));
+//	FreeLookTimeLine.PlayFromStart();
+//}
+//
+//void AUE5_GameplayPlayerController::FreeLookTimelineProgress(float Value)
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("FreeLook_Value: %f | Oter Time is : %f "), Value, FreeLookTimeLine.GetPlaybackPosition());
+//	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Progress"));
+//	FQuat LerpFreeLookQuat = FQuat::Slerp(FreeLookEnd, FreeLookStart, Value); //FreeLookTimeLine.GetPlaybackPosition()
+//
+//	SetControlRotation(LerpFreeLookQuat.Rotator());
+//}
+//
+//void AUE5_GameplayPlayerController::FreeLookTimelineFinished()
+//{
+//	bIsFreeLook = false;
+//	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Finished"));
+//}
+//
+//FRotator AUE5_GameplayPlayerController::RotationValue()
+//{
+//	FRotator Rotation;
+//	if (bIsFreeLook)
+//	{
+//		Rotation = FreeLookStart.Rotator();
+//	}
+//	else
+//	{
+//		Rotation = GetControlRotation();
+//	}
+//	return Rotation;
+//}
 
-void AUE5_GameplayPlayerController::Runing(const FInputActionValue& Value)
-{
-	bIsRuning = Value.Get<bool>();
-
-	if (Value.Get<bool>()) bIsWalking = false;
-}
-
-void AUE5_GameplayPlayerController::Walking(const FInputActionValue& Value)
-{
-	bIsWalking = Value.Get<bool>();
-
-	if (Value.Get<bool>()) bIsRuning = false;
-}
-
-void AUE5_GameplayPlayerController::FreeLook_Start()
-{
-	//bIsFreeLook =  Value.Get<bool>();
-	if (!MyCharacter) return;
-
-	bIsFreeLook = true;
-	UE_LOG(LogTemp, Warning, TEXT("IsFreeLook : Start"));
-
-	//FreeLookStart = MyCharacter->GetControlRotation();
-	FreeLookStart = MyCharacter->GetCameraBoom()->GetTargetRotation().Quaternion();
-
-	UE_LOG(LogTemp, Warning, TEXT("FreeLook_Start: %s "), *FreeLookStart.ToString());
-}
-
-void AUE5_GameplayPlayerController::FreeLook_Release()
-{
-	if (!MyCharacter) return;
-	if (!FreeLookCurve) return;
-	//FreeLookEnd = MyCharacter->GetActorRotation();
-	FreeLookEnd = MyCharacter->GetCameraBoom()->GetTargetRotation().Quaternion();
-	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Release"));
-	FreeLookTimeLine.PlayFromStart();
-}
-
-void AUE5_GameplayPlayerController::FreeLookTimelineProgress(float Value)
-{
-	UE_LOG(LogTemp, Warning, TEXT("FreeLook_Value: %f | Oter Time is : %f "), Value, FreeLookTimeLine.GetPlaybackPosition());
-	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Progress"));
-	FQuat LerpFreeLookQuat = FQuat::Slerp(FreeLookEnd, FreeLookStart, Value); //FreeLookTimeLine.GetPlaybackPosition()
-
-	SetControlRotation(LerpFreeLookQuat.Rotator());
-}
-
-void AUE5_GameplayPlayerController::FreeLookTimelineFinished()
-{
-	bIsFreeLook = false;
-	UE_LOG(LogTemp, Warning, TEXT("FreeLook : Finished"));
-}
-
-FRotator AUE5_GameplayPlayerController::RotationValue()
-{
-	FRotator Rotation;
-	if (bIsFreeLook)
-	{
-		Rotation = FreeLookStart.Rotator();
-	}
-	else
-	{
-		Rotation = GetControlRotation();
-	}
-	return Rotation;
-}
-
-// Called when movement input is received (WASD / joystick)
-// Moves the character forward/back and right/left based on the input vector
-void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
-{
-	// input is a Vector2D
-	// Get the input vector (X = right/left, Y = forward/back)
-	MovementVector = Value.Get<FVector2D>();
-
-	if (MyCharacter != nullptr)
-	{
-		// Player Move Smoothly
-		SmoothSpeed();
-
-		// find out which way is forward
-		const FRotator Rotation = RotationValue(); // GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		// get forward vector
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-
-		// get right vector 
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		
-		// add movement 
-		// Move the character forward/backward
-		MyCharacter->AddMovementInput(ForwardDirection, MovementVector.Y);
-		// Move the character right/left
-		MyCharacter->AddMovementInput(RightDirection, MovementVector.X);
-	}
-}
-
-void AUE5_GameplayPlayerController::SmoothSpeed()
-{
-	MovementSpeed();
-	if (MyCharacter)
-	{
-		float CurrentSpeed = MyCharacter->GetVelocity().Size() + InterpSpeed;
-		UE_LOG(LogTemp, Warning, TEXT("Current Speed : %f"), CurrentSpeed);
-
-		if (CurrentSpeed <= WalkSpeed)
-		{
-			MyCharacterMovement->MaxWalkSpeed = CurrentSpeed;
-		}
-		else
-		{
-			MyCharacterMovement->MaxWalkSpeed = WalkSpeed;
-		}
-	}
-}
-
-void AUE5_GameplayPlayerController::MovementSpeed()
-{
-	FName DataRow = MovementPosition();
-	const UDataTable* Data_Table = SpeedDataTable.DataTable;
-
-	if (Data_Table != nullptr)
-	{
-		FControlSpeed* Data = Data_Table->FindRow<FControlSpeed>(DataRow, TEXT("Movement Data"));
-		if (Data != nullptr)
-		{
-			InterpSpeed = Data->InterpSpeed;
-
-			if (MovementVector.Y > 0.f)
-			{
-				WalkSpeed = Data->Forward_Dir;
-			}
-			else
-			{
-				WalkSpeed = Data->Other_Dir;
-			}
-		}
-	}
-}
-
-FName AUE5_GameplayPlayerController::MovementPosition()
-{
-	FName Position;
-	if (bIsRuning)
-	{
-		Position = FName(TEXT("Stand_Run"));
-	}
-	else if (bIsWalking)
-	{
-		Position = FName(TEXT("Stand_Walk"));
-	}
-	else
-	{
-		Position = FName(TEXT("Stand_Jog"));
-	}
-	
-	UE_LOG(LogTemp, Display, TEXT("Position : %s"), *Position.ToString());
-
-	// Return Movement Position for DataTable
-	return Position;
-}
+//// Called when movement input is received (WASD / joystick)
+//// Moves the character forward/back and right/left based on the input vector
+//void AUE5_GameplayPlayerController::Move(const FInputActionValue& Value)
+//{
+//	// input is a Vector2D
+//	// Get the input vector (X = right/left, Y = forward/back)
+//	MovementVector = Value.Get<FVector2D>();
+//
+//	if (MyCharacter != nullptr)
+//	{
+//		// Player Move Smoothly
+//		SmoothSpeed();
+//
+//		if (!MyCharacter) return;
+//		// find out which way is forward
+//		const FRotator Rotation = MyCharacter->RotationValue(); // GetControlRotation(); ?????
+//		const FRotator YawRotation(0, Rotation.Yaw, 0);
+//
+//		// get forward vector
+//		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+//
+//		// get right vector 
+//		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+//		
+//		// add movement 
+//		// Move the character forward/backward
+//		MyCharacter->AddMovementInput(ForwardDirection, MovementVector.Y);
+//		// Move the character right/left
+//		MyCharacter->AddMovementInput(RightDirection, MovementVector.X);
+//	}
+//}
+//
+//void AUE5_GameplayPlayerController::SmoothSpeed()
+//{
+//	MovementSpeed();
+//	if (MyCharacter)
+//	{
+//		float CurrentSpeed = MyCharacter->GetVelocity().Size() + InterpSpeed;
+//		//UE_LOG(LogTemp, Warning, TEXT("Current Speed : %f"), CurrentSpeed);
+//
+//		if (CurrentSpeed <= WalkSpeed)
+//		{
+//			MyCharacterMovement->MaxWalkSpeed = CurrentSpeed;
+//		}
+//		else
+//		{
+//			MyCharacterMovement->MaxWalkSpeed = WalkSpeed;
+//		}
+//	}
+//}
+//
+//void AUE5_GameplayPlayerController::MovementSpeed()
+//{
+//	FName DataRow = MovementPosition();
+//	const UDataTable* Data_Table = SpeedDataTable.DataTable;
+//
+//	if (Data_Table != nullptr)
+//	{
+//		FControlSpeed* Data = Data_Table->FindRow<FControlSpeed>(DataRow, TEXT("Movement Data"));
+//		if (Data != nullptr)
+//		{
+//			InterpSpeed = Data->InterpSpeed;
+//
+//			if (MovementVector.Y > 0.f)
+//			{
+//				WalkSpeed = Data->Forward_Dir;
+//			}
+//			else
+//			{
+//				WalkSpeed = Data->Other_Dir;
+//			}
+//		}
+//	}
+//}
+//
+//FName AUE5_GameplayPlayerController::MovementPosition()
+//{
+//	FName Position;
+//	if (bIsRuning)
+//	{
+//		Position = FName(TEXT("Stand_Run"));
+//	}
+//	else if (bIsWalking)
+//	{
+//		Position = FName(TEXT("Stand_Walk"));
+//	}
+//	else
+//	{
+//		Position = FName(TEXT("Stand_Jog"));
+//	}
+//	
+//	//UE_LOG(LogTemp, Display, TEXT("Position : %s"), *Position.ToString());
+//
+//	// Return Movement Position for DataTable
+//	return Position;
+//}

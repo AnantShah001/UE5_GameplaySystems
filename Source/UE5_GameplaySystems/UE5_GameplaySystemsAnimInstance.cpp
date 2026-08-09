@@ -3,6 +3,7 @@
 
 #include "UE5_GameplaySystemsAnimInstance.h"
 #include "UE5_GameplaySystemsCharacter.h"
+#include "UE5_GameplayPlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "KismetAnimationLibrary.h"
@@ -14,6 +15,7 @@ void UUE5_GameplaySystemsAnimInstance::NativeInitializeAnimation()
 	if (MyCharacter)
 	{
 		MyCharacterMovement = MyCharacter->GetCharacterMovement();
+		MyController = Cast<AUE5_GameplayPlayerController>(MyCharacter->GetController());
 	}
 }
 
@@ -36,21 +38,36 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		Pitch = DeltaRotator.Pitch;
 		Yaw = DeltaRotator.Yaw;
 
-		//UseControllerRotationYaw();
+		//UsedControlledRotations();
 		InAirCheck();
 	}
 }
 
-void UUE5_GameplaySystemsAnimInstance::UseControllerRotationYaw()
+void UUE5_GameplaySystemsAnimInstance::UsedControlledRotations()
 {
-	//if (Speed > 0)
-	//{
-	//	MyCharacter->bUseControllerRotationYaw = true;
-	//}
-	//else if (Speed <= 0)
-	//{
-	//	MyCharacter->bUseControllerRotationYaw = false;
-	//}
+	/*if (!MyController) return;
+	if (Speed > 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("1) Speed : True"));
+		if (MyController->bIsFreeLook)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("2) Free_Look : True"));
+			MyCharacterMovement->bOrientRotationToMovement = false;
+			MyCharacter->bUseControllerRotationYaw = false;
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("3) Free_Look : False"));
+			MyCharacterMovement->bOrientRotationToMovement = false;
+			MyCharacter->bUseControllerRotationYaw = true;
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("4) Speed : False"));
+		MyCharacterMovement->bOrientRotationToMovement = true;
+		MyCharacter->bUseControllerRotationYaw = false;
+	}*/
 }
 
 void UUE5_GameplaySystemsAnimInstance::InAirCheck()

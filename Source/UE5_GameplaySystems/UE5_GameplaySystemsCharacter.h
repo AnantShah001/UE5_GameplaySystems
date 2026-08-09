@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "TimerManager.h"
+#include "Components/TimelineComponent.h"
 #include "UE5_GameplaySystemsCharacter.generated.h"
 
 //Reduce compile time
@@ -23,8 +24,9 @@ class USoundBase;
 class UDeath;
 class UScoreUI;
 class UUE5_GameplaySystemsGameInstance;
+class AUE5_GameplayPlayerController;
 class UHealth_UI;
-
+class UCurveFloat;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -96,6 +98,9 @@ public:
 	UPROPERTY()
 	TObjectPtr<UUE5_GameplaySystemsGameInstance> MyGameInstance;
 
+	UPROPERTY()
+	TObjectPtr<AUE5_GameplayPlayerController> MyController;
+
 	void DeathWidgetAnimation();
 
 	int Gold;
@@ -165,5 +170,86 @@ protected:
 
 public:
 	bool bIsRespawning = false;
+
+// Free Look Mode
+public:
+	void FreeLook_Start();
+
+	void FreeLook_Release();
+
+	bool bIsFreeLook = false;
+
+	FRotator RotationValue(); //Protected
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> FreeLookAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Timeline")
+	TObjectPtr<UCurveFloat> FreeLookCurve;
+
+	FTimeline FreeLookTimeLine;
+
+	UFUNCTION()
+	void FreeLookTimelineProgress(float Value);
+
+	UFUNCTION()
+	void FreeLookTimelineFinished();
+
+	FQuat FreeLookStart;
+	FQuat FreeLookEnd;
+	
+// Player Movement System
+	public:
+		//void Jump();
+
+		//void StopJumping();
+
+		void Runing(const FInputActionValue& Value);
+
+		void Walking(const FInputActionValue& Value);
+
+	protected:
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+		TObjectPtr<UInputAction> JumpAction;
+
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+		TObjectPtr<UInputAction> MoveAction;
+
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+		TObjectPtr<UInputAction> RunAction;
+
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+		TObjectPtr<UInputAction> WalkAction;
+
+		/** Called for movement input */
+		// Handles movement input (X = right/left, Y = forward/back).
+		void Move(const FInputActionValue& Value);
+
+		UPROPERTY(BlueprintReadOnly, Category = "Movement")
+		bool bIsRuning = false;
+
+		UPROPERTY(BlueprintReadOnly, Category = "Movement")
+		bool bIsWalking = false;
+
+		UPROPERTY(BlueprintReadOnly, Category = "Movement")
+		float WalkSpeed = 200.f;
+
+		FVector2D MovementVector;
+		
+	private:
+
+		void SmoothSpeed();
+
+		void MovementSpeed();
+
+		FName MovementPosition();
+		float InterpSpeed;
+
+		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true", RowType = "ControlSpeed"))
+		FDataTableRowHandle SpeedDataTable;
+		
+		void UpdateControlledRotations();
+
 };
 

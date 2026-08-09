@@ -8,6 +8,7 @@
 
 class AUE5_GameplaySystemsCharacter;
 class UCharacterMovementComponent;
+class AUE5_GameplayPlayerController;
 
 /**
  * 
@@ -27,6 +28,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	TObjectPtr<UCharacterMovementComponent> MyCharacterMovement;
 
+	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr<AUE5_GameplayPlayerController> MyController;
+
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	float Speed;
 
@@ -43,7 +47,7 @@ public:
 	bool IsInAir = false;
 
 private:
-	void UseControllerRotationYaw();
+	void UsedControlledRotations();
 
 	void InAirCheck();
 
