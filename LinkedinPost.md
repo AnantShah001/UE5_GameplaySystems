@@ -390,3 +390,10 @@ Today I focus to packaged the latest Android build and spent time testing it on 
 [LinkedIn Post & Video]()
 
 ---
+> Day 52 - Unreal Engine 5 C++ Gameplay Systems | Character Rotation Integration 🚀
+
+Today I worked on an important character-system modification. As the project became more advanced, several systems started interacting
+
+[LinkedIn Post & Video]()
+
+---

@@ -1653,3 +1653,23 @@ Testing on a real device reveals issues that are difficult to notice in the edit
 ![Game View](Screenshots/GameView4_Android.png)
 
 ---
+# Day 52 - Character Rotation Integration
+
+## Completed
+* Updated Character rotation logic
+* Improved interaction between locomotion and Free Look
+* Fixed character facing behavior on rotating platforms
+* Updated rotation handling based on movement state
+* Moved related control logic into Character
+
+## Result
+* Character maintains correct facing direction
+* 8-direction locomotion works with rotating platforms
+* Free Look no longer causes unwanted rotation behavior
+* Packaged and tested the updated build
+
+## Learning
+New gameplay systems can affect existing systems.
+Instead of replacing the architecture, understand the interaction and modify the correct layer.
+
+---
