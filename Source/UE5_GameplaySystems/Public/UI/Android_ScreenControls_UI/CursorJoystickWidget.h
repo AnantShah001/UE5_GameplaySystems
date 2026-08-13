@@ -19,15 +19,17 @@ class UE5_GAMEPLAYSYSTEMS_API UCursorJoystickWidget : public UUserWidget
 	
 protected:
 
-	// This binds the C++ pointer to the visual background image in UMG
+	virtual void NativeConstruct() override;
+
+	// NativeTick allows us to send continuous input every frame
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> JoystickBackground;
 
-	// This binds the C++ pointer to the visual moving thumb image in UMG
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> JoystickThumb;
 
-	// Max visual distance the thumb can slide from the center
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Joystick Settings")
 	float MaxMovementRadius = 150.0f;
 
@@ -49,4 +51,10 @@ protected:
 
 	// Helper Function to Update the UI Thumb Visual Pointer 
 	void UpdateJoystickVisuals(FVector2D ThumbPosition);
+
+private:
+	UPROPERTY()
+	TObjectPtr<AUE5_GameplaySystemsCharacter> MyCharacter;
+
+	bool bIsCursorActive = false;
 };

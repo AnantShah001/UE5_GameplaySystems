@@ -201,6 +201,9 @@ protected:
 	
 // Player Movement System
 	public:
+		/** Called for movement input */
+		// Handles movement input (X = right/left, Y = forward/back).
+		void Move(const FInputActionValue& Value);
 
 		void Runing(const FInputActionValue& Value);
 
@@ -218,10 +221,6 @@ protected:
 
 		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 		TObjectPtr<UInputAction> WalkAction;
-
-		/** Called for movement input */
-		// Handles movement input (X = right/left, Y = forward/back).
-		void Move(const FInputActionValue& Value);
 
 		UPROPERTY(BlueprintReadOnly, Category = "Movement")
 		bool bIsRuning = false;

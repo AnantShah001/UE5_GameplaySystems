@@ -4,12 +4,35 @@
 #include "UI/Android_ScreenControls_UI/CursorJoystickWidget.h"
 #include "Components/Image.h"
 #include "Components/CanvasPanelSlot.h"
+#include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
+#include "InputActionValue.h"
 
+
+void UCursorJoystickWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	MyCharacter = Cast<AUE5_GameplaySystemsCharacter>(GetOwningPlayerPawn());
+}
+
+void UCursorJoystickWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	if (bIsCursorActive)
+	{
+		//MyCharacter->Move(FInputActionValue(ClampedInputVector));
+		MyCharacter->Move(FInputActionValue(FVector2D(ClampedInputVector.X, -ClampedInputVector.Y)));
+
+	}
+}
 
 FReply UCursorJoystickWidget::NativeOnTouchStarted(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent)
 {
 	UE_LOG(LogTemp, Error, TEXT("StartTouch"));
-
+	
+	bIsCursorActive = true;
+	
 	// Capture the local coordinates of the initial touch relative to this widget
 	JoystickCenterPosition = InGeometry.AbsoluteToLocal(InPointerEvent.GetScreenSpacePosition());
 
@@ -28,9 +51,8 @@ FReply UCursorJoystickWidget::NativeOnTouchMoved(const FGeometry& InGeometry, co
 	FVector2D Offset = CurrentTouchPos - JoystickCenterPosition;
 	float Distance = Offset.Size();
 
-	UE_LOG(LogTemp, Warning, TEXT("1) Current Thumb: %s | Offset : %s"), *CurrentTouchPos.ToString(), *Offset.ToString());
-
-	UE_LOG(LogTemp, Warning, TEXT("2) Distance: %f"), Distance);
+	UE_LOG(LogTemp, Warning, TEXT("1) Current Thumb: %s |-| Offset : %s |=| Distance : %f"),
+		*CurrentTouchPos.ToString(), *Offset.ToString(), Distance);
 
 	// Clamp the touch position within your maximum radius boundary
 	if (Distance > MaxMovementRadius)
@@ -81,6 +103,8 @@ FReply UCursorJoystickWidget::NativeOnTouchEnded(const FGeometry& InGeometry, co
 	// Reset everything back to center when the player lifts their thumb
 	ClampedInputVector = FVector2D::ZeroVector;
 	UpdateJoystickVisuals(FVector2D::ZeroVector);
+
+	bIsCursorActive = false;
 
 	return FReply::Handled().ReleaseMouseCapture();
 }
