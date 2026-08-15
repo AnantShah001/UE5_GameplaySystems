@@ -30,9 +30,9 @@ void UCursorJoystickWidget::NativeTick(const FGeometry& MyGeometry, float InDelt
 FReply UCursorJoystickWidget::NativeOnTouchStarted(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent)
 {
 	UE_LOG(LogTemp, Error, TEXT("StartTouch"));
-	
+
 	bIsCursorActive = true;
-	
+
 	// Capture the local coordinates of the initial touch relative to this widget
 	JoystickCenterPosition = InGeometry.AbsoluteToLocal(InPointerEvent.GetScreenSpacePosition());
 
@@ -46,7 +46,7 @@ FReply UCursorJoystickWidget::NativeOnTouchMoved(const FGeometry& InGeometry, co
 	UE_LOG(LogTemp, Error, TEXT("MoveTouch"));
 
 	FVector2D CurrentTouchPos = InGeometry.AbsoluteToLocal(InPointerEvent.GetScreenSpacePosition());
-	
+
 	// Calculate direction and distance from the center point
 	FVector2D Offset = CurrentTouchPos - JoystickCenterPosition;
 	float Distance = Offset.Size();
@@ -77,21 +77,38 @@ FReply UCursorJoystickWidget::NativeOnTouchMoved(const FGeometry& InGeometry, co
 	// 3. Apply your custom gating logic for your Blend Space
 	if (InputMagnitude < WalkThreshold)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("6) InputMagnitude < 0.3f - Death Zone"));
-		ClampedInputVector = FVector2D::ZeroVector; // Inside dead-zone
+		MyCharacter->Runing(FInputActionValue(false));
+		MyCharacter->Walking(FInputActionValue(false));
+		UE_LOG(LogTemp, Warning, TEXT("6) InputMagnitude < 0.3f - Idle State"));
+		//ClampedInputVector = FVector2D::ZeroVector; // Inside Idle State
+	}
+	else if (InputMagnitude > 0.85f)
+	{
+		MyCharacter->Runing(FInputActionValue(true));
+		MyCharacter->Walking(FInputActionValue(false));
+		UE_LOG(LogTemp, Warning, TEXT("7) InputMagnitude > 0.80f - Run State"));
+		//ClampedInputVector = RawNormalized.GetSafeNormal() * 0.80f; // Inside Run State
+
+	}
+	else if (InputMagnitude > 0.40f)
+	{
+		MyCharacter->Runing(FInputActionValue(false));
+		MyCharacter->Walking(FInputActionValue(false));
+		UE_LOG(LogTemp, Warning, TEXT("8) InputMagnitude > 0.60f - Jog State"));
+		//ClampedInputVector = RawNormalized.GetSafeNormal() * 0.60f;  // Inside Jog State
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("7) InputMagnitude > 0.3f - Jog"));
-		ClampedInputVector = RawNormalized.GetSafeNormal() * 0.3f; // Force clean walk value
-		
-		UE_LOG(LogTemp, Warning, TEXT("8) Clamped Input Vector (* 0.3f) : %s "), *ClampedInputVector.ToString());
-
-		ClampedInputVector = RawNormalized.GetSafeNormal();
-
-		UE_LOG(LogTemp, Warning, TEXT("9) Clamped Input Vector (Normal) : %s "), *ClampedInputVector.ToString());
-
+		MyCharacter->Runing(FInputActionValue(false));
+		MyCharacter->Walking(FInputActionValue(true));
+		UE_LOG(LogTemp, Warning, TEXT("9) InputMagnitude > 0.20f - Walk State"));
+		//ClampedInputVector = RawNormalized.GetSafeNormal() * 0.20f; // Force walk State
 	}
+	//UE_LOG(LogTemp, Warning, TEXT("10) Clamped Input Vector (* 0.20f) : %s "), *ClampedInputVector.ToString());
+
+	ClampedInputVector = RawNormalized.GetSafeNormal();
+
+	UE_LOG(LogTemp, Warning, TEXT("11) Clamped Input Vector (Normal) : %s "), *ClampedInputVector.ToString());
 
 	return FReply::Handled();
 }

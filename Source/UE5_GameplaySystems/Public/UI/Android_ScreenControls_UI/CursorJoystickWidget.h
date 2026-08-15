@@ -35,7 +35,7 @@ protected:
 
 	// Input zone thresholds for Walk vs Jog/Run
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Joystick Settings")
-	float WalkThreshold = 0.3f;
+	float WalkThreshold = 0.10f;
 
 	// Stores the current clean -1.0 to 1.0 input vector for your character to read
 	UPROPERTY(BlueprintReadOnly, Category = "Joystick Output")
