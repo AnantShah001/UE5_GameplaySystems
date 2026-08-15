@@ -4,41 +4,17 @@
 #include "UI/Android_ScreenControls_UI/CursorJoystickWidget.h"
 #include "Components/Image.h"
 #include "Components/CanvasPanelSlot.h"
-#include "UE5_GameplaySystems/UE5_GameplaySystemsCharacter.h"
-#include "InputActionValue.h"
 
-
-void UCursorJoystickWidget::NativeConstruct()
-{
-	Super::NativeConstruct();
-
-	MyCharacter = Cast<AUE5_GameplaySystemsCharacter>(GetOwningPlayerPawn());
-}
-
-void UCursorJoystickWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
-{
-	Super::NativeTick(MyGeometry, InDeltaTime);
-
-	if (bIsCursorActive)
-	{
-		//MyCharacter->Move(FInputActionValue(ClampedInputVector));
-		MyCharacter->Move(FInputActionValue(FVector2D(ClampedInputVector.X, -ClampedInputVector.Y)));
-
-	}
-}
 
 FReply UCursorJoystickWidget::NativeOnTouchStarted(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent)
 {
 	UE_LOG(LogTemp, Error, TEXT("StartTouch"));
-
 	bIsCursorActive = true;
 
 	// Capture the local coordinates of the initial touch relative to this widget
 	JoystickCenterPosition = InGeometry.AbsoluteToLocal(InPointerEvent.GetScreenSpacePosition());
 
-	//return FReply::Handled().CaptureMouse(this);
-	return FReply::Handled().CaptureMouse(TakeWidget());//(TSharedFromThis);
-
+	return FReply::Handled().CaptureMouse(TakeWidget());
 }
 
 FReply UCursorJoystickWidget::NativeOnTouchMoved(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent)
@@ -46,69 +22,33 @@ FReply UCursorJoystickWidget::NativeOnTouchMoved(const FGeometry& InGeometry, co
 	UE_LOG(LogTemp, Error, TEXT("MoveTouch"));
 
 	FVector2D CurrentTouchPos = InGeometry.AbsoluteToLocal(InPointerEvent.GetScreenSpacePosition());
-
-	// Calculate direction and distance from the center point
-	FVector2D Offset = CurrentTouchPos - JoystickCenterPosition;
-	float Distance = Offset.Size();
+	
+	// Calculate direction and distance from Touch to the center point
+	FVector2D CursorOffset = CurrentTouchPos - JoystickCenterPosition;
+	float Distance = CursorOffset.Size();
 
 	UE_LOG(LogTemp, Warning, TEXT("1) Current Thumb: %s |-| Offset : %s |=| Distance : %f"),
-		*CurrentTouchPos.ToString(), *Offset.ToString(), Distance);
+		*CurrentTouchPos.ToString(), *CursorOffset.ToString(), Distance);
 
 	// Clamp the touch position within your maximum radius boundary
 	if (Distance > MaxMovementRadius)
 	{
-		Offset = Offset.GetSafeNormal() * MaxMovementRadius;
-		UE_LOG(LogTemp, Warning, TEXT("3) Offset (MaxMovement Radius): %s"), *Offset.ToString());
-
+		CursorOffset = CursorOffset.GetSafeNormal() * MaxMovementRadius;
+		UE_LOG(LogTemp, Warning, TEXT("3) CursorOffset (MaxMovement Radius): %s"), *CursorOffset.ToString());
 	}
 
-	// 1. Update the visual position of the thumb widget
-	UpdateJoystickVisuals(Offset);
+	// Update the visual position of the thumb widget
+	UpdateJoystickVisuals(CursorOffset);
 
-	UE_LOG(LogTemp, Warning, TEXT("4) Selected-Offset : %s"), *Offset.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("4) CursorOffset : %s"), *CursorOffset.ToString());
 
+	// Normalize data to a clean 0.0 -> 1.0 scale for the framework
+	FVector2D CursorNormalized = CursorOffset / MaxMovementRadius;
+	float CursorDistance = CursorNormalized.Size();
 
-	// 2. Normalize raw data to a clean 0.0 -> 1.0 scale for the framework
-	FVector2D RawNormalized = Offset / MaxMovementRadius;
-	float InputMagnitude = RawNormalized.Size();
+	UE_LOG(LogTemp, Warning, TEXT("5) CursorNormalized : %s | CursorDistance : %f"), *CursorNormalized.ToString(), CursorDistance);
 
-	UE_LOG(LogTemp, Warning, TEXT("5) RawNormalized : %s | Input Magnitude: %f"), *RawNormalized.ToString(), InputMagnitude);
-
-	// 3. Apply your custom gating logic for your Blend Space
-	if (InputMagnitude < WalkThreshold)
-	{
-		MyCharacter->Runing(FInputActionValue(false));
-		MyCharacter->Walking(FInputActionValue(false));
-		UE_LOG(LogTemp, Warning, TEXT("6) InputMagnitude < 0.3f - Idle State"));
-		//ClampedInputVector = FVector2D::ZeroVector; // Inside Idle State
-	}
-	else if (InputMagnitude > 0.85f)
-	{
-		MyCharacter->Runing(FInputActionValue(true));
-		MyCharacter->Walking(FInputActionValue(false));
-		UE_LOG(LogTemp, Warning, TEXT("7) InputMagnitude > 0.80f - Run State"));
-		//ClampedInputVector = RawNormalized.GetSafeNormal() * 0.80f; // Inside Run State
-
-	}
-	else if (InputMagnitude > 0.40f)
-	{
-		MyCharacter->Runing(FInputActionValue(false));
-		MyCharacter->Walking(FInputActionValue(false));
-		UE_LOG(LogTemp, Warning, TEXT("8) InputMagnitude > 0.60f - Jog State"));
-		//ClampedInputVector = RawNormalized.GetSafeNormal() * 0.60f;  // Inside Jog State
-	}
-	else
-	{
-		MyCharacter->Runing(FInputActionValue(false));
-		MyCharacter->Walking(FInputActionValue(true));
-		UE_LOG(LogTemp, Warning, TEXT("9) InputMagnitude > 0.20f - Walk State"));
-		//ClampedInputVector = RawNormalized.GetSafeNormal() * 0.20f; // Force walk State
-	}
-	//UE_LOG(LogTemp, Warning, TEXT("10) Clamped Input Vector (* 0.20f) : %s "), *ClampedInputVector.ToString());
-
-	ClampedInputVector = RawNormalized.GetSafeNormal();
-
-	UE_LOG(LogTemp, Warning, TEXT("11) Clamped Input Vector (Normal) : %s "), *ClampedInputVector.ToString());
+	AssignTask(CursorNormalized);
 
 	return FReply::Handled();
 }
@@ -117,7 +57,7 @@ FReply UCursorJoystickWidget::NativeOnTouchEnded(const FGeometry& InGeometry, co
 {
 	UE_LOG(LogTemp, Error, TEXT("EndTouch"));
 
-	// Reset everything back to center when the player lifts their thumb
+	// Reset everything cursor back to center when the player lifts their thumb
 	ClampedInputVector = FVector2D::ZeroVector;
 	UpdateJoystickVisuals(FVector2D::ZeroVector);
 
@@ -137,4 +77,9 @@ void UCursorJoystickWidget::UpdateJoystickVisuals(FVector2D ThumbPosition)
 			ThumbSlot->SetPosition(ThumbPosition);
 		}
 	}
+}
+
+void UCursorJoystickWidget::AssignTask(FVector2D CursorNormalized)
+{
+	UE_LOG(LogTemp, Display, TEXT("AssignTask()"));
 }
