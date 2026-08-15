@@ -1673,3 +1673,22 @@ New gameplay systems can affect existing systems.
 Instead of replacing the architecture, understand the interaction and modify the correct layer.
 
 ---
+# Day 53 - Custom Mobile Movement Joystick
+
+## Completed
+* Created `UCursorJoystickWidget` in C++
+* Added a custom movable cursor/joystick
+* Attached the joystick to the player UI
+* Connected joystick movement with player movement
+
+## Current Limitations
+* Player currently uses Jog movement only
+* Walk / Run states are not connected yet
+* Some directional Blend Space jitter remains
+
+## Next
+* Improve joystick movement values
+* Fix directional jitter
+* Add Walk / Jog / Run movement states
+
+---

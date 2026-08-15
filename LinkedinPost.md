@@ -387,12 +387,19 @@ Day 51 - Unreal Engine 5 C++ Gameplay Systems | Android Packaged build & Plannin
 
 Today I focus to packaged the latest Android build and spent time testing it on a physical device. Rather than adding new features, I focused on identifying areas where the mobile experience can be improved.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://www.linkedin.com/posts/anantshah001_unrealengine-ue5-cpp-ugcPost-7493182609150173184-TMqa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADAckacBWrzq0RzPkslWDDT0TW49wYgUCIM)
 
 ---
 > Day 52 - Unreal Engine 5 C++ Gameplay Systems | Character Rotation Integration 🚀
 
-Today I worked on an important character-system modification. As the project became more advanced, several systems started interacting
+Today I focus to worked on an important character-system modification. As the project became more advanced, several systems started interacting
+
+[LinkedIn Post & Video]()
+
+---
+Day 53 — Unreal Engine 5 C++ Gameplay Systems | Building a Custom Mobile Movement Control 🚀
+
+Today I focus to started replacing the default mobile movement control with a custom C++ UMG based system.
 
 [LinkedIn Post & Video]()
 
