@@ -1692,3 +1692,20 @@ Instead of replacing the architecture, understand the interaction and modify the
 * Add Walk / Jog / Run movement states
 
 ---
+#Day 54 - Custom Joystick Movement & UI Architecture
+
+## Completed
+* Connected custom joystick to character movement
+* Added Idle / Walk / Jog / Run movement states
+* Improved movement control using joystick input
+* Created `UCursorJoystickWidget` as the reusable parent class
+* Created `MoveCursorWidget` as the movement specific child class
+
+## Architecture
+* **Parent:** Handles basic joystick functionality, visuals and shared input
+* **Child:** Uses the input for specific gameplay requirements
+
+## Next
+* Reuse the joystick foundation for the Free Look system
+
+---

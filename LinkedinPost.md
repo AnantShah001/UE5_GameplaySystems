@@ -404,3 +404,10 @@ Today I focus to started replacing the default mobile movement control with a cu
 [LinkedIn Post & Video]()
 
 ---
+Day 54 — Unreal Engine 5 C++ Gameplay Systems | Custom Joystick Movement & UI Architecture 🚀
+
+Today I focus to connected my custom mobile joystick to the character's locomotion system.
+
+[LinkedIn Post & Video]()
+
+---
