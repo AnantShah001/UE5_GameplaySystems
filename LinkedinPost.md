@@ -397,14 +397,14 @@ Today I focus to worked on an important character-system modification. As the pr
 [LinkedIn Post & Video]()
 
 ---
-Day 53 — Unreal Engine 5 C++ Gameplay Systems | Building a Custom Mobile Movement Control 🚀
+> Day 53 — Unreal Engine 5 C++ Gameplay Systems | Building a Custom Mobile Movement Control 🚀
 
 Today I focus to started replacing the default mobile movement control with a custom C++ UMG based system.
 
 [LinkedIn Post & Video]()
 
 ---
-Day 54 — Unreal Engine 5 C++ Gameplay Systems | Custom Joystick Movement & UI Architecture 🚀
+> Day 54 — Unreal Engine 5 C++ Gameplay Systems | Custom Joystick Movement & UI Architecture 🚀
 
 Today I focus to connected my custom mobile joystick to the character's locomotion system.
 
