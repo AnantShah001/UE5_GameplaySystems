@@ -121,11 +121,15 @@ public:
 
 	int CurrentLifeLine;
 
+	/** Called for looking input */
+	// Handles look input (X = yaw, Y = pitch).
+	void Look(const FInputActionValue& Value);
+
 protected:
 
 	/** Called for looking input */
 	// Handles look input (X = yaw, Y = pitch).
-	void Look(const FInputActionValue& Value);
+	//void Look(const FInputActionValue& Value);
 
 	void DebugActionPressed();
 			
