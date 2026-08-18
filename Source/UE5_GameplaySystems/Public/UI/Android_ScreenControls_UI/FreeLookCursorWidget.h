@@ -20,6 +20,10 @@ protected:
 
 	virtual void NativeConstruct() override;
 
+	//Native UMG Touch Events Overrides
+	virtual FReply NativeOnTouchStarted(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent) override;
+	virtual FReply NativeOnTouchEnded(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent) override;
+
 	virtual void AssignTask(FVector2D CursorNormalized) override;
 
 private:

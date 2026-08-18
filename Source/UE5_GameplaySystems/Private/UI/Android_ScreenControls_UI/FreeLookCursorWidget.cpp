@@ -13,6 +13,38 @@ void UFreeLookCursorWidget::NativeConstruct()
 	MyCharacter = Cast<AUE5_GameplaySystemsCharacter>(GetOwningPlayerPawn());
 }
 
+FReply UFreeLookCursorWidget::NativeOnTouchStarted(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent)
+{
+	Super::NativeOnTouchStarted(InGeometry, InPointerEvent);
+
+	UE_LOG(LogTemp, Error, TEXT("StartTouch"));
+	bIsCursorActive = true;
+
+	// Capture the local coordinates of the initial touch relative to this widget
+	JoystickCenterPosition = InGeometry.AbsoluteToLocal(InPointerEvent.GetScreenSpacePosition());
+
+	MyCharacter->FreeLook_Start();
+
+	return FReply::Handled().CaptureMouse(TakeWidget());
+}
+
+FReply UFreeLookCursorWidget::NativeOnTouchEnded(const FGeometry& InGeometry, const FPointerEvent& InPointerEvent)
+{
+	Super::NativeOnTouchEnded(InGeometry, InPointerEvent);
+
+	UE_LOG(LogTemp, Error, TEXT("EndTouch"));
+
+	MyCharacter->FreeLook_Release();
+
+	// Reset everything cursor back to center when the player lifts their thumb
+	ClampedInputVector = FVector2D::ZeroVector;
+	UpdateJoystickVisuals(FVector2D::ZeroVector);
+
+	bIsCursorActive = false;
+
+	return FReply::Handled().ReleaseMouseCapture();
+}
+
 void UFreeLookCursorWidget::AssignTask(FVector2D CursorNormalized)
 {
 	Super::AssignTask(CursorNormalized);
@@ -20,6 +52,9 @@ void UFreeLookCursorWidget::AssignTask(FVector2D CursorNormalized)
 	float CursorDistance = CursorNormalized.Size();
 
 	UE_LOG(LogTemp, Warning, TEXT("CursorDistance : %f"), CursorDistance);
+
+	ClampedInputVector = CursorNormalized.GetSafeNormal();
+	UE_LOG(LogTemp, Warning, TEXT("11) CursorDistance : %f | ClampedInputVector(Normal) : %s "), CursorDistance, *ClampedInputVector.ToString());
 
 	MyCharacter->AddControllerYawInput(CursorNormalized.X);
 	MyCharacter->AddControllerPitchInput(-CursorNormalized.Y);
