@@ -27,26 +27,21 @@ FReply UCursorJoystickWidget::NativeOnTouchMoved(const FGeometry& InGeometry, co
 	FVector2D CursorOffset = CurrentTouchPos - JoystickCenterPosition;
 	float Distance = CursorOffset.Size();
 
-	UE_LOG(LogTemp, Warning, TEXT("1) Current Thumb: %s |-| Offset : %s |=| Distance : %f"),
+	UE_LOG(LogTemp, Warning, TEXT(" Current Thumb: %s |-| Offset : %s |=| Distance : %f"),
 		*CurrentTouchPos.ToString(), *CursorOffset.ToString(), Distance);
 
 	// Clamp the touch position within your maximum radius boundary
 	if (Distance > MaxMovementRadius)
 	{
 		CursorOffset = CursorOffset.GetSafeNormal() * MaxMovementRadius;
-		UE_LOG(LogTemp, Warning, TEXT("3) CursorOffset (MaxMovement Radius): %s"), *CursorOffset.ToString());
 	}
 
 	// Update the visual position of the thumb widget
 	UpdateJoystickVisuals(CursorOffset);
 
-	UE_LOG(LogTemp, Warning, TEXT("4) CursorOffset : %s"), *CursorOffset.ToString());
-
 	// Normalize data to a clean 0.0 -> 1.0 scale for the framework
 	FVector2D CursorNormalized = CursorOffset / MaxMovementRadius;
 	float CursorDistance = CursorNormalized.Size();
-
-	UE_LOG(LogTemp, Warning, TEXT("5) CursorNormalized : %s | CursorDistance : %f"), *CursorNormalized.ToString(), CursorDistance);
 
 	AssignTask(CursorNormalized);
 

@@ -51,12 +51,8 @@ void UFreeLookCursorWidget::AssignTask(FVector2D CursorNormalized)
 
 	float CursorDistance = CursorNormalized.Size();
 
-	UE_LOG(LogTemp, Warning, TEXT("CursorDistance : %f"), CursorDistance);
-
 	ClampedInputVector = CursorNormalized.GetSafeNormal();
-	UE_LOG(LogTemp, Warning, TEXT("11) CursorDistance : %f | ClampedInputVector(Normal) : %s "), CursorDistance, *ClampedInputVector.ToString());
 
 	MyCharacter->AddControllerYawInput(CursorNormalized.X);
-	MyCharacter->AddControllerPitchInput(-CursorNormalized.Y);
-	
+	MyCharacter->AddControllerPitchInput(CursorNormalized.Y);
 }
