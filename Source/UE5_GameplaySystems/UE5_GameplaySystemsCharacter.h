@@ -166,6 +166,9 @@ protected:
 	void TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location);
 
 	bool EnableTouchScreenMovement(UInputComponent* PlayerInputComponent);
+	
+	bool bIsTouchRotationFinger = false;
+	ETouchIndex::Type RotationFingerIndex;
 
 	FVector2D StartTouchLoc;
 
@@ -203,6 +206,8 @@ protected:
 	FQuat FreeLookStart;
 	FQuat FreeLookEnd;
 	
+	float Direction;
+
 // Player Movement System
 	public:
 		/** Called for movement input */

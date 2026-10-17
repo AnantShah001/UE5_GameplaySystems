@@ -19,6 +19,7 @@ void UMoveCursorWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTim
 
 	if (bIsCursorActive)
 	{
+		UE_LOG(LogTemp, Error, TEXT("ClampedInput.X : %f | ClampedInput.Y : %f"), ClampedInputVector.X, ClampedInputVector.Y);
 		MyCharacter->Move(FInputActionValue(FVector2D(ClampedInputVector.X, -ClampedInputVector.Y)));
 	}
 }
@@ -27,26 +28,30 @@ void UMoveCursorWidget::AssignTask(FVector2D CursorNormalized)
 {
 	float CursorDistance = CursorNormalized.Size();
 
-	if (CursorDistance < 0.10f)
-	{
-		MyCharacter->Runing(FInputActionValue(false));
-		MyCharacter->Walking(FInputActionValue(false));
-	}
+	//if (CursorDistance < 0.10f)
+	//{
+	//	UE_LOG(LogTemp, Warning, TEXT("Idle"));
+	//	MyCharacter->Runing(FInputActionValue(false));
+	//	MyCharacter->Walking(FInputActionValue(false));
+	//}
 
-	else if (CursorDistance > 0.95f)
+	if (CursorDistance > 0.95f)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Run"));
 		MyCharacter->Runing(FInputActionValue(true));
 		MyCharacter->Walking(FInputActionValue(false));
 	}
 
 	else if (CursorDistance > 0.50f)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Jog"));
 		MyCharacter->Runing(FInputActionValue(false));
 		MyCharacter->Walking(FInputActionValue(false));
 	}
 
 	else
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Walk"));
 		MyCharacter->Runing(FInputActionValue(false));
 		MyCharacter->Walking(FInputActionValue(true));
 	}

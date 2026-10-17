@@ -35,6 +35,24 @@ public:
 	float Speed;
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	float CalculatDirection;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	float IfGreaterThen = 45.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	float IfLessThen = 90.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	float Target = 55.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	float First_Target = 85.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	float Second_Target = 50.f;
+
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	float Direction;
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement)

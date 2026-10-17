@@ -23,6 +23,7 @@
 #include "UI/Health/Health_UI.h"
 #include "Data/Struct/ControlSpeed.h"
 #include "UE5_GameplayPlayerController.h"
+#include "KismetAnimationLibrary.h"
 
 
 
@@ -172,6 +173,9 @@ void AUE5_GameplaySystemsCharacter::Tick(float DeltaTime)
 	if (FreeLookTimeLine.IsPlaying()) FreeLookTimeLine.TickTimeline(DeltaTime);
 	
 	UpdateControlledRotations();
+
+	Direction = UKismetAnimationLibrary::CalculateDirection(GetVelocity(), FRotator(0.f, GetActorRotation().Yaw, 0.f));
+	UE_LOG(LogTemp, Warning, TEXT("C_Direction: %f"), Direction);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -350,6 +354,8 @@ bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* P
 		PlayerInputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AUE5_GameplaySystemsCharacter::TouchUpdate);
 		UE_LOG(LogTemp, Display, TEXT("Touch Update in Enable Touch screen"));
 
+		bIsTouchRotationFinger = false;
+		RotationFingerIndex = ETouchIndex::Touch1;
 		return true;
 	}
 
@@ -543,15 +549,24 @@ FName AUE5_GameplaySystemsCharacter::MovementPosition()
 
 void AUE5_GameplaySystemsCharacter::Runing(const FInputActionValue& Value)
 {
-	bIsRuning = Value.Get<bool>();
+	float Abs_Direction = FMath::Abs(Direction);
+	if (Abs_Direction > 45.f)
+	{
+		bIsRuning = false;
+	}
+	else
+	{
+		bIsRuning = Value.Get<bool>();
+		if (Value.Get<bool>()) bIsWalking = false;
 
-	if (Value.Get<bool>()) bIsWalking = false;
+	}
+	
 }
 
 void AUE5_GameplaySystemsCharacter::Walking(const FInputActionValue& Value)
 {
 	bIsWalking = Value.Get<bool>();
-
+	
 	if (Value.Get<bool>()) bIsRuning = false;
 }
 
