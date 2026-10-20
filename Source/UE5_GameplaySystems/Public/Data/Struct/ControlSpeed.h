@@ -14,11 +14,11 @@ struct UE5_GAMEPLAYSYSTEMS_API FControlSpeed : public FTableRowBase
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float Forward_Dir;
+	float Forward_Dir = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float Other_Dir;
+	float Other_Dir = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float InterpSpeed;
+	float InterpSpeed = 0.0f;
 };
