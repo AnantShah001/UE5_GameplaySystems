@@ -352,7 +352,7 @@ bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* P
 
 		//Commenting this out to be more consistent with FPS BP template.
 		PlayerInputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AUE5_GameplaySystemsCharacter::TouchUpdate);
-		UE_LOG(LogTemp, Display, TEXT("Touch Update in Enable Touch screen"));
+		//UE_LOG(LogTemp, Display, TEXT("Touch Update in Enable Touch screen"));
 
 		bIsTouchRotationFinger = false;
 		RotationFingerIndex = ETouchIndex::Touch1;
@@ -364,15 +364,24 @@ bool AUE5_GameplaySystemsCharacter::EnableTouchScreenMovement(UInputComponent* P
 
 void AUE5_GameplaySystemsCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
-	// Start Touch Location
-	StartTouchLoc = FVector2D(Location.X, Location.Y);
-	//UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
-
+	if (!bIsTouchRotationFinger)
+	{
+		bIsTouchRotationFinger = true;
+		RotationFingerIndex = FingerIndex; // Set the finger index for touch screen rotation
+		// Start Touch Location
+		StartTouchLoc = FVector2D(Location.X, Location.Y);
+		//UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
+	}
 }
 
 void AUE5_GameplaySystemsCharacter::TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	//UE_LOG(LogTemp, Display, TEXT("StartTouchLoc : %s"), *StartTouchLoc.ToString());
+
+	if (!bIsTouchRotationFinger || FingerIndex != RotationFingerIndex)
+	{
+		return; // Ignore if not the rotation finger
+	}
 
 	// Current touch Location
 	FVector2D CurrentTouchLoc = FVector2D(Location.X, Location.Y);
@@ -381,6 +390,13 @@ void AUE5_GameplaySystemsCharacter::TouchUpdate(const ETouchIndex::Type FingerIn
 	// Update TouchLocation
 	FVector2D MoveTouchDelta = CurrentTouchLoc - StartTouchLoc;
 	//UE_LOG(LogTemp, Display, TEXT("MoveTouchDelta : %s"), *MoveTouchDelta.ToString());
+
+	// Check Delta Threshold not more then 100
+	if (MoveTouchDelta.Size() > 100.f)
+	{
+		StartTouchLoc = CurrentTouchLoc;
+		return; // Ignore if the touch delta is too large (to prevent sudden jumps)
+	}
 
 	// Apply In the Movement 
 	AddControllerYawInput(MoveTouchDelta.X * TouchSensitivity);
@@ -396,10 +412,20 @@ void AUE5_GameplaySystemsCharacter::TouchUpdate(const ETouchIndex::Type FingerIn
 
 void AUE5_GameplaySystemsCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
-	StartTouchLoc = FVector2D::ZeroVector;
+	if (bIsTouchRotationFinger && RotationFingerIndex == FingerIndex)
+	{
+		bIsTouchRotationFinger = false;
+		RotationFingerIndex = ETouchIndex::Touch1; // Reset to default
+
+		StartTouchLoc = FVector2D::ZeroVector;
+		//UE_LOG(LogTemp, Display, TEXT("End_TouchLoc : %s"), *StartTouchLoc.ToString());
+	}
+
+	//StartTouchLoc = FVector2D::ZeroVector;
 	//UE_LOG(LogTemp, Display, TEXT("End_TouchLoc : %s"), *StartTouchLoc.ToString());
 
 }
+
 
 void AUE5_GameplaySystemsCharacter::SetClothLeaderPose()
 {

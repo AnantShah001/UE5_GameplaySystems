@@ -38,27 +38,27 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		CalculatDirection = UKismetAnimationLibrary::CalculateDirection(Velocity, FRotator(0.f, ActorRotation.Yaw,0.f));
 		float Abs_Direction = FMath::Abs(CalculatDirection);
 
-		UE_LOG(LogTemp, Error, TEXT(" ##1) CalculatDirection : %f "), CalculatDirection);
-		UE_LOG(LogTemp, Error, TEXT(" ##2) ABS_Direction : %f "), Abs_Direction);
+		//UE_LOG(LogTemp, Error, TEXT(" ##1) CalculatDirection : %f "), CalculatDirection);
+		//UE_LOG(LogTemp, Error, TEXT(" ##2) ABS_Direction : %f "), Abs_Direction);
 
 
 		if (Abs_Direction > IfGreaterThen && Abs_Direction < IfLessThen)
 		{
-			UE_LOG(LogTemp, Error, TEXT(" ##3) --------"));
+			//UE_LOG(LogTemp, Error, TEXT(" ##3) --------"));
 			//Direction = Target * FMath::Sign(CalculatDirection);
 			//}
 			//UE_LOG(LogTemp, Error, TEXT(" ##3) 50 to 90"));
 			//Direction = Target * FMath::Sign(CalculatDirection);
 			if (Abs_Direction > Target) // 70
 			{
-				UE_LOG(LogTemp, Error, TEXT(" ##4) >65"));
+				//UE_LOG(LogTemp, Error, TEXT(" ##4) >65"));
 
 				Direction = First_Target * FMath::Sign(CalculatDirection); //90
 			}
 			else
 			{
-				UE_LOG(LogTemp, Error, TEXT(" ##5) <60"));
-				UE_LOG(LogTemp, Error, TEXT("-- ##5) <60"));
+				//UE_LOG(LogTemp, Error, TEXT(" ##5) <60"));
+				//UE_LOG(LogTemp, Error, TEXT("-- ##5) <60"));
 
 				Direction = Second_Target * FMath::Sign(CalculatDirection); //45
 			}
@@ -69,7 +69,7 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		}
 		//Direction = CalculatDirection;
 		
-		UE_LOG(LogTemp, Error, TEXT(" ##6) Direction : %f "), Direction);
+		//UE_LOG(LogTemp, Error, TEXT(" ##6) Direction : %f "), Direction);
 
 		//FRotator ActorRotation = MyCharacter->GetActorRotation();
 		FRotator ControlRotation = MyCharacter->GetControlRotation();
