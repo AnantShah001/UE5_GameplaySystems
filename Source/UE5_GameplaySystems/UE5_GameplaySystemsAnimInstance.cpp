@@ -41,32 +41,39 @@ void UUE5_GameplaySystemsAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		//UE_LOG(LogTemp, Error, TEXT(" ##1) CalculatDirection : %f "), CalculatDirection);
 		//UE_LOG(LogTemp, Error, TEXT(" ##2) ABS_Direction : %f "), Abs_Direction);
 
-
-		if (Abs_Direction > IfGreaterThen && Abs_Direction < IfLessThen)
+		if (bRefinedDirection == true)
 		{
-			//UE_LOG(LogTemp, Error, TEXT(" ##3) --------"));
-			//Direction = Target * FMath::Sign(CalculatDirection);
-			//}
-			//UE_LOG(LogTemp, Error, TEXT(" ##3) 50 to 90"));
-			//Direction = Target * FMath::Sign(CalculatDirection);
-			if (Abs_Direction > Target) // 70
+			if (Abs_Direction > IfGreaterThen && Abs_Direction < IfLessThen)
 			{
-				//UE_LOG(LogTemp, Error, TEXT(" ##4) >65"));
+				//UE_LOG(LogTemp, Error, TEXT(" ##3) --------"));
+				//Direction = Target * FMath::Sign(CalculatDirection);
+				//}
+				//UE_LOG(LogTemp, Error, TEXT(" ##3) 50 to 90"));
+				//Direction = Target * FMath::Sign(CalculatDirection);
+				if (Abs_Direction > Target) // 70
+				{
+					//UE_LOG(LogTemp, Error, TEXT(" ##4) >65"));
 
-				Direction = First_Target * FMath::Sign(CalculatDirection); //90
+					Direction = First_Target * FMath::Sign(CalculatDirection); //90
+				}
+				else
+				{
+					//UE_LOG(LogTemp, Error, TEXT(" ##5) <60"));
+					//UE_LOG(LogTemp, Error, TEXT("-- ##5) <60"));
+
+					Direction = Second_Target * FMath::Sign(CalculatDirection); //45
+				}
 			}
 			else
 			{
-				//UE_LOG(LogTemp, Error, TEXT(" ##5) <60"));
-				//UE_LOG(LogTemp, Error, TEXT("-- ##5) <60"));
-
-				Direction = Second_Target * FMath::Sign(CalculatDirection); //45
+				Direction = CalculatDirection;
 			}
 		}
 		else
 		{
 			Direction = CalculatDirection;
 		}
+		
 		//Direction = CalculatDirection;
 		
 		//UE_LOG(LogTemp, Error, TEXT(" ##6) Direction : %f "), Direction);

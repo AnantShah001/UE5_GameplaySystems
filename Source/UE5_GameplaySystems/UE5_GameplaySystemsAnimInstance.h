@@ -64,6 +64,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 	bool IsInAir = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	bool bRefinedDirection = true;
+
 private:
 
 	void InAirCheck();

@@ -1730,3 +1730,24 @@ Instead of replacing the architecture, understand the interaction and modify the
 * Separation of movement and camera control
 
 ---
+# Day 56 - Fix Android Direction Movement Issue
+
+## Completed
+* Refined movement direction calculations in UUE5_GameplaySystemsAnimInstance
+* Added angle thresholds to adjust directional animation values
+* Updated Run input logic to prevent activation when the absolute movement direction exceeds 45°
+* Tested movement animations with keyboard and custom joystick controls
+* Worked on reducing animation overlap and directional jitter
+
+## Result
+* Improved control over directional Blend Space values
+* Added a direction-based condition for Run activation
+* Identified areas requiring further animation tuning
+
+## Learning
+* Blend Space direction control
+* Direction calculations using CalculateDirection()
+* Angle thresholds for movement conditions
+* Debugging animation behavior across different input methods
+
+---
