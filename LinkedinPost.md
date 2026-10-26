@@ -394,27 +394,43 @@ Today I focus to packaged the latest Android build and spent time testing it on 
 
 Today I focus to worked on an important character-system modification. As the project became more advanced, several systems started interacting
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://lnkd.in/p/gup5cara)
 
 ---
 > Day 53 — Unreal Engine 5 C++ Gameplay Systems | Building a Custom Mobile Movement Control 🚀
 
 Today I focus to started replacing the default mobile movement control with a custom C++ UMG based system.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://lnkd.in/p/g7XkMzty)
 
 ---
 > Day 54 — Unreal Engine 5 C++ Gameplay Systems | Custom Joystick Movement & UI Architecture 🚀
 
 Today I focus to connected my custom mobile joystick to the character's locomotion system.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://lnkd.in/p/g7XkMzty)
 
 ---
 Day 55 — Unreal Engine 5 C++ Gameplay Systems | Custom Mobile Free Look 🚀
 
 > Today I completed the custom Free Look control for the Android version of my game. This builds directly on the joystick architecture I created on Days 53–54. Instead of creating another completely separate joystick system, I reused the common functionality from: `UCursorJoystickWidget` and created a dedicated implementation for Free Look.
 
-[LinkedIn Post & Video]()
+[LinkedIn Post & Video](https://lnkd.in/p/g7DQtvtS)
+
+---
+
+Day 56 - Unreal Engine 5 C++ Gameplay Systems | Fix Android Direction Movement Issue 🚀
+
+Today I focused on improving character animation behavior with my custom mobile joystick system.
+
+[LinkedIn Post & Video](https://lnkd.in/p/gYtwc48W)
+
+---
+
+Day 57 - Unreal Engine 5 C++ Gameplay Systems | Fixing a Mobile Touch Rotation Bug 🚀
+
+Today I focused on fixing an existing touch screen camera rotation issue in my Unreal Engine 5 C++ project.
+
+[LinkedIn Post & Video](https://lnkd.in/p/g2QN2TUC)
 
 ---

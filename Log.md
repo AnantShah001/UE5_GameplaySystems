@@ -1751,3 +1751,31 @@ Instead of replacing the architecture, understand the interaction and modify the
 * Debugging animation behavior across different input methods
 
 ---
+
+Day 58 - Fixing Mobile Touch Rotation Bug
+
+## Completed
+
+* Investigated an existing Android touch-screen camera rotation bug
+* Added active-finger tracking using bIsTouchRotationFinger
+* Stored the active rotation finger using RotationFingerIndex
+* Ignored touch updates from fingers that do not control rotation
+* Added a movement delta threshold to reject unusually large touch jumps
+* Reset the rotation touch state when the active finger is released
+
+## Result
+
+* Prevented multiple fingers from competing for camera rotation
+* Reduced unexpected camera jumps caused by large touch deltas
+* Improved the consistency of mobile touch-screen rotation
+* Tested the updated logic and confirmed improved behavior
+
+## Learning
+
+* Multi-touch input handling in Unreal Engine
+* Tracking individual touch indices
+* Filtering unexpected touch movement
+* Managing touch input states
+* Debugging existing gameplay control issues
+
+---
